@@ -1,0 +1,16 @@
+appendix_python.md
+Ch01_Preliminaries.md
+Ch02_Introductory_Examples.md
+Ch03_IPython_An_Interactive_Computing_and_Development_Environment.md
+Ch04_NumPy_Basics_Arrays_and_Vectorized_Computation.md
+Ch05_Getting_Started_with_pandas.md
+Ch06_Data_Loading_Storage_and_File_Formats.md
+Ch07_Data_Wrangling_Clean_Transform_Merge_Reshape.md
+Ch08_Plotting_and_Visualization.md
+Ch09_Data_Aggregation_and_Group_Operations.md
+Ch10_Time_Series.md
+Ch11_Financial_and_Economic_Data_Applications.md
+Ch12_Advanced_NumPy.md
+fec_study.md
+README.md
+README_.md

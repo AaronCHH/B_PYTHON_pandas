@@ -1,0 +1,11 @@
+Ch01_WorkingWithFiles.ipynb
+Ch02_SlicingPandasObjects.ipynb
+Ch03_SubsettingData.ipynb
+Ch04_WorkingWithDates.ipynb
+Ch05_ModifyingDataWithFunctions.ipynb
+Ch06_CombiningDatasets.ipynb
+Ch07_UsingIndexes.ipynb
+Ch08_GettingData.ipynb
+Ch09_CombiningPandasWithSciKitLearn.ipynb
+Ch10_IntegratingPandasWithStatsPackages.ipynb
+Ch12_VisualizingPandasObjects.ipynb

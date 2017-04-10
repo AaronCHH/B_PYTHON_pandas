@@ -1,0 +1,11 @@
+Ch01_WorkingWithFiles
+Ch02_SlicingPandasObjects
+Ch03_SubsettingData
+Ch04_WorkingWithDates
+Ch05_ModifyingDataWithFunctions
+Ch06_CombiningDatasets
+Ch07_UsingIndexes
+Ch08_GettingData
+Ch09_CombiningPandasWithSciKitLearn
+Ch10_IntegratingPandasWithStatsPackages
+Ch12_VisualizingPandasObjects

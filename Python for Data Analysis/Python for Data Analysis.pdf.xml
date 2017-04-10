@@ -1,0 +1,461 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BookmarkExport>
+  <Item ID="1" Name="Table of Contents" Page="5" Open="0" />
+  <Item ID="2" Name="Preface" Page="13" Open="0">
+    <Item ID="3" Name="Conventions Used in This Book" Page="13" Open="0" />
+    <Item ID="4" Name="Using Code Examples" Page="14" Open="0" />
+    <Item ID="5" Name="Safari® Books Online" Page="14" Open="0" />
+    <Item ID="6" Name="How to Contact Us" Page="15" Open="0" />
+  </Item>
+  <Item ID="7" Name="Chapter 1. Preliminaries" Page="17" Open="0">
+    <Item ID="8" Name="What Is This Book About?" Page="17" Open="0" />
+    <Item ID="9" Name="Why Python for Data Analysis?" Page="18" Open="0">
+      <Item ID="10" Name="Python as Glue" Page="18" Open="0" />
+      <Item ID="11" Name="Solving the “Two-Language” Problem" Page="18" Open="0" />
+      <Item ID="12" Name="Why Not Python?" Page="19" Open="0" />
+    </Item>
+    <Item ID="13" Name="Essential Python Libraries" Page="19" Open="0">
+      <Item ID="14" Name="NumPy" Page="20" Open="0" />
+      <Item ID="15" Name="pandas" Page="20" Open="0" />
+      <Item ID="16" Name="matplotlib" Page="21" Open="0" />
+      <Item ID="17" Name="IPython" Page="21" Open="0" />
+      <Item ID="18" Name="SciPy" Page="22" Open="0" />
+    </Item>
+    <Item ID="19" Name="Installation and Setup" Page="22" Open="0">
+      <Item ID="20" Name="Windows" Page="23" Open="0" />
+      <Item ID="21" Name="Apple OS X" Page="25" Open="0" />
+      <Item ID="22" Name="GNU/Linux" Page="26" Open="0" />
+      <Item ID="23" Name="Python 2 and Python 3" Page="27" Open="0" />
+      <Item ID="24" Name="Integrated Development Environments (IDEs)" Page="27" Open="0" />
+    </Item>
+    <Item ID="25" Name="Community and Conferences" Page="28" Open="0" />
+    <Item ID="26" Name="Navigating This Book" Page="28" Open="0">
+      <Item ID="27" Name="Code Examples" Page="29" Open="0" />
+      <Item ID="28" Name="Data for Examples" Page="29" Open="0" />
+      <Item ID="29" Name="Import Conventions" Page="29" Open="0" />
+      <Item ID="30" Name="Jargon" Page="29" Open="0" />
+    </Item>
+    <Item ID="31" Name="Acknowledgements" Page="30" Open="0" />
+  </Item>
+  <Item ID="32" Name="Chapter 2. Introductory Examples" Page="33" Open="0">
+    <Item ID="33" Name="1.usa.gov data from bit.ly" Page="33" Open="0">
+      <Item ID="34" Name="Counting Time Zones in Pure Python" Page="35" Open="0" />
+      <Item ID="35" Name="Counting Time Zones with pandas" Page="37" Open="0" />
+    </Item>
+    <Item ID="36" Name="MovieLens 1M Data Set" Page="42" Open="0">
+      <Item ID="37" Name="Measuring rating disagreement" Page="46" Open="0" />
+    </Item>
+    <Item ID="38" Name="US Baby Names 1880-2010" Page="48" Open="0">
+      <Item ID="39" Name="Analyzing Naming Trends" Page="52" Open="0">
+        <Item ID="40" Name="Measuring the increase in naming diversity" Page="53" Open="0" />
+        <Item ID="41" Name="The “Last letter” Revolution" Page="56" Open="0" />
+        <Item ID="42" Name="Boy names that became girl names (and vice versa)" Page="58" Open="0" />
+      </Item>
+    </Item>
+    <Item ID="43" Name="Conclusions and The Path Ahead" Page="59" Open="0" />
+  </Item>
+  <Item ID="44" Name="Chapter 3. IPython: An Interactive Computing and Development Environment" Page="61" Open="0">
+    <Item ID="45" Name="IPython Basics" Page="62" Open="0">
+      <Item ID="46" Name="Tab Completion" Page="63" Open="0" />
+      <Item ID="47" Name="Introspection" Page="64" Open="0" />
+      <Item ID="48" Name="The %run Command" Page="65" Open="0">
+        <Item ID="49" Name="Interrupting running code" Page="66" Open="0" />
+      </Item>
+      <Item ID="50" Name="Executing Code from the Clipboard" Page="66" Open="0">
+        <Item ID="51" Name="IPython interaction with editors and IDEs" Page="68" Open="0" />
+      </Item>
+      <Item ID="52" Name="Keyboard Shortcuts" Page="68" Open="0" />
+      <Item ID="53" Name="Exceptions and Tracebacks" Page="69" Open="0" />
+      <Item ID="54" Name="Magic Commands" Page="70" Open="0" />
+      <Item ID="55" Name="Qt-based Rich GUI Console" Page="71" Open="0" />
+      <Item ID="56" Name="Matplotlib Integration and Pylab Mode" Page="72" Open="0" />
+    </Item>
+    <Item ID="57" Name="Using the Command History" Page="74" Open="0">
+      <Item ID="58" Name="Searching and Reusing the Command History" Page="74" Open="0" />
+      <Item ID="59" Name="Input and Output Variables" Page="74" Open="0" />
+      <Item ID="60" Name="Logging the Input and Output" Page="75" Open="0" />
+    </Item>
+    <Item ID="61" Name="Interacting with the Operating System" Page="76" Open="0">
+      <Item ID="62" Name="Shell Commands and Aliases" Page="76" Open="0" />
+      <Item ID="63" Name="Directory Bookmark System" Page="78" Open="0" />
+    </Item>
+    <Item ID="64" Name="Software Development Tools" Page="78" Open="0">
+      <Item ID="65" Name="Interactive Debugger" Page="78" Open="0">
+        <Item ID="66" Name="Other ways to make use of the debugger" Page="81" Open="0" />
+      </Item>
+      <Item ID="67" Name="Timing Code: %time and %timeit" Page="83" Open="0" />
+      <Item ID="68" Name="Basic Profiling: %prun and %run -p" Page="84" Open="0" />
+      <Item ID="69" Name="Profiling a Function Line-by-Line" Page="86" Open="0" />
+    </Item>
+    <Item ID="70" Name="IPython HTML Notebook" Page="88" Open="0" />
+    <Item ID="71" Name="Tips for Productive Code Development Using IPython" Page="88" Open="0">
+      <Item ID="72" Name="Reloading Module Dependencies" Page="90" Open="0" />
+      <Item ID="73" Name="Code Design Tips" Page="90" Open="0">
+        <Item ID="74" Name="Keep relevant objects and data alive" Page="91" Open="0" />
+        <Item ID="75" Name="Flat is better than nested" Page="91" Open="0" />
+        <Item ID="76" Name="Overcome a fear of longer files" Page="91" Open="0" />
+      </Item>
+    </Item>
+    <Item ID="77" Name="Advanced IPython Features" Page="92" Open="0">
+      <Item ID="78" Name="Making Your Own Classes IPython-friendly" Page="92" Open="0" />
+      <Item ID="79" Name="Profiles and Configuration" Page="93" Open="0" />
+    </Item>
+    <Item ID="80" Name="Credits" Page="94" Open="0" />
+  </Item>
+  <Item ID="81" Name="Chapter 4. NumPy Basics: Arrays and Vectorized Computation" Page="95" Open="0">
+    <Item ID="82" Name="The NumPy ndarray: A Multidimensional Array Object" Page="96" Open="0">
+      <Item ID="83" Name="Creating ndarrays" Page="97" Open="0" />
+      <Item ID="84" Name="Data Types for ndarrays" Page="99" Open="0" />
+      <Item ID="85" Name="Operations between Arrays and Scalars" Page="101" Open="0" />
+      <Item ID="86" Name="Basic Indexing and Slicing" Page="102" Open="0">
+        <Item ID="87" Name="Indexing with slices" Page="104" Open="0" />
+      </Item>
+      <Item ID="88" Name="Boolean Indexing" Page="105" Open="0" />
+      <Item ID="89" Name="Fancy Indexing" Page="108" Open="0" />
+      <Item ID="90" Name="Transposing Arrays and Swapping Axes" Page="109" Open="0" />
+    </Item>
+    <Item ID="91" Name="Universal Functions: Fast Element-wise Array Functions" Page="111" Open="0" />
+    <Item ID="92" Name="Data Processing Using Arrays" Page="113" Open="0">
+      <Item ID="93" Name="Expressing Conditional Logic as Array Operations" Page="114" Open="0" />
+      <Item ID="94" Name="Mathematical and Statistical Methods" Page="116" Open="0" />
+      <Item ID="95" Name="Methods for Boolean Arrays" Page="117" Open="0" />
+      <Item ID="96" Name="Sorting" Page="117" Open="0" />
+      <Item ID="97" Name="Unique and Other Set Logic" Page="118" Open="0" />
+    </Item>
+    <Item ID="98" Name="File Input and Output with Arrays" Page="119" Open="0">
+      <Item ID="99" Name="Storing Arrays on Disk in Binary Format" Page="119" Open="0" />
+      <Item ID="100" Name="Saving and Loading Text Files" Page="120" Open="0" />
+    </Item>
+    <Item ID="101" Name="Linear Algebra" Page="121" Open="0" />
+    <Item ID="102" Name="Random Number Generation" Page="122" Open="0" />
+    <Item ID="103" Name="Example: Random Walks" Page="124" Open="0">
+      <Item ID="104" Name="Simulating Many Random Walks at Once" Page="125" Open="0" />
+    </Item>
+  </Item>
+  <Item ID="105" Name="Chapter 5. Getting Started with pandas" Page="127" Open="0">
+    <Item ID="106" Name="Introduction to pandas Data Structures" Page="128" Open="0">
+      <Item ID="107" Name="Series" Page="128" Open="0" />
+      <Item ID="108" Name="DataFrame" Page="131" Open="0" />
+      <Item ID="109" Name="Index Objects" Page="136" Open="0" />
+    </Item>
+    <Item ID="110" Name="Essential Functionality" Page="138" Open="0">
+      <Item ID="111" Name="Reindexing" Page="138" Open="0" />
+      <Item ID="112" Name="Dropping entries from an axis" Page="141" Open="0" />
+      <Item ID="113" Name="Indexing, selection, and filtering" Page="141" Open="0" />
+      <Item ID="114" Name="Arithmetic and data alignment" Page="144" Open="0">
+        <Item ID="115" Name="Arithmetic methods with fill values" Page="145" Open="0" />
+        <Item ID="116" Name="Operations between DataFrame and Series" Page="146" Open="0" />
+      </Item>
+      <Item ID="117" Name="Function application and mapping" Page="148" Open="0" />
+      <Item ID="118" Name="Sorting and ranking" Page="149" Open="0" />
+      <Item ID="119" Name="Axis indexes with duplicate values" Page="152" Open="0" />
+    </Item>
+    <Item ID="120" Name="Summarizing and Computing Descriptive Statistics" Page="153" Open="0">
+      <Item ID="121" Name="Correlation and Covariance" Page="155" Open="0" />
+      <Item ID="122" Name="Unique Values, Value Counts, and Membership" Page="157" Open="0" />
+    </Item>
+    <Item ID="123" Name="Handling Missing Data" Page="158" Open="0">
+      <Item ID="124" Name="Filtering Out Missing Data" Page="159" Open="0" />
+      <Item ID="125" Name="Filling in Missing Data" Page="161" Open="0" />
+    </Item>
+    <Item ID="126" Name="Hierarchical Indexing" Page="163" Open="0">
+      <Item ID="127" Name="Reordering and Sorting Levels" Page="165" Open="0" />
+      <Item ID="128" Name="Summary Statistics by Level" Page="166" Open="0" />
+      <Item ID="129" Name="Using a DataFrame’s Columns" Page="166" Open="0" />
+    </Item>
+    <Item ID="130" Name="Other pandas Topics" Page="167" Open="0">
+      <Item ID="131" Name="Integer Indexing" Page="167" Open="0" />
+      <Item ID="132" Name="Panel Data" Page="168" Open="0" />
+    </Item>
+  </Item>
+  <Item ID="133" Name="Chapter 6. Data Loading, Storage, and File Formats" Page="171" Open="0">
+    <Item ID="134" Name="Reading and Writing Data in Text Format" Page="171" Open="0">
+      <Item ID="135" Name="Reading Text Files in Pieces" Page="176" Open="0" />
+      <Item ID="136" Name="Writing Data Out to Text Format" Page="178" Open="0" />
+      <Item ID="137" Name="Manually Working with Delimited Formats" Page="179" Open="0" />
+      <Item ID="138" Name="JSON Data" Page="181" Open="0" />
+      <Item ID="139" Name="XML and HTML: Web Scraping" Page="182" Open="0">
+        <Item ID="140" Name="Parsing XML with lxml.objectify" Page="185" Open="0" />
+      </Item>
+    </Item>
+    <Item ID="141" Name="Binary Data Formats" Page="187" Open="0">
+      <Item ID="142" Name="Using HDF5 Format" Page="187" Open="0" />
+      <Item ID="143" Name="Reading Microsoft Excel Files" Page="188" Open="0" />
+    </Item>
+    <Item ID="144" Name="Interacting with HTML and Web APIs" Page="189" Open="0" />
+    <Item ID="145" Name="Interacting with Databases" Page="190" Open="0">
+      <Item ID="146" Name="Storing and Loading Data in MongoDB" Page="192" Open="0" />
+    </Item>
+  </Item>
+  <Item ID="147" Name="Chapter 7. Data Wrangling: Clean, Transform, Merge, Reshape" Page="193" Open="0">
+    <Item ID="148" Name="Combining and Merging Data Sets" Page="193" Open="0">
+      <Item ID="149" Name="Database-style DataFrame Merges" Page="194" Open="0" />
+      <Item ID="150" Name="Merging on Index" Page="198" Open="0" />
+      <Item ID="151" Name="Concatenating Along an Axis" Page="201" Open="0" />
+      <Item ID="152" Name="Combining Data with Overlap" Page="204" Open="0" />
+    </Item>
+    <Item ID="153" Name="Reshaping and Pivoting" Page="205" Open="0">
+      <Item ID="154" Name="Reshaping with Hierarchical Indexing" Page="206" Open="0" />
+      <Item ID="155" Name="Pivoting “long” to “wide” Format" Page="208" Open="0" />
+    </Item>
+    <Item ID="156" Name="Data Transformation" Page="210" Open="0">
+      <Item ID="157" Name="Removing Duplicates" Page="210" Open="0" />
+      <Item ID="158" Name="Transforming Data Using a Function or Mapping" Page="211" Open="0" />
+      <Item ID="159" Name="Replacing Values" Page="212" Open="0" />
+      <Item ID="160" Name="Renaming Axis Indexes" Page="213" Open="0" />
+      <Item ID="161" Name="Discretization and Binning" Page="215" Open="0" />
+      <Item ID="162" Name="Detecting and Filtering Outliers" Page="217" Open="0" />
+      <Item ID="163" Name="Permutation and Random Sampling" Page="218" Open="0" />
+      <Item ID="164" Name="Computing Indicator/Dummy Variables" Page="219" Open="0" />
+    </Item>
+    <Item ID="165" Name="String Manipulation" Page="221" Open="0">
+      <Item ID="166" Name="String Object Methods" Page="222" Open="0" />
+      <Item ID="167" Name="Regular expressions" Page="223" Open="0" />
+      <Item ID="168" Name="Vectorized string functions in pandas" Page="226" Open="0" />
+    </Item>
+    <Item ID="169" Name="Example: USDA Food Database" Page="228" Open="0" />
+  </Item>
+  <Item ID="170" Name="Chapter 8. Plotting and Visualization" Page="235" Open="0">
+    <Item ID="171" Name="A Brief matplotlib API Primer" Page="235" Open="0">
+      <Item ID="172" Name="Figures and Subplots" Page="236" Open="0">
+        <Item ID="173" Name="Adjusting the spacing around subplots" Page="239" Open="0" />
+      </Item>
+      <Item ID="174" Name="Colors, Markers, and Line Styles" Page="240" Open="0" />
+      <Item ID="175" Name="Ticks, Labels, and Legends" Page="241" Open="0">
+        <Item ID="176" Name="Setting the title, axis labels, ticks, and ticklabels" Page="242" Open="0" />
+        <Item ID="177" Name="Adding legends" Page="244" Open="0" />
+      </Item>
+      <Item ID="178" Name="Annotations and Drawing on a Subplot" Page="244" Open="0" />
+      <Item ID="179" Name="Saving Plots to File" Page="247" Open="0" />
+      <Item ID="180" Name="matplotlib Configuration" Page="247" Open="0" />
+    </Item>
+    <Item ID="181" Name="Plotting Functions in pandas" Page="248" Open="0">
+      <Item ID="182" Name="Line Plots" Page="248" Open="0" />
+      <Item ID="183" Name="Bar Plots" Page="251" Open="0" />
+      <Item ID="184" Name="Histograms and Density Plots" Page="254" Open="0" />
+      <Item ID="185" Name="Scatter Plots" Page="255" Open="0" />
+    </Item>
+    <Item ID="186" Name="Plotting Maps: Visualizing Haiti Earthquake Crisis Data" Page="257" Open="0" />
+    <Item ID="187" Name="Python Visualization Tool Ecosystem" Page="263" Open="0">
+      <Item ID="188" Name="Chaco" Page="264" Open="0" />
+      <Item ID="189" Name="mayavi" Page="264" Open="0" />
+      <Item ID="190" Name="Other Packages" Page="264" Open="0" />
+      <Item ID="191" Name="The Future of Visualization Tools?" Page="265" Open="0" />
+    </Item>
+  </Item>
+  <Item ID="192" Name="Chapter 9. Data Aggregation and Group Operations" Page="267" Open="0">
+    <Item ID="193" Name="GroupBy Mechanics" Page="268" Open="0">
+      <Item ID="194" Name="Iterating Over Groups" Page="271" Open="0" />
+      <Item ID="195" Name="Selecting a Column or Subset of Columns" Page="272" Open="0" />
+      <Item ID="196" Name="Grouping with Dicts and Series" Page="273" Open="0" />
+      <Item ID="197" Name="Grouping with Functions" Page="274" Open="0" />
+      <Item ID="198" Name="Grouping by Index Levels" Page="275" Open="0" />
+    </Item>
+    <Item ID="199" Name="Data Aggregation" Page="275" Open="0">
+      <Item ID="200" Name="Column-wise and Multiple Function Application" Page="278" Open="0" />
+      <Item ID="201" Name="Returning Aggregated Data in “unindexed” Form" Page="280" Open="0" />
+    </Item>
+    <Item ID="202" Name="Group-wise Operations and Transformations" Page="280" Open="0">
+      <Item ID="203" Name="Apply: General split-apply-combine" Page="282" Open="0">
+        <Item ID="204" Name="Suppressing the group keys" Page="284" Open="0" />
+      </Item>
+      <Item ID="205" Name="Quantile and Bucket Analysis" Page="284" Open="0" />
+      <Item ID="206" Name="Example: Filling Missing Values with Group-specific Values" Page="286" Open="0" />
+      <Item ID="207" Name="Example: Random Sampling and Permutation" Page="287" Open="0" />
+      <Item ID="208" Name="Example: Group Weighted Average and Correlation" Page="289" Open="0" />
+      <Item ID="209" Name="Example: Group-wise Linear Regression" Page="290" Open="0" />
+    </Item>
+    <Item ID="210" Name="Pivot Tables and Cross-Tabulation" Page="291" Open="0">
+      <Item ID="211" Name="Cross-Tabulations: Crosstab" Page="293" Open="0" />
+    </Item>
+    <Item ID="212" Name="Example: 2012 Federal Election Commission Database" Page="294" Open="0">
+      <Item ID="213" Name="Donation Statistics by Occupation and Employer" Page="296" Open="0" />
+      <Item ID="214" Name="Bucketing Donation Amounts" Page="299" Open="0" />
+      <Item ID="215" Name="Donation Statistics by State" Page="301" Open="0" />
+    </Item>
+  </Item>
+  <Item ID="216" Name="Chapter 10. Time Series" Page="305" Open="0">
+    <Item ID="217" Name="Date and Time Data Types and Tools" Page="306" Open="0">
+      <Item ID="218" Name="Converting between string and datetime" Page="307" Open="0" />
+    </Item>
+    <Item ID="219" Name="Time Series Basics" Page="309" Open="0">
+      <Item ID="220" Name="Indexing, Selection, Subsetting" Page="310" Open="0" />
+      <Item ID="221" Name="Time Series with Duplicate Indices" Page="312" Open="0" />
+    </Item>
+    <Item ID="222" Name="Date Ranges, Frequencies, and Shifting" Page="313" Open="0">
+      <Item ID="223" Name="Generating Date Ranges" Page="314" Open="0" />
+      <Item ID="224" Name="Frequencies and Date Offsets" Page="315" Open="0">
+        <Item ID="225" Name="Week of month dates" Page="317" Open="0" />
+      </Item>
+      <Item ID="226" Name="Shifting (Leading and Lagging) Data" Page="317" Open="0">
+        <Item ID="227" Name="Shifting dates with offsets" Page="318" Open="0" />
+      </Item>
+    </Item>
+    <Item ID="228" Name="Time Zone Handling" Page="319" Open="0">
+      <Item ID="229" Name="Localization and Conversion" Page="320" Open="0" />
+      <Item ID="230" Name="Operations with Time Zone−aware Timestamp Objects" Page="321" Open="0" />
+      <Item ID="231" Name="Operations between Different Time Zones" Page="322" Open="0" />
+    </Item>
+    <Item ID="232" Name="Periods and Period Arithmetic" Page="323" Open="0">
+      <Item ID="233" Name="Period Frequency Conversion" Page="324" Open="0" />
+      <Item ID="234" Name="Quarterly Period Frequencies" Page="325" Open="0" />
+      <Item ID="235" Name="Converting Timestamps to Periods (and Back)" Page="327" Open="0" />
+      <Item ID="236" Name="Creating a PeriodIndex from Arrays" Page="328" Open="0" />
+    </Item>
+    <Item ID="237" Name="Resampling and Frequency Conversion" Page="328" Open="0">
+      <Item ID="238" Name="Downsampling" Page="330" Open="0">
+        <Item ID="239" Name="Open-High-Low-Close (OHLC) resampling" Page="332" Open="0" />
+        <Item ID="240" Name="Resampling with GroupBy" Page="332" Open="0" />
+      </Item>
+      <Item ID="241" Name="Upsampling and Interpolation" Page="332" Open="0" />
+      <Item ID="242" Name="Resampling with Periods" Page="334" Open="0" />
+    </Item>
+    <Item ID="243" Name="Time Series Plotting" Page="335" Open="0" />
+    <Item ID="244" Name="Moving Window Functions" Page="336" Open="0">
+      <Item ID="245" Name="Exponentially-weighted functions" Page="340" Open="0" />
+      <Item ID="246" Name="Binary Moving Window Functions" Page="340" Open="0" />
+      <Item ID="247" Name="User-Defined Moving Window Functions" Page="342" Open="0" />
+    </Item>
+    <Item ID="248" Name="Performance and Memory Usage Notes" Page="343" Open="0" />
+  </Item>
+  <Item ID="249" Name="Chapter 11. Financial and Economic Data Applications" Page="345" Open="0">
+    <Item ID="250" Name="Data Munging Topics" Page="345" Open="0">
+      <Item ID="251" Name="Time Series and Cross-Section Alignment" Page="346" Open="0" />
+      <Item ID="252" Name="Operations with Time Series of Different Frequencies" Page="348" Open="0">
+        <Item ID="253" Name="Using periods instead of timestamps" Page="349" Open="0" />
+      </Item>
+      <Item ID="254" Name="Time of Day and “as of” Data Selection" Page="350" Open="0" />
+      <Item ID="255" Name="Splicing Together Data Sources" Page="352" Open="0" />
+      <Item ID="256" Name="Return Indexes and Cumulative Returns" Page="354" Open="0" />
+    </Item>
+    <Item ID="257" Name="Group Transforms and Analysis" Page="356" Open="0">
+      <Item ID="258" Name="Group Factor Exposures" Page="358" Open="0" />
+      <Item ID="259" Name="Decile and Quartile Analysis" Page="359" Open="0" />
+    </Item>
+    <Item ID="260" Name="More Example Applications" Page="361" Open="0">
+      <Item ID="261" Name="Signal Frontier Analysis" Page="361" Open="0" />
+      <Item ID="262" Name="Future Contract Rolling" Page="363" Open="0" />
+      <Item ID="263" Name="Rolling Correlation and Linear Regression" Page="366" Open="0" />
+    </Item>
+  </Item>
+  <Item ID="264" Name="Chapter 12. Advanced NumPy" Page="369" Open="0">
+    <Item ID="265" Name="ndarray Object Internals" Page="369" Open="0">
+      <Item ID="266" Name="NumPy dtype Hierarchy" Page="370" Open="0" />
+    </Item>
+    <Item ID="267" Name="Advanced Array Manipulation" Page="371" Open="0">
+      <Item ID="268" Name="Reshaping Arrays" Page="371" Open="0" />
+      <Item ID="269" Name="C versus Fortran Order" Page="372" Open="0" />
+      <Item ID="270" Name="Concatenating and Splitting Arrays" Page="373" Open="0">
+        <Item ID="271" Name="Stacking helpers: r_ and c_" Page="375" Open="0" />
+      </Item>
+      <Item ID="272" Name="Repeating Elements: Tile and Repeat" Page="376" Open="0" />
+      <Item ID="273" Name="Fancy Indexing Equivalents: Take and Put" Page="377" Open="0" />
+    </Item>
+    <Item ID="274" Name="Broadcasting" Page="378" Open="0">
+      <Item ID="275" Name="Broadcasting Over Other Axes" Page="380" Open="0" />
+      <Item ID="276" Name="Setting Array Values by Broadcasting" Page="383" Open="0" />
+    </Item>
+    <Item ID="277" Name="Advanced ufunc Usage" Page="383" Open="0">
+      <Item ID="278" Name="ufunc Instance Methods" Page="384" Open="0" />
+      <Item ID="279" Name="Custom ufuncs" Page="386" Open="0" />
+    </Item>
+    <Item ID="280" Name="Structured and Record Arrays" Page="386" Open="0">
+      <Item ID="281" Name="Nested dtypes and Multidimensional Fields" Page="387" Open="0" />
+      <Item ID="282" Name="Why Use Structured Arrays?" Page="388" Open="0" />
+      <Item ID="283" Name="Structured Array Manipulations: numpy.lib.recfunctions" Page="388" Open="0" />
+    </Item>
+    <Item ID="284" Name="More About Sorting" Page="389" Open="0">
+      <Item ID="285" Name="Indirect Sorts: argsort and lexsort" Page="390" Open="0" />
+      <Item ID="286" Name="Alternate Sort Algorithms" Page="391" Open="0" />
+      <Item ID="287" Name="numpy.searchsorted: Finding elements in a Sorted Array" Page="392" Open="0" />
+    </Item>
+    <Item ID="288" Name="NumPy Matrix Class" Page="393" Open="0" />
+    <Item ID="289" Name="Advanced Array Input and Output" Page="395" Open="0">
+      <Item ID="290" Name="Memory-mapped Files" Page="395" Open="0" />
+      <Item ID="291" Name="HDF5 and Other Array Storage Options" Page="396" Open="0" />
+    </Item>
+    <Item ID="292" Name="Performance Tips" Page="396" Open="0">
+      <Item ID="293" Name="The Importance of Contiguous Memory" Page="397" Open="0" />
+      <Item ID="294" Name="Other Speed Options: Cython, f2py, C" Page="398" Open="0" />
+    </Item>
+  </Item>
+  <Item ID="295" Name="Appendix. Python Language Essentials" Page="401" Open="0">
+    <Item ID="296" Name="The Python Interpreter" Page="402" Open="0" />
+    <Item ID="297" Name="The Basics" Page="403" Open="0">
+      <Item ID="298" Name="Language Semantics" Page="403" Open="0">
+        <Item ID="299" Name="Indentation, not braces" Page="403" Open="0" />
+        <Item ID="300" Name="Everything is an object" Page="404" Open="0" />
+        <Item ID="301" Name="Comments" Page="404" Open="0" />
+        <Item ID="302" Name="Function and object method calls" Page="405" Open="0" />
+        <Item ID="303" Name="Variables and pass-by-reference" Page="405" Open="0" />
+        <Item ID="304" Name="Dynamic references, strong types" Page="406" Open="0" />
+        <Item ID="305" Name="Attributes and methods" Page="407" Open="0" />
+        <Item ID="306" Name="“Duck” typing" Page="408" Open="0" />
+        <Item ID="307" Name="Imports" Page="408" Open="0" />
+        <Item ID="308" Name="Binary operators and comparisons" Page="409" Open="0" />
+        <Item ID="309" Name="Strictness versus laziness" Page="410" Open="0" />
+        <Item ID="310" Name="Mutable and immutable objects" Page="410" Open="0" />
+      </Item>
+      <Item ID="311" Name="Scalar Types" Page="411" Open="0">
+        <Item ID="312" Name="Numeric types" Page="411" Open="0" />
+        <Item ID="313" Name="Strings" Page="412" Open="0" />
+        <Item ID="314" Name="Booleans" Page="414" Open="0" />
+        <Item ID="315" Name="Type casting" Page="415" Open="0" />
+        <Item ID="316" Name="None" Page="415" Open="0" />
+        <Item ID="317" Name="Dates and times" Page="415" Open="0" />
+      </Item>
+      <Item ID="318" Name="Control Flow" Page="416" Open="0">
+        <Item ID="319" Name="if, elif, and else" Page="416" Open="0" />
+        <Item ID="320" Name="for loops" Page="417" Open="0" />
+        <Item ID="321" Name="while loops" Page="418" Open="0" />
+        <Item ID="322" Name="pass" Page="418" Open="0" />
+        <Item ID="323" Name="Exception handling" Page="418" Open="0" />
+        <Item ID="324" Name="range and xrange" Page="420" Open="0" />
+        <Item ID="325" Name="Ternary Expressions" Page="421" Open="0" />
+      </Item>
+    </Item>
+    <Item ID="326" Name="Data Structures and Sequences" Page="421" Open="0">
+      <Item ID="327" Name="Tuple" Page="422" Open="0">
+        <Item ID="328" Name="Unpacking tuples" Page="423" Open="0" />
+        <Item ID="329" Name="Tuple methods" Page="423" Open="0" />
+      </Item>
+      <Item ID="330" Name="List" Page="424" Open="0">
+        <Item ID="331" Name="Adding and removing elements" Page="424" Open="0" />
+        <Item ID="332" Name="Concatenating and combining lists" Page="425" Open="0" />
+        <Item ID="333" Name="Sorting" Page="425" Open="0" />
+        <Item ID="334" Name="Binary search and maintaining a sorted list" Page="426" Open="0" />
+        <Item ID="335" Name="Slicing" Page="426" Open="0" />
+      </Item>
+      <Item ID="336" Name="Built-in Sequence Functions" Page="427" Open="0">
+        <Item ID="337" Name="enumerate" Page="428" Open="0" />
+        <Item ID="338" Name="sorted" Page="428" Open="0" />
+        <Item ID="339" Name="zip" Page="428" Open="0" />
+        <Item ID="340" Name="reversed" Page="429" Open="0" />
+      </Item>
+      <Item ID="341" Name="Dict" Page="429" Open="0">
+        <Item ID="342" Name="Creating dicts from sequences" Page="431" Open="0" />
+        <Item ID="343" Name="Default values" Page="431" Open="0" />
+        <Item ID="344" Name="Valid dict key types" Page="432" Open="0" />
+      </Item>
+      <Item ID="345" Name="Set" Page="432" Open="0" />
+      <Item ID="346" Name="List, Set, and Dict Comprehensions" Page="434" Open="0">
+        <Item ID="347" Name="Nested list comprehensions" Page="435" Open="0" />
+      </Item>
+    </Item>
+    <Item ID="348" Name="Functions" Page="436" Open="0">
+      <Item ID="349" Name="Namespaces, Scope, and Local Functions" Page="436" Open="0" />
+      <Item ID="350" Name="Returning Multiple Values" Page="438" Open="0" />
+      <Item ID="351" Name="Functions Are Objects" Page="438" Open="0" />
+      <Item ID="352" Name="Anonymous (lambda) Functions" Page="440" Open="0" />
+      <Item ID="353" Name="Closures: Functions that Return Functions" Page="441" Open="0" />
+      <Item ID="354" Name="Extended Call Syntax with *args, **kwargs" Page="442" Open="0" />
+      <Item ID="355" Name="Currying: Partial Argument Application" Page="443" Open="0" />
+      <Item ID="356" Name="Generators" Page="443" Open="0">
+        <Item ID="357" Name="Generator expresssions" Page="445" Open="0" />
+        <Item ID="358" Name="itertools module" Page="445" Open="0" />
+      </Item>
+    </Item>
+    <Item ID="359" Name="Files and the operating system" Page="446" Open="0" />
+  </Item>
+  <Item ID="360" Name="Index" Page="449" Open="0" />
+</BookmarkExport>
