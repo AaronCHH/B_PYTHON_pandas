@@ -1,19 +1,5 @@
 
 # Chapter 2. Introductory Examples
-<!-- toc orderedList:0 depthFrom:1 depthTo:6 -->
-
-* [Chapter 2. Introductory Examples](#chapter-2-introductory-examples)
-  * [2.1 1.usa.gov data from bit.ly](#21-1usagov-data-from-bitly)
-    * [2.1.1 Counting Time Zones in Pure Python](#211-counting-time-zones-in-pure-python)
-    * [2.1.2 Counting Time Zones with pandas](#212-counting-time-zones-with-pandas)
-  * [2.2 MovieLens 1M Data Set](#22-movielens-1m-data-set)
-    * [2.2.1 Measuring rating disagreement](#221-measuring-rating-disagreement)
-  * [2.3 US Baby Names 1880-2010](#23-us-baby-names-1880-2010)
-    * [2.3.1 Analyzing Naming Trends](#231-analyzing-naming-trends)
-  * [2.4 Conclusions and The Path Ahead](#24-conclusions-and-the-path-ahead)
-
-<!-- tocstop -->
-
 
 ## 2.1 1.usa.gov data from bit.ly
 
@@ -708,8 +694,9 @@ plt.close('all')
 table.plot(style={'M': 'k-', 'F': 'k--'})
 ```
 
-## 2.4 Conclusions and The Path Ahead
+## 2.4 Conclusions and The Path Ahead 
 
-The examples in this chapter are rather simple, but they’re here to give you a bit of a flavor of what sorts of things you can expect in the upcoming chapters.
-The focus of this book is on tools as opposed to presenting more sophisticated analytical methods.
-Mastering the techniques in this book will enable you to implement your own analyses (assuming you know what you want to do!) in short order.
+The examples in this chapter are rather simple, but they’re here to give you a bit of a flavor of what sorts of things you can expect in the upcoming chapters.  
+The focus of this book is on tools as opposed to presenting more sophisticated analytical methods.  
+Mastering the techniques in this book will enable you to implement your own analyses (assuming you know what you want to do!) in short order.  
+

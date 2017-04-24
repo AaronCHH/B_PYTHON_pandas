@@ -1,39 +1,5 @@
 
 # Chapter 10. Time Series
-<!-- toc orderedList:0 depthFrom:1 depthTo:6 -->
-
-* [Chapter 10. Time Series](#chapter-10-time-series)
-  * [10.1 Date and Time Data Types and Tools](#101-date-and-time-data-types-and-tools)
-    * [10.1.1 Converting between string and datetime](#1011-converting-between-string-and-datetime)
-  * [10.2 Time Series Basics](#102-time-series-basics)
-    * [10.2.1 Indexing, Selection, Subsetting](#1021-indexing-selection-subsetting)
-    * [10.2.2 Time Series with Duplicate Indices](#1022-time-series-with-duplicate-indices)
-  * [10.3 Date Ranges, Frequencies, and Shifting](#103-date-ranges-frequencies-and-shifting)
-    * [10.3.1 Generating Date Ranges](#1031-generating-date-ranges)
-    * [10.3.2 Frequencies and Date Offsets](#1032-frequencies-and-date-offsets)
-    * [10.3.3 Shifting (Leading and Lagging) Data](#1033-shifting-leading-and-lagging-data)
-  * [10.4 Time Zone Handling](#104-time-zone-handling)
-    * [10.4.1 Localization and Conversion](#1041-localization-and-conversion)
-    * [10.4.2 Operations with Time Zone−aware Timestamp Objects](#1042-operations-with-time-zoneaware-timestamp-objects)
-    * [10.4.3 Operations between Different Time Zones](#1043-operations-between-different-time-zones)
-  * [10.5 Periods and Period Arithmetic](#105-periods-and-period-arithmetic)
-    * [10.5.1 Period Frequency Conversion](#1051-period-frequency-conversion)
-    * [10.5.2 Quarterly Period Frequencies](#1052-quarterly-period-frequencies)
-    * [10.5.3 Converting Timestamps to Periods (and Back)](#1053-converting-timestamps-to-periods-and-back)
-    * [10.5.4 Creating a PeriodIndex from Arrays](#1054-creating-a-periodindex-from-arrays)
-  * [10.6 Resampling and Frequency Conversion](#106-resampling-and-frequency-conversion)
-    * [10.6.1 Downsampling](#1061-downsampling)
-    * [10.6.2 Upsampling and Interpolation](#1062-upsampling-and-interpolation)
-    * [10.6.3 Resampling with Periods](#1063-resampling-with-periods)
-  * [10.7 Time Series Plotting](#107-time-series-plotting)
-  * [10.8 Moving Window Functions](#108-moving-window-functions)
-    * [10.8.1 Exponentially-weighted functions](#1081-exponentially-weighted-functions)
-    * [10.8.2 Binary Moving Window Functions](#1082-binary-moving-window-functions)
-    * [10.8.3 User-Defined Moving Window Functions](#1083-user-defined-moving-window-functions)
-  * [10.9 Performance and Memory Usage Notes](#109-performance-and-memory-usage-notes)
-
-<!-- tocstop -->
-
 
 
 ```python
@@ -1050,7 +1016,7 @@ result = pd.rolling_apply(returns.AAPL, 250, score_at_2percent)
 result.plot()
 ```
 
-## 10.9 Performance and Memory Usage Notes
+## 10.9 Performance and Memory Usage Notes 
 
 
 ```python

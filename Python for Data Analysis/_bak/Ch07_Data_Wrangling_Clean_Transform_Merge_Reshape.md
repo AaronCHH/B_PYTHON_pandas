@@ -1,33 +1,5 @@
 
 # Chapter 7. Data Wrangling: Clean, Transform, Merge, Reshape
-<!-- toc orderedList:0 depthFrom:1 depthTo:6 -->
-
-* [Chapter 7. Data Wrangling: Clean, Transform, Merge, Reshape](#chapter-7-data-wrangling-clean-transform-merge-reshape)
-  * [7.1 Combining and Merging Data Sets](#71-combining-and-merging-data-sets)
-    * [7.1.1 Database-style DataFrame Merges](#711-database-style-dataframe-merges)
-    * [7.1.2 Merging on Index](#712-merging-on-index)
-    * [7.1.3 Concatenating Along an Axis](#713-concatenating-along-an-axis)
-    * [7.1.4 Combining Data with Overlap](#714-combining-data-with-overlap)
-  * [7.2 Reshaping and Pivoting](#72-reshaping-and-pivoting)
-    * [7.2.1 Reshaping with Hierarchical Indexing](#721-reshaping-with-hierarchical-indexing)
-    * [7.2.2 Pivoting "long" to "wide" Format](#722-pivoting-long-to-wide-format)
-  * [7.3 Data Transformation](#73-data-transformation)
-    * [7.3.1 Removing Duplicates](#731-removing-duplicates)
-    * [7.3.2 Transforming Data Using a Function or Mapping](#732-transforming-data-using-a-function-or-mapping)
-    * [7.3.3 Replacing Values](#733-replacing-values)
-    * [7.3.4 Renaming Axis Indexes](#734-renaming-axis-indexes)
-    * [7.3.5 Discretization and Binning](#735-discretization-and-binning)
-    * [7.3.6 Detecting and Filtering Outliers](#736-detecting-and-filtering-outliers)
-    * [7.3.7 Permutation and Random Sampling](#737-permutation-and-random-sampling)
-    * [7.3.8 Computing Indicator/Dummy Variables](#738-computing-indicatordummy-variables)
-  * [7.4 String Manipulation](#74-string-manipulation)
-    * [7.4.1 String Object Methods](#741-string-object-methods)
-    * [7.4.2 Regular expressions](#742-regular-expressions)
-    * [7.4.3 Vectorized string functions in pandas](#743-vectorized-string-functions-in-pandas)
-  * [7.5 Example: USDA Food Database](#75-example-usda-food-database)
-
-<!-- tocstop -->
-
 
 
 ```python
@@ -1060,7 +1032,7 @@ matches.str[0]
 data.str[:5]
 ```
 
-## 7.5 Example: USDA Food Database
+## 7.5 Example: USDA Food Database 
 {
   "id": 21441,
   "description": "KENTUCKY FRIED CHICKEN, Fried Chicken, EXTRA CRISPY,

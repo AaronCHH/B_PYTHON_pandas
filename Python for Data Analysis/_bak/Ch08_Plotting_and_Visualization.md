@@ -1,29 +1,5 @@
 
 # Chapter 8. Plotting and Visualization
-<!-- toc orderedList:0 depthFrom:1 depthTo:6 -->
-
-* [Chapter 8. Plotting and Visualization](#chapter-8-plotting-and-visualization)
-  * [8.1 A Brief matplotlib API Primer](#81-a-brief-matplotlib-api-primer)
-    * [8.1.1 Figures and Subplots](#811-figures-and-subplots)
-    * [8.1.2 Colors, Markers, and Line Styles](#812-colors-markers-and-line-styles)
-    * [8.1.3 Ticks, Labels, and Legends](#813-ticks-labels-and-legends)
-    * [8.1.4 Annotations and Drawing on a Subplot](#814-annotations-and-drawing-on-a-subplot)
-    * [8.1.5 Saving Plots to File](#815-saving-plots-to-file)
-    * [8.1.6 matplotlib Configuration](#816-matplotlib-configuration)
-  * [8.2 Plotting Functions in pandas](#82-plotting-functions-in-pandas)
-    * [8.2.1 Line Plots](#821-line-plots)
-    * [8.2.2 Bar Plots](#822-bar-plots)
-    * [8.2.3 Histograms and Density Plots](#823-histograms-and-density-plots)
-    * [8.2.4 Scatter Plots](#824-scatter-plots)
-  * [8.3 Plotting Maps: Visualizing Haiti Earthquake Crisis Data](#83-plotting-maps-visualizing-haiti-earthquake-crisis-data)
-  * [8.4 Python Visualization Tool Ecosystem](#84-python-visualization-tool-ecosystem)
-    * [8.4.1 Chaco](#841-chaco)
-    * [8.4.2 mayavi](#842-mayavi)
-    * [8.4.3 Other Packages](#843-other-packages)
-    * [8.4.4 The Future of Visualization Tools](#844-the-future-of-visualization-tools)
-
-<!-- tocstop -->
-
 
 
 ```python
@@ -547,7 +523,7 @@ def make_plot():
 
         m.plot(x, y, 'k.', alpha=0.5)
         ax.set_title('%s: %s' % (code, english_mapping[code]))
-
+        
 ```
 
 
@@ -569,4 +545,4 @@ m.readshapefile(shapefile_path, 'roads')
 
 ### 8.4.3 Other Packages
 
-### 8.4.4 The Future of Visualization Tools
+### 8.4.4 The Future of Visualization Tools 

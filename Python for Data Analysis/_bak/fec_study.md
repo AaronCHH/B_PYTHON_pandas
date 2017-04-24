@@ -1,11 +1,5 @@
 
 # Example: 2012 Federal Election Commission Database
-<!-- toc orderedList:0 depthFrom:1 depthTo:6 -->
-
-* [Example: 2012 Federal Election Commission Database](#example-2012-federal-election-commission-database)
-
-<!-- tocstop -->
-
 
 
 ```python
@@ -23,7 +17,7 @@ np.set_printoptions(precision=4)
 ```
 
     /home/phillip/Documents/code/py/pandas-book/rev_539000/book_scripts/fec
-
+    
 
 
 ```python

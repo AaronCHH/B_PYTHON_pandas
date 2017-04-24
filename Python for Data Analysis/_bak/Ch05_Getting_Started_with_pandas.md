@@ -1,36 +1,5 @@
 
 # Chapter 5. Getting Started with pandas
-<!-- toc orderedList:0 depthFrom:1 depthTo:6 -->
-
-* [Chapter 5. Getting Started with pandas](#chapter-5-getting-started-with-pandas)
-  * [5.1 Introduction to pandas Data Structures](#51-introduction-to-pandas-data-structures)
-    * [5.1.1 Series](#511-series)
-    * [5.1.2 DataFrame](#512-dataframe)
-    * [5.1.3 Index Objects](#513-index-objects)
-  * [5.2 Essential Functionality](#52-essential-functionality)
-    * [5.2.1 Reindexing](#521-reindexing)
-    * [5.2.2 Dropping entries from an axis](#522-dropping-entries-from-an-axis)
-    * [5.2.3 Indexing, selection, and filtering](#523-indexing-selection-and-filtering)
-    * [5.2.4 Arithmetic and data alignment](#524-arithmetic-and-data-alignment)
-    * [5.2.5 Function application and mapping](#525-function-application-and-mapping)
-    * [5.2.6 Sorting and ranking](#526-sorting-and-ranking)
-    * [5.2.7 Axis indexes with duplicate values](#527-axis-indexes-with-duplicate-values)
-  * [5.3 Summarizing and Computing Descriptive Statistics](#53-summarizing-and-computing-descriptive-statistics)
-    * [5.3.1 Correlation and Covariance](#531-correlation-and-covariance)
-    * [5.3.2 Unique Values, Value Counts, and Membership](#532-unique-values-value-counts-and-membership)
-  * [5.4 Handling Missing Data](#54-handling-missing-data)
-    * [5.4.1 Filtering Out Missing Data](#541-filtering-out-missing-data)
-    * [5.4.2 Filling in Missing Data](#542-filling-in-missing-data)
-  * [5.5 Hierarchical Indexing](#55-hierarchical-indexing)
-    * [5.5.1 Reordering and Sorting Levels](#551-reordering-and-sorting-levels)
-    * [5.5.2 Summary Statistics by Level](#552-summary-statistics-by-level)
-    * [5.5.3 Using a DataFrame’s Columns](#553-using-a-dataframes-columns)
-  * [5.6 Other pandas Topics](#56-other-pandas-topics)
-    * [5.6.1 Integer Indexing](#561-integer-indexing)
-    * [5.6.2 Panel Data](#562-panel-data)
-
-<!-- tocstop -->
-
 
 ## 5.1 Introduction to pandas Data Structures
 
@@ -1070,7 +1039,7 @@ df.dropna(thresh=3)
 
 
 ```python
-df.fillna(0)
+df.fillna(0) 
 ```
 
 
@@ -1268,7 +1237,7 @@ frame = DataFrame(np.arange(6).reshape((3, 2)), index=[2, 0, 1])
 frame.iloc[0]
 ```
 
-### 5.6.2 Panel Data
+### 5.6.2 Panel Data 
 
 
 ```python

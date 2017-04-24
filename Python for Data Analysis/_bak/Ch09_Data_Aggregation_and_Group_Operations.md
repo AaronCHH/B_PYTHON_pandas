@@ -1,33 +1,5 @@
 
 # Chapter 9. Data Aggregation and Group Operations
-<!-- toc orderedList:0 depthFrom:1 depthTo:6 -->
-
-* [Chapter 9. Data Aggregation and Group Operations](#chapter-9-data-aggregation-and-group-operations)
-  * [9.1 GroupBy Mechanics](#91-groupby-mechanics)
-    * [9.1.1 Iterating Over Groups](#911-iterating-over-groups)
-    * [9.1.2 Selecting a Column or Subset of Columns](#912-selecting-a-column-or-subset-of-columns)
-    * [9.1.3 Grouping with Dicts and Series](#913-grouping-with-dicts-and-series)
-    * [9.1.4 Grouping with Functions](#914-grouping-with-functions)
-    * [9.1.5 Grouping by Index Levels](#915-grouping-by-index-levels)
-  * [9.2 Data Aggregation](#92-data-aggregation)
-    * [9.2.1 Column-wise and Multiple Function Application](#921-column-wise-and-multiple-function-application)
-    * [9.2.2 Returning Aggregated Data in "unindexed" Form](#922-returning-aggregated-data-in-unindexed-form)
-  * [9.3 Group-wise Operations and Transformations](#93-group-wise-operations-and-transformations)
-    * [9.3.1 Apply: General split-apply-combine](#931-apply-general-split-apply-combine)
-    * [9.3.2 Quantile and Bucket Analysis](#932-quantile-and-bucket-analysis)
-    * [9.3.3 Example: Filling Missing Values with Group-specific Values](#933-example-filling-missing-values-with-group-specific-values)
-    * [9.3.4 Example: Random Sampling and Permutation](#934-example-random-sampling-and-permutation)
-    * [9.3.5 Example: Group Weighted Average and Correlation](#935-example-group-weighted-average-and-correlation)
-    * [9.3.6 Example: Group-wise Linear Regression](#936-example-group-wise-linear-regression)
-  * [9.4 Pivot Tables and Cross-Tabulation](#94-pivot-tables-and-cross-tabulation)
-    * [9.4.1 Cross-Tabulations: Crosstab](#941-cross-tabulations-crosstab)
-  * [9.5 Example: 2012 Federal Election Commission Database](#95-example-2012-federal-election-commission-database)
-    * [9.5.1 Donation Statistics by Occupation and Employer](#951-donation-statistics-by-occupation-and-employer)
-    * [9.5.2 Bucketing Donation Amounts](#952-bucketing-donation-amounts)
-    * [9.5.3 Donation Statistics by State](#953-donation-statistics-by-state)
-
-<!-- tocstop -->
-
 
 
 ```python
@@ -820,7 +792,7 @@ normed_sums
 normed_sums[:-2].plot(kind='barh', stacked=True)
 ```
 
-### 9.5.3 Donation Statistics by State
+### 9.5.3 Donation Statistics by State 
 
 
 ```python

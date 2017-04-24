@@ -1,33 +1,5 @@
 
 # Appendix. Python Language Essentials
-<!-- toc orderedList:0 depthFrom:1 depthTo:6 -->
-
-* [Appendix. Python Language Essentials](#appendix-python-language-essentials)
-  * [A.1 The Python Interpreter](#a1-the-python-interpreter)
-  * [A.2 The Basics](#a2-the-basics)
-    * [A.2.1 Language Semantics](#a21-language-semantics)
-    * [A.2.2 Scalar Types](#a22-scalar-types)
-    * [A.2.3 Control Flow](#a23-control-flow)
-  * [A.3 Data Structures and Sequences](#a3-data-structures-and-sequences)
-    * [A.6.1 Tuple](#a61-tuple)
-    * [A.6.2 List](#a62-list)
-    * [A.6.3 Built-in Sequence Functions](#a63-built-in-sequence-functions)
-    * [A.6.4 Dict](#a64-dict)
-    * [A.6.5 Set](#a65-set)
-    * [A.6.6 List, Set, and Dict Comprehensions](#a66-list-set-and-dict-comprehensions)
-  * [A.4 Functions](#a4-functions)
-    * [A.4.1 Namespaces, Scope, and Local Functions](#a41-namespaces-scope-and-local-functions)
-    * [A.4.2 Returning Multiple Values](#a42-returning-multiple-values)
-    * [A.4.3 Functions Are Objects](#a43-functions-are-objects)
-    * [A.4.4 Anonymous (lambda) Functions](#a44-anonymous-lambda-functions)
-    * [A.4.5 Closures: Functions that Return Functions](#a45-closures-functions-that-return-functions)
-    * [A.4.6 Extended Call Syntax with *args, **kwargs](#a46-extended-call-syntax-with-args-kwargs)
-    * [A.4.7 Currying: Partial Argument Application](#a47-currying-partial-argument-application)
-    * [A.4.8 Generators](#a48-generators)
-  * [A.5 Files and the operating system](#a5-files-and-the-operating-system)
-
-<!-- tocstop -->
-
 
 
 ```python

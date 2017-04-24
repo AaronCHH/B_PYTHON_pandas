@@ -1,33 +1,5 @@
 
 # Chapter 4. NumPy Basics: Arrays and Vectorized Computation
-<!-- toc orderedList:0 depthFrom:1 depthTo:6 -->
-
-* [Chapter 4. NumPy Basics: Arrays and Vectorized Computation](#chapter-4-numpy-basics-arrays-and-vectorized-computation)
-  * [4.1 The NumPy ndarray: A Multidimensional Array Object](#41-the-numpy-ndarray-a-multidimensional-array-object)
-    * [4.1.1 Creating ndarrays](#411-creating-ndarrays)
-    * [4.1.2 Data Types for ndarrays](#412-data-types-for-ndarrays)
-    * [4.1.3 Operations between Arrays and Scalars](#413-operations-between-arrays-and-scalars)
-    * [4.1.4 Basic Indexing and Slicing](#414-basic-indexing-and-slicing)
-    * [4.1.5 Boolean Indexing](#415-boolean-indexing)
-    * [4.1.6 Fancy Indexing](#416-fancy-indexing)
-    * [4.1.7 Transposing Arrays and Swapping Axes](#417-transposing-arrays-and-swapping-axes)
-  * [4.2 Universal Functions: Fast Element-wise Array Functions](#42-universal-functions-fast-element-wise-array-functions)
-  * [4.3 Data Processing Using Arrays](#43-data-processing-using-arrays)
-    * [4.3.1 Expressing Conditional Logic as Array Operations](#431-expressing-conditional-logic-as-array-operations)
-    * [4.3.2 Mathematical and Statistical Methods](#432-mathematical-and-statistical-methods)
-    * [4.3.3 Methods for Boolean Arrays](#433-methods-for-boolean-arrays)
-    * [4.3.4 Sorting](#434-sorting)
-    * [4.3.5 Unique and Other Set Logic](#435-unique-and-other-set-logic)
-  * [4.4 File Input and Output with Arrays](#44-file-input-and-output-with-arrays)
-    * [4.4.1 Storing Arrays on Disk in Binary Format](#441-storing-arrays-on-disk-in-binary-format)
-    * [4.4.2 Saving and Loading Text Files](#442-saving-and-loading-text-files)
-  * [4.5 Linear Algebra](#45-linear-algebra)
-  * [4.6 Random Number Generation](#46-random-number-generation)
-  * [4.7 Example: Random Walks](#47-example-random-walks)
-    * [4.7.1 Simulating Many Random Walks at Once](#471-simulating-many-random-walks-at-once)
-
-<!-- tocstop -->
-
 
 
 ```python
@@ -135,7 +107,7 @@ np.empty((2, 3, 2))
     array([[[ 0.,  0.],
             [ 0.,  0.],
             [ 0.,  0.]],
-
+    
            [[ 0.,  0.],
             [ 0.,  0.],
             [ 0.,  0.]]])
@@ -344,7 +316,7 @@ arr3d
 
     array([[[ 1,  2,  3],
             [ 4,  5,  6]],
-
+    
            [[ 7,  8,  9],
             [10, 11, 12]]])
 
@@ -377,7 +349,7 @@ arr3d
 
     array([[[ 1,  2,  3],
             [ 4,  5,  6]],
-
+    
            [[ 7,  8,  9],
             [10, 11, 12]]])
 
@@ -468,7 +440,7 @@ arr2d[:, :1]
 arr2d[:2, 1:] = 0
 ```
 
-### 4.1.5 Boolean Indexing
+### 4.1.5 Boolean Indexing  
 
 
 ```python
@@ -537,7 +509,7 @@ data[-(names == 'Bob')]
 
     C:\Anaconda36\lib\site-packages\ipykernel\__main__.py:2: DeprecationWarning: numpy boolean negative, the `-` operator, is deprecated, use the `~` operator or the logical_not function instead.
       from ipykernel import kernelapp as app
-
+    
 
 
 
@@ -1045,7 +1017,7 @@ walk.max()
 (np.abs(walk) >= 10).argmax()
 ```
 
-### 4.7.1 Simulating Many Random Walks at Once
+### 4.7.1 Simulating Many Random Walks at Once 
 
 
 ```python

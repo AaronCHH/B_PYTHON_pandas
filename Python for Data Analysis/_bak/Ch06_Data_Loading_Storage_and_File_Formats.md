@@ -1,23 +1,5 @@
 
 # Chapter 6. Data Loading, Storage, and File Formats
-<!-- toc orderedList:0 depthFrom:1 depthTo:6 -->
-
-* [Chapter 6. Data Loading, Storage, and File Formats](#chapter-6-data-loading-storage-and-file-formats)
-  * [6.1 Reading and Writing Data in Text Format](#61-reading-and-writing-data-in-text-format)
-    * [6.1.1 Reading Text Files in Pieces](#611-reading-text-files-in-pieces)
-    * [6.1.2 Writing Data Out to Text Format](#612-writing-data-out-to-text-format)
-    * [6.1.3 Manually Working with Delimited Formats](#613-manually-working-with-delimited-formats)
-    * [6.1.4 JSON Data](#614-json-data)
-    * [6.1.5 XML and HTML: Web Scraping](#615-xml-and-html-web-scraping)
-  * [6.2 Binary Data Formats](#62-binary-data-formats)
-    * [6.2.1 Using HDF5 Format](#621-using-hdf5-format)
-    * [6.2.2 Reading Microsoft Excel Files](#622-reading-microsoft-excel-files)
-  * [6.3 Interacting with HTML and Web APIs](#63-interacting-with-html-and-web-apis)
-  * [6.4 Interacting with Databases](#64-interacting-with-databases)
-    * [6.4.1 Storing and Loading Data in MongoDB](#641-storing-and-loading-data-in-mongodb)
-
-<!-- tocstop -->
-
 
 
 ```python
@@ -537,7 +519,7 @@ import pandas.io.sql as sql
 sql.read_sql('select * from test', con)
 ```
 
-### 6.4.1 Storing and Loading Data in MongoDB
+### 6.4.1 Storing and Loading Data in MongoDB 
 
 
 ```python

@@ -1,39 +1,6 @@
 
 # Chapter 12. Advanced NumPy
-<!-- toc orderedList:0 depthFrom:1 depthTo:6 -->
 
-* [Chapter 12. Advanced NumPy](#chapter-12-advanced-numpy)
-  * [12.1 ndarray Object Internals](#121-ndarray-object-internals)
-    * [12.1.1 NumPy dtype Hierarchy](#1211-numpy-dtype-hierarchy)
-  * [12.2 Advanced Array Manipulation](#122-advanced-array-manipulation)
-    * [12.2.1 Reshaping Arrays](#1221-reshaping-arrays)
-    * [12.2.2 C versus Fortran Order](#1222-c-versus-fortran-order)
-    * [12.2.3 Concatenating and Splitting Arrays](#1223-concatenating-and-splitting-arrays)
-    * [12.2.4 Repeating Elements: Tile and Repeat](#1224-repeating-elements-tile-and-repeat)
-    * [12.2.5 Fancy Indexing Equivalents: Take and Put](#1225-fancy-indexing-equivalents-take-and-put)
-  * [12.3 Broadcasting](#123-broadcasting)
-    * [12.3.1 Broadcasting Over Other Axes](#1231-broadcasting-over-other-axes)
-    * [12.3.2 Setting Array Values by Broadcasting](#1232-setting-array-values-by-broadcasting)
-  * [12.4 Advanced ufunc Usage](#124-advanced-ufunc-usage)
-    * [12.4.1 ufunc Instance Methods](#1241-ufunc-instance-methods)
-    * [12.4.2 Custom ufuncs](#1242-custom-ufuncs)
-  * [12.5 Structured and Record Arrays](#125-structured-and-record-arrays)
-    * [12.5.1 Nested dtypes and Multidimensional Fields](#1251-nested-dtypes-and-multidimensional-fields)
-    * [12.5.2 Why Use Structured Arrays](#1252-why-use-structured-arrays)
-    * [12.5.3 Structured Array Manipulations: numpy.lib.recfunctions](#1253-structured-array-manipulations-numpylibrecfunctions)
-  * [12.6 More About Sorting](#126-more-about-sorting)
-    * [12.6.1 Indirect Sorts: argsort and lexsort](#1261-indirect-sorts-argsort-and-lexsort)
-    * [12.6.2 Alternate Sort Algorithms](#1262-alternate-sort-algorithms)
-    * [12.6.3 numpy.searchsorted: Finding elements in a Sorted Array](#1263-numpysearchsorted-finding-elements-in-a-sorted-array)
-  * [12.7 NumPy Matrix Class](#127-numpy-matrix-class)
-  * [12.8 Advanced Array Input and Output](#128-advanced-array-input-and-output)
-    * [12.8.1 Memory-mapped Files](#1281-memory-mapped-files)
-    * [12.8.2 HDF5 and Other Array Storage Options](#1282-hdf5-and-other-array-storage-options)
-  * [12.9 Performance Tips](#129-performance-tips)
-    * [12.9.1 The Importance of Contiguous Memory](#1291-the-importance-of-contiguous-memory)
-    * [12.9.2 Other Speed Options: Cython, f2py, C](#1292-other-speed-options-cython-f2py-c)
-
-<!-- tocstop -->
 
 ```python
 from __future__ import division

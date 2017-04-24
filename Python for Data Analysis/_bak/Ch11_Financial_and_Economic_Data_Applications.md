@@ -1,24 +1,5 @@
 
 # Chapter 11. Financial and Economic Data Applications
-<!-- toc orderedList:0 depthFrom:1 depthTo:6 -->
-
-* [Chapter 11. Financial and Economic Data Applications](#chapter-11-financial-and-economic-data-applications)
-  * [11.1 Data Munging Topics](#111-data-munging-topics)
-    * [11.1.1 Time Series and Cross-Section Alignment](#1111-time-series-and-cross-section-alignment)
-    * [11.1.2 Operations with Time Series of Different Frequencies](#1112-operations-with-time-series-of-different-frequencies)
-    * [11.1.3 Time of Day and "as of" Data Selection](#1113-time-of-day-and-as-of-data-selection)
-    * [11.1.4 Splicing Together Data Sources](#1114-splicing-together-data-sources)
-    * [11.1.5 Return Indexes and Cumulative Returns](#1115-return-indexes-and-cumulative-returns)
-  * [11.2 Group Transforms and Analysis](#112-group-transforms-and-analysis)
-    * [11.2.1 Group Factor Exposures](#1121-group-factor-exposures)
-    * [11.2.2 Decile and Quartile Analysis](#1122-decile-and-quartile-analysis)
-  * [11.3 More Example Applications](#113-more-example-applications)
-    * [11.3.1 Signal Frontier Analysis](#1131-signal-frontier-analysis)
-    * [11.3.2 Future Contract Rolling](#1132-future-contract-rolling)
-    * [11.3.3 Rolling Correlation and Linear Regression](#1133-rolling-correlation-and-linear-regression)
-
-<!-- tocstop -->
-
 
 
 ```python
@@ -659,7 +640,7 @@ weights.ix['2012-09-12':'2012-09-21']
 rolled_returns = (prices.pct_change() * weights).sum(1)
 ```
 
-### 11.3.3 Rolling Correlation and Linear Regression
+### 11.3.3 Rolling Correlation and Linear Regression 
 
 
 ```python
