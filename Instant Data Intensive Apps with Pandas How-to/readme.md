@@ -1,5 +1,5 @@
 # Instant Data Intensive Apps with Pandas How-to
-<img src="cover.jpg" alt="" height="400">
+<img src="cover.jpg" alt="" height="300">
 
 ## Info
 * [Packt](https://www.packtpub.com/big-data-and-business-intelligence/instant-data-intensive-apps-pandas-how-instant)
