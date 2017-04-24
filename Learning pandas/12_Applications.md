@@ -1,27 +1,30 @@
 
+# Chapter 12: Applications to Finance
 <!-- toc orderedList:0 depthFrom:1 depthTo:6 -->
 
-- [Setting up the notebook](#setting-up-the-notebook)
-- [Obtaining and organizing stock data from Yahoo!](#obtaining-and-organizing-stock-data-from-yahoo)
-	- [Plotting time-series prices](#plotting-time-series-prices)
-	- [Plotting volume series data](#plotting-volume-series-data)
-	- [Calculating simple daily percentage change](#calculating-simple-daily-percentage-change)
-	- [Calculating simple daily cumulative returns](#calculating-simple-daily-cumulative-returns)
-	- [Resampling data from daily to monthly returns](#resampling-data-from-daily-to-monthly-returns)
-	- [Analyzing distribution of returns](#analyzing-distribution-of-returns)
-	- [Performing moving average calculation](#performing-moving-average-calculation)
-	- [Comparision of average daily returns across stocks](#comparision-of-average-daily-returns-across-stocks)
-	- [Correlation of stocks based upon daily percentage change of closing price](#correlation-of-stocks-based-upon-daily-percentage-change-of-closing-price)
-- [Volatility](#volatility)
-- [Determining risk relative to expected returns](#determining-risk-relative-to-expected-returns)
+* [Chapter 12: Applications to Finance](#chapter-12-applications-to-finance)
+  * [12.1 Setting up the IPython notebook](#121-setting-up-the-ipython-notebook)
+  * [12.2 Obtaining and organizing stock data from Yahoo](#122-obtaining-and-organizing-stock-data-from-yahoo)
+  * [12.3 Plotting time-series prices](#123-plotting-time-series-prices)
+    * [Plotting volume-series data](#plotting-volume-series-data)
+    * [Calculating the simple daily percentage change](#calculating-the-simple-daily-percentage-change)
+    * [Calculating simple daily cumulative returns](#calculating-simple-daily-cumulative-returns)
+    * [Resampling data from daily to monthly returns](#resampling-data-from-daily-to-monthly-returns)
+    * [Analyzing distribution of returns](#analyzing-distribution-of-returns)
+  * [12.4 Performing a moving-average calculation](#124-performing-a-moving-average-calculation)
+    * [The comparison of average daily returns across stocks](#the-comparison-of-average-daily-returns-across-stocks)
+    * [The correlation of stocks based on the daily percentage change of the closing price](#the-correlation-of-stocks-based-on-the-daily-percentage-change-of-the-closing-price)
+  * [12.5 Volatility calculation](#125-volatility-calculation)
+  * [12.6 Determining risk relative to expected returns](#126-determining-risk-relative-to-expected-returns)
+  * [12.7 Summary](#127-summary)
 
 <!-- tocstop -->
 
 
-# Setting up the notebook
+## 12.1 Setting up the IPython notebook
 
 
-```
+```python
 # necessary imports for the workbook
 import pandas as pd
 import pandas.io.data
@@ -40,10 +43,10 @@ pd.set_option('precision', 4)
 %matplotlib inline
 ```
 
-# Obtaining and organizing stock data from Yahoo!
+## 12.2 Obtaining and organizing stock data from Yahoo
 
 
-```
+```python
 # read data from Yahoo! Finance for a specific
 # stock specified by ticker and between the start and end dates
 def getStockData(ticker, start, end):
@@ -57,7 +60,7 @@ def getStockData(ticker, start, end):
 ```
 
 
-```
+```python
 # request the three years of data for MSFT
 start = datetime.datetime(2012, 1, 1)
 end = datetime.datetime(2014, 12, 31)
@@ -68,7 +71,7 @@ getStockData("MSFT", start, end).head()
 
 
                Ticker   Open   High    ...     Close    Volume  AdjClose
-    Date                               ...                              
+    Date                               ...
     2012-01-03   MSFT  26.55  26.96    ...     26.77  64731500     24.42
     2012-01-04   MSFT  26.82  27.47    ...     27.40  80516100     25.00
     2012-01-05   MSFT  27.38  27.73    ...     27.68  56081400     25.25
@@ -80,7 +83,7 @@ getStockData("MSFT", start, end).head()
 
 
 
-```
+```python
 # gets data for multiple stocks
 # tickers: a list of stock symbols to fetch
 # start and end are the start end end dates
@@ -98,7 +101,7 @@ def getDataForMultipleStocks(tickers, start, end):
 ```
 
 
-```
+```python
 # get the data for all the stocks that we want
 raw = getDataForMultipleStocks(
     ["MSFT", "AAPL", "GE", "IBM", "AA", "DAL",
@@ -107,7 +110,7 @@ raw = getDataForMultipleStocks(
 ```
 
 
-```
+```python
 # take a peek at the data for MSFT
 raw['MSFT'][:5]
 ```
@@ -116,7 +119,7 @@ raw['MSFT'][:5]
 
 
                Ticker   Open   High    ...     Close    Volume  AdjClose
-    Date                               ...                              
+    Date                               ...
     2012-01-03   MSFT  26.55  26.96    ...     26.77  64731500     24.42
     2012-01-04   MSFT  26.82  27.47    ...     27.40  80516100     25.00
     2012-01-05   MSFT  27.38  27.73    ...     27.68  56081400     25.25
@@ -128,7 +131,7 @@ raw['MSFT'][:5]
 
 
 
-```
+```python
 # given the dictionary of data frames,
 # pivots a given column into values with column
 # names being the stock symbols
@@ -152,7 +155,7 @@ def pivotTickersToColumns(raw, column):
 ```
 
 
-```
+```python
 # do the pivot
 close_px = pivotTickersToColumns(raw, "AdjClose")
 # peek at the result
@@ -163,7 +166,7 @@ close_px[:5]
 
 
     Ticker        AA   AAPL   DAL  ...     MSFT    PEP    UAL
-    Date                           ...                       
+    Date                           ...
     2012-01-03  8.89  55.41  7.92  ...    24.42  60.44  18.90
     2012-01-04  9.10  55.71  7.89  ...    25.00  60.75  18.52
     2012-01-05  9.02  56.33  8.20  ...    25.25  60.28  18.39
@@ -174,42 +177,42 @@ close_px[:5]
 
 
 
-## Plotting time-series prices
+## 12.3 Plotting time-series prices
 
 
-```
+```python
 # plot the closing prices of AAPL
 close_px['AAPL'].plot();
-```
-
-
-![png](12_Applications_files/12_Applications_11_0.png)
-
-
-
-```
-# plot the closing prices of MSFT
-close_px['MSFT'].plot();
-```
-
-
-![png](12_Applications_files/12_Applications_12_0.png)
-
-
-
-```
-# plot MSFT vs AAPL on the same chart
-close_px[['MSFT', 'AAPL']].plot();
 ```
 
 
 ![png](12_Applications_files/12_Applications_13_0.png)
 
 
-## Plotting volume series data
 
-
+```python
+# plot the closing prices of MSFT
+close_px['MSFT'].plot();
 ```
+
+
+![png](12_Applications_files/12_Applications_14_0.png)
+
+
+
+```python
+# plot MSFT vs AAPL on the same chart
+close_px[['MSFT', 'AAPL']].plot();
+```
+
+
+![png](12_Applications_files/12_Applications_15_0.png)
+
+
+### Plotting volume-series data
+
+
+```python
 # pivot the volume data into columns
 volumes = pivotTickersToColumns(raw, "Volume")
 volumes.tail()
@@ -219,7 +222,7 @@ volumes.tail()
 
 
     Ticker           AA      AAPL      DAL   ...         MSFT      PEP      UAL
-    Date                                     ...                               
+    Date                                     ...
     2014-12-24  4944200  14479600  4296200   ...     11437800  1604100  2714300
     2014-12-26  6355200  33721000  5303100   ...     13197800  1492700  3062200
     2014-12-29  7087800  27598900  6656700   ...     14439500  2453800  2874300
@@ -231,7 +234,7 @@ volumes.tail()
 
 
 
-```
+```python
 # plot the volume for MSFT
 msftV = volumes[["MSFT"]]
 plt.bar(msftV.index, msftV["MSFT"])
@@ -239,11 +242,11 @@ plt.gcf().set_size_inches(15,8)
 ```
 
 
-![png](12_Applications_files/12_Applications_16_0.png)
+![png](12_Applications_files/12_Applications_18_0.png)
 
 
 
-```
+```python
 # draw the price history on the top
 top = plt.subplot2grid((4,4), (0, 0), rowspan=3, colspan=4)
 top.plot(close_px['MSFT'].index, close_px['MSFT'], label='MSFT Adjusted Close')
@@ -259,13 +262,13 @@ plt.gcf().set_size_inches(15,8)
 ```
 
 
-![png](12_Applications_files/12_Applications_17_0.png)
+![png](12_Applications_files/12_Applications_19_0.png)
 
 
-## Calculating simple daily percentage change
+### Calculating the simple daily percentage change
 
 
-```
+```python
 # calculate daily percentage change
 daily_pc = close_px / close_px.shift(1) - 1
 daily_pc[:5]
@@ -275,7 +278,7 @@ daily_pc[:5]
 
 
     Ticker         AA   AAPL    DAL  ...     MSFT    PEP    UAL
-    Date                             ...                       
+    Date                             ...
     2012-01-03    NaN    NaN    NaN  ...      NaN    NaN    NaN
     2012-01-04  0.024  0.005 -0.004  ...    0.024  0.005 -0.020
     2012-01-05 -0.009  0.011  0.039  ...    0.010 -0.008 -0.007
@@ -287,7 +290,7 @@ daily_pc[:5]
 
 
 
-```
+```python
 # check the percentage on 2012-01-05
 close_px.ix['2012-01-05']['AAPL'] / close_px.ix['2012-01-04']['AAPL'] -1
 ```
@@ -300,19 +303,19 @@ close_px.ix['2012-01-05']['AAPL'] / close_px.ix['2012-01-04']['AAPL'] -1
 
 
 
-```
+```python
 # plot daily percentage change for AAPL
 daily_pc["AAPL"].plot();
 ```
 
 
-![png](12_Applications_files/12_Applications_21_0.png)
+![png](12_Applications_files/12_Applications_23_0.png)
 
 
-## Calculating simple daily cumulative returns
+### Calculating simple daily cumulative returns
 
 
-```
+```python
 # calculate daily cumulative return
 daily_cr = (1 + daily_pc).cumprod()
 daily_cr[:5]
@@ -322,7 +325,7 @@ daily_cr[:5]
 
 
     Ticker         AA   AAPL    DAL  ...     MSFT    PEP    UAL
-    Date                             ...                       
+    Date                             ...
     2012-01-03    NaN    NaN    NaN  ...      NaN    NaN    NaN
     2012-01-04  1.024  1.005  0.996  ...    1.024  1.005  0.980
     2012-01-05  1.015  1.017  1.035  ...    1.034  0.997  0.973
@@ -334,7 +337,7 @@ daily_cr[:5]
 
 
 
-```
+```python
 # plot all the cumulative returns to get an idea
 # of the relative performance of all the stocks
 daily_cr.plot(figsize=(8,6))
@@ -342,13 +345,13 @@ plt.legend(loc=2);
 ```
 
 
-![png](12_Applications_files/12_Applications_24_0.png)
+![png](12_Applications_files/12_Applications_26_0.png)
 
 
-## Resampling data from daily to monthly returns
+### Resampling data from daily to monthly returns
 
 
-```
+```python
 # resample to end of month and forward fill values
 monthly = close_px.asfreq('EOM', method="ffill")
 monthly[:5]
@@ -369,7 +372,7 @@ monthly[:5]
 
 
 
-```
+```python
 # calculate the monthly percentage changes
 monthly_pc = monthly / monthly.shift(1) - 1
 monthly_pc[:5]
@@ -390,7 +393,7 @@ monthly_pc[:5]
 
 
 
-```
+```python
 # calculate monthly cumulative return
 monthly_cr = (1 + monthly_pc).cumprod()
 monthly_cr[:5]
@@ -411,31 +414,31 @@ monthly_cr[:5]
 
 
 
-```
+```python
 # plot the monthly cumulative returns
 monthly_cr.plot(figsize=(12,6))
 plt.legend(loc=2);
 ```
 
 
-![png](12_Applications_files/12_Applications_29_0.png)
+![png](12_Applications_files/12_Applications_31_0.png)
 
 
-## Analyzing distribution of returns
+### Analyzing distribution of returns
 
 
-```
+```python
 # histogram of the daily percentage change for AAPL
 aapl = daily_pc['AAPL']
 aapl.hist(bins=50);
 ```
 
 
-![png](12_Applications_files/12_Applications_31_0.png)
+![png](12_Applications_files/12_Applications_33_0.png)
 
 
 
-```
+```python
 # descriptive statistics of the percentage changes
 aapl.describe()
 ```
@@ -456,19 +459,19 @@ aapl.describe()
 
 
 
-```
+```python
 # matrix of all stocks daily % changes histograms
 daily_pc.hist(bins=50, figsize=(8,6));
 ```
 
 
-![png](12_Applications_files/12_Applications_33_0.png)
+![png](12_Applications_files/12_Applications_35_0.png)
 
 
-## Performing moving average calculation
+## 12.4 Performing a moving-average calculation
 
 
-```
+```python
 # extract just MSFT close
 msft_close = close_px[['MSFT']]['MSFT']
 # calculate the 30 and 90 day rolling means
@@ -484,13 +487,13 @@ plt.gcf().set_size_inches(12,8)
 ```
 
 
-![png](12_Applications_files/12_Applications_35_0.png)
+![png](12_Applications_files/12_Applications_37_0.png)
 
 
-## Comparision of average daily returns across stocks
+### The comparison of average daily returns across stocks
 
 
-```
+```python
 # plot the daily percentage change of MSFT vs AAPL
 plt.scatter(daily_pc['MSFT'], daily_pc['AAPL'])
 plt.xlabel('MSFT')
@@ -498,33 +501,33 @@ plt.ylabel('AAPL');
 ```
 
 
-![png](12_Applications_files/12_Applications_37_0.png)
+![png](12_Applications_files/12_Applications_39_0.png)
 
 
 
-```
+```python
 # demonstrate perfect correlation
 plt.scatter(daily_pc['MSFT'], daily_pc['MSFT']);
 ```
 
 
-![png](12_Applications_files/12_Applications_38_0.png)
+![png](12_Applications_files/12_Applications_40_0.png)
 
 
 
-```
+```python
 # plot the scatter of daily price changed for ALL stocks
 pd.scatter_matrix(daily_pc, diagonal='kde', figsize=(12,12));
 ```
 
 
-![png](12_Applications_files/12_Applications_39_0.png)
+![png](12_Applications_files/12_Applications_41_0.png)
 
 
-## Correlation of stocks based upon daily percentage change of closing price
+### The correlation of stocks based on the daily percentage change of the closing price
 
 
-```
+```python
 # calculate the correlation between all the stocks relative
 # to daily percentage change
 corrs = daily_pc.corr()
@@ -535,7 +538,7 @@ corrs
 
 
     Ticker     AA   AAPL    DAL  ...     MSFT    PEP    UAL
-    Ticker                       ...                       
+    Ticker                       ...
     AA      1.000  0.236  0.251  ...    0.310  0.227  0.223
     AAPL    0.236  1.000  0.135  ...    0.187  0.092  0.062
     DAL     0.251  0.135  1.000  ...    0.149  0.174  0.761
@@ -551,7 +554,7 @@ corrs
 
 
 
-```
+```python
 # plot a heatmap of the correlations
 plt.imshow(corrs, cmap='hot', interpolation='none')
 plt.colorbar()
@@ -561,13 +564,13 @@ plt.gcf().set_size_inches(8,8)
 ```
 
 
-![png](12_Applications_files/12_Applications_42_0.png)
+![png](12_Applications_files/12_Applications_44_0.png)
 
 
-# Volatility
+## 12.5 Volatility calculation
 
 
-```
+```python
 # 75 period minimum
 min_periods = 75
 # calculate the volatility
@@ -578,13 +581,13 @@ vol.plot(figsize=(10, 8));
 ```
 
 
-![png](12_Applications_files/12_Applications_44_0.png)
+![png](12_Applications_files/12_Applications_46_0.png)
 
 
-# Determining risk relative to expected returns
+## 12.6 Determining risk relative to expected returns
 
 
-```
+```python
 # generate a scatter of the mean vs std of daily % change
 plt.scatter(daily_pc.mean(), daily_pc.std())
 plt.xlabel('Expected returns')
@@ -613,4 +616,7 @@ plt.gcf().set_size_inches(8,8)
 ```
 
 
-![png](12_Applications_files/12_Applications_46_0.png)
+![png](12_Applications_files/12_Applications_48_0.png)
+
+
+## 12.7 Summary

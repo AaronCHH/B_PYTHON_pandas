@@ -1,34 +1,36 @@
 
-
+# Chapter 3: NumPy for pandas
 <!-- toc orderedList:0 depthFrom:1 depthTo:6 -->
 
-- [Installing and importing NumPy](#installing-and-importing-numpy)
-- [Benefits and characteristics of NumPy arrays](#benefits-and-characteristics-of-numpy-arrays)
-- [Creating NumPy arrays and performing basic operations](#creating-numpy-arrays-and-performing-basic-operations)
-- [Selecting array elements](#selecting-array-elements)
-- [Logical operation on arrays](#logical-operation-on-arrays)
-- [Slicing arrays](#slicing-arrays)
-- [Reshaping arrays](#reshaping-arrays)
-- [Combining arrays](#combining-arrays)
-- [Splitting arrays](#splitting-arrays)
-- [Useful numerical methods of NumPy arrays](#useful-numerical-methods-of-numpy-arrays)
+* [Chapter 3: NumPy for pandas](#chapter-3-numpy-for-pandas)
+  * [3.1 Installing and importing NumPy](#31-installing-and-importing-numpy)
+  * [3.2 Benefits and characteristics of NumPy arrays](#32-benefits-and-characteristics-of-numpy-arrays)
+  * [3.3 Creating NumPy arrays and performing basic array operations](#33-creating-numpy-arrays-and-performing-basic-array-operations)
+  * [3.4 Selecting array elements](#34-selecting-array-elements)
+  * [3.5 Logical operations on arrays](#35-logical-operations-on-arrays)
+  * [3.6 Slicing arrays](#36-slicing-arrays)
+  * [3.7 Reshaping arrays](#37-reshaping-arrays)
+  * [3.8 Combining arrays](#38-combining-arrays)
+  * [3.9 Splitting arrays](#39-splitting-arrays)
+  * [3.10 Useful numerical methods of NumPy arrays](#310-useful-numerical-methods-of-numpy-arrays)
+  * [3.11 Summary](#311-summary)
 
 <!-- tocstop -->
 
 
-# Installing and importing NumPy
+## 3.1 Installing and importing NumPy
 
 
-```{python}
+```python
 # this allows us to access numpy using the
 # np. prefix
 import numpy as np
 ```
 
-# Benefits and characteristics of NumPy arrays
+## 3.2 Benefits and characteristics of NumPy arrays
 
 
-```{python}
+```python
 # a function that squares all the values
 # in a sequence
 def squares(values):
@@ -47,7 +49,7 @@ to_square = range(100000)
 
 
 
-```{python}
+```python
 # now lets do this with a numpy array
 array_to_square = np.arange(0, 100000)
 # and time using a vectorized operation
@@ -57,10 +59,10 @@ array_to_square = np.arange(0, 100000)
     10000 loops, best of 3: 77.6 µs per loop
 
 
-# Creating NumPy arrays and performing basic operations
+## 3.3 Creating NumPy arrays and performing basic array operations
 
 
-```{python}
+```python
 # a simple array
 a1 = np.array([1, 2, 3, 4, 5])
 a1
@@ -74,7 +76,7 @@ a1
 
 
 
-```{python}
+```python
 # what is its type?
 type(a1)
 ```
@@ -87,7 +89,7 @@ type(a1)
 
 
 
-```{python}
+```python
 # how many elements?
 np.size(a1)
 ```
@@ -100,7 +102,7 @@ np.size(a1)
 
 
 
-```{python}
+```python
 # any floats in the sequences makes
 # it an array of floats
 a2 = np.array([1, 2, 3, 4.0, 5.0])
@@ -115,7 +117,7 @@ a2
 
 
 
-```{python}
+```python
 # array is all of one type (float64 in this case)
 a2.dtype
 ```
@@ -128,7 +130,7 @@ a2.dtype
 
 
 
-```{python}
+```python
 # shorthand to repeat a sequence 10 times
 a3 = np.array([0]*10)
 a3
@@ -142,7 +144,7 @@ a3
 
 
 
-```{python}
+```python
 # convert a python range to numpy array
 np.array(range(10))
 ```
@@ -155,7 +157,7 @@ np.array(range(10))
 
 
 
-```{python}
+```python
 # create a numpy array of 10 0.0's
 np.zeros(10)
 ```
@@ -168,7 +170,7 @@ np.zeros(10)
 
 
 
-```{python}
+```python
 # force it to be of int instead of float64
 np.zeros(10, dtype=int)
 ```
@@ -181,7 +183,7 @@ np.zeros(10, dtype=int)
 
 
 
-```{python}
+```python
 # make "a range" starting at 0 and with 10 values
 np.arange(0, 10)
 ```
@@ -194,7 +196,7 @@ np.arange(0, 10)
 
 
 
-```{python}
+```python
 # 0 <= x < 10 increment by two
 np.arange(0, 10, 2)
 ```
@@ -207,7 +209,7 @@ np.arange(0, 10, 2)
 
 
 
-```{python}
+```python
 # 10 >= x > 0, counting down
 np.arange(10, 0, -1)
 ```
@@ -220,7 +222,7 @@ np.arange(10, 0, -1)
 
 
 
-```{python}
+```python
 # evenly spaced #'s between two intervals
 np.linspace(0, 10, 11)
 ```
@@ -233,7 +235,7 @@ np.linspace(0, 10, 11)
 
 
 
-```{python}
+```python
 # multiply numpy array by 2
 a1 = np.arange(0, 10)
 a1 * 2
@@ -247,7 +249,7 @@ a1 * 2
 
 
 
-```{python}
+```python
 # add two numpy arrays
 a2 = np.arange(10, 20)
 a1 + a2
@@ -261,7 +263,7 @@ a1 + a2
 
 
 
-```{python}
+```python
 # create a 2- array (2x2)
 np.array([[1,2], [3,4]])
 ```
@@ -275,7 +277,7 @@ np.array([[1,2], [3,4]])
 
 
 
-```{python}
+```python
 # create a 1x20 array, and reshape to a 5x4 2d-array
 m = np.arange(0, 20).reshape(5, 4)
 m
@@ -293,7 +295,7 @@ m
 
 
 
-```{python}
+```python
 # size of any dimensional array is the # of elements
 np.size(m)
 ```
@@ -306,7 +308,7 @@ np.size(m)
 
 
 
-```{python}
+```python
 # can ask the size along a given axis (0 is rows)
 np.size(m, 0)
 ```
@@ -319,7 +321,7 @@ np.size(m, 0)
 
 
 
-```{python}
+```python
 # and 1 is the columns
 np.size(m, 1)
 ```
@@ -331,23 +333,29 @@ np.size(m, 1)
 
 
 
-# Selecting array elements
+## 3.4 Selecting array elements
 
 
-```{python}
+```python
 # select 0-based elements 0 and 2
 a1[0], a1[2]
 ```
 
 
+    ---------------------------------------------------------------------------
+
+    NameError                                 Traceback (most recent call last)
+
+    <ipython-input-7-6291bf204242> in <module>()
+          1 # select 0-based elements 0 and 2
+    ----> 2 a1[0], a1[2]
 
 
-    (0, 2)
+    NameError: name 'a1' is not defined
 
 
 
-
-```{python}
+```python
 # select an element in 2d array at row 1 column 2
 m[1, 2]
 ```
@@ -360,7 +368,7 @@ m[1, 2]
 
 
 
-```{python}
+```python
 # all items in row 1
 m[1,]
 ```
@@ -373,7 +381,19 @@ m[1,]
 
 
 
-```{python}
+```python
+m[1,:]
+```
+
+
+
+
+    array([4, 5, 6, 7])
+
+
+
+
+```python
 # all items in column 2
 m[:,2]
 ```
@@ -385,10 +405,10 @@ m[:,2]
 
 
 
-# Logical operation on arrays
+## 3.5 Logical operations on arrays
 
 
-```{python}
+```python
 # which items are less than 2?
 a = np.arange(5)
 a < 2
@@ -402,13 +422,13 @@ a < 2
 
 
 
-```{python}
+```python
 # this is commented as it will cause an exception
 # print (a<2 or a>3)
 ```
 
 
-```{python}
+```python
 # less than 2 or greater than 3?
 (a<2) | (a>3)
 ```
@@ -421,7 +441,7 @@ a < 2
 
 
 
-```{python}
+```python
 # create a function that is applied to all array elements
 def exp (x):
     return x<3 or x>3
@@ -437,7 +457,7 @@ np.vectorize(exp)(a)
 
 
 
-```{python}
+```python
 # boolean select items < 3
 r = a<3
 # applying the result of the expression to the [] operate
@@ -453,7 +473,7 @@ a[r]
 
 
 
-```{python}
+```python
 # np.sum treats True as 1 and False as 0
 # so this is how many items are less than 3
 np.sum(a < 3)
@@ -467,7 +487,7 @@ np.sum(a < 3)
 
 
 
-```{python}
+```python
 # This can be applied across two arrays
 a1 = np.arange(0, 5)
 a2 = np.arange(5, 0, -1)
@@ -482,7 +502,7 @@ a1 < a2
 
 
 
-```{python}
+```python
 # and even multi dimensional arrays
 a1 = np.arange(9).reshape(3, 3)
 a2 = np.arange(9, 0 , -1).reshape(3, 3)
@@ -498,10 +518,10 @@ a1 < a2
 
 
 
-# Slicing arrays
+## 3.6 Slicing arrays
 
 
-```{python}
+```python
 # get all items in the array from position 3
 # up to position 8 (but not inclusive)
 a1 = np.arange(1, 10)
@@ -516,7 +536,7 @@ a1[3:8]
 
 
 
-```{python}
+```python
 # every other item
 a1[::2]
 ```
@@ -529,7 +549,7 @@ a1[::2]
 
 
 
-```{python}
+```python
 # in reverse order
 a1[::-1]
 ```
@@ -542,7 +562,7 @@ a1[::-1]
 
 
 
-```{python}
+```python
 # note that when in reverse, this does not include
 # the element specified in the second component of the slice
 # ie: there is no 1 printed in this
@@ -557,7 +577,7 @@ a1[9:0:-1]
 
 
 
-```{python}
+```python
 # all items from position 5 onwards
 a1[5:]
 ```
@@ -570,7 +590,7 @@ a1[5:]
 
 
 
-```{python}
+```python
 # the items in the first 5 positions
 a1[:5]
 ```
@@ -583,7 +603,7 @@ a1[:5]
 
 
 
-```{python}
+```python
 # we saw this earlier
 # : in rows specifier means all rows
 # so this gets items in column position 1, all rows
@@ -598,7 +618,7 @@ m[:,1]
 
 
 
-```{python}
+```python
 # in all rows, but for all columns in positions
 # 1 up to but not including 3
 m[:,1:3]
@@ -616,7 +636,7 @@ m[:,1:3]
 
 
 
-```{python}
+```python
 # in row positions 3 up to but not including 5, all columns
 m[3:5,:]
 ```
@@ -630,7 +650,7 @@ m[3:5,:]
 
 
 
-```{python}
+```python
 # combined to pull out a sub matrix of the matrix
 m[3:5,1:3]
 ```
@@ -644,7 +664,7 @@ m[3:5,1:3]
 
 
 
-```{python}
+```python
 # using a python array, we can select
 # non-contiguous rows or columns
 m[[1,3,4],:]
@@ -659,10 +679,10 @@ m[[1,3,4],:]
 
 
 
-# Reshaping arrays
+## 3.7 Reshaping arrays
 
 
-```{python}
+```python
 # create a 9 element array (1x9)
 a = np.arange(0, 9)
 # and reshape to a 3x3 2-d array
@@ -680,7 +700,7 @@ m
 
 
 
-```{python}
+```python
 # and we can reshape downward in dimensions too
 reshaped = m.reshape(9)
 reshaped
@@ -694,7 +714,7 @@ reshaped
 
 
 
-```{python}
+```python
 # .ravel will array representing a flattened 2-d array
 raveled = m.ravel()
 raveled
@@ -708,7 +728,7 @@ raveled
 
 
 
-```{python}
+```python
 # it does not alter the shape of the source
 m
 ```
@@ -723,7 +743,7 @@ m
 
 
 
-```{python}
+```python
 # but it will be a view into the source
 # so items changed in the result of the ravel
 # are changed in the original object
@@ -748,7 +768,7 @@ m
 
 
 
-```{python}
+```python
 # flattened is like ravel, but a copy of the data,
 # not a view into the source
 m2 = np.arange(0, 9).reshape(3,3)
@@ -766,7 +786,7 @@ flattened
 
 
 
-```{python}
+```python
 # but not in the original
 m2
 ```
@@ -781,7 +801,7 @@ m2
 
 
 
-```{python}
+```python
 # we can reshape by assigning  a tuple to the .shape property
 # we start with this, which has one dimension
 flattened.shape
@@ -795,7 +815,7 @@ flattened.shape
 
 
 
-```{python}
+```python
 # and make it 3x3
 flattened.shape = (3, 3)
 # it is no longer flattened
@@ -812,7 +832,7 @@ flattened
 
 
 
-```{python}
+```python
 # transpose a matrix
 flattened.transpose()
 ```
@@ -827,7 +847,7 @@ flattened.transpose()
 
 
 
-```{python}
+```python
 # can also use .T property to transpose
 flattened.T
 ```
@@ -842,7 +862,7 @@ flattened.T
 
 
 
-```{python}
+```python
 # we can also use .resize, which changes shape of
 # and object in-place
 m = np.arange(0, 9).reshape(3,3)
@@ -857,10 +877,10 @@ m # my shape has changed
 
 
 
-# Combining arrays
+## 3.8 Combining arrays
 
 
-```{python}
+```python
 # creating two arrays for examples
 a = np.arange(9).reshape(3, 3)
 b = (a + 1) * 10
@@ -877,7 +897,7 @@ a
 
 
 
-```{python}
+```python
 b
 ```
 
@@ -891,7 +911,7 @@ b
 
 
 
-```{python}
+```python
 # horizontally stack the two arrays
 # b becomes columns of a to the right of a's columns
 np.hstack((a, b))
@@ -907,7 +927,7 @@ np.hstack((a, b))
 
 
 
-```{python}
+```python
 # identical to concatenate along axis = 1
 np.concatenate((a, b), axis = 1)
 ```
@@ -922,7 +942,7 @@ np.concatenate((a, b), axis = 1)
 
 
 
-```{python}
+```python
 # vertical stack, adding b as rows after a's rows
 np.vstack((a, b))
 ```
@@ -940,7 +960,7 @@ np.vstack((a, b))
 
 
 
-```{python}
+```python
 # concatenate along axis=0 is the same as vstack
 np.concatenate((a, b), axis = 0)
 ```
@@ -958,7 +978,7 @@ np.concatenate((a, b), axis = 0)
 
 
 
-```{python}
+```python
 # dstack stacks each independent column of a and b
 np.dstack((a, b))
 ```
@@ -981,7 +1001,7 @@ np.dstack((a, b))
 
 
 
-```{python}
+```python
 # set up 1-d array
 one_d_a = np.arange(5)
 one_d_a
@@ -995,7 +1015,7 @@ one_d_a
 
 
 
-```{python}
+```python
 # another 1-d array
 one_d_b = (one_d_a + 1) * 10
 one_d_b
@@ -1009,7 +1029,7 @@ one_d_b
 
 
 
-```{python}
+```python
 # stack the two columns
 np.column_stack((one_d_a, one_d_b))
 ```
@@ -1026,7 +1046,7 @@ np.column_stack((one_d_a, one_d_b))
 
 
 
-```{python}
+```python
 # stack along rows
 np.row_stack((one_d_a, one_d_b))
 ```
@@ -1039,10 +1059,10 @@ np.row_stack((one_d_a, one_d_b))
 
 
 
-# Splitting arrays
+## 3.9 Splitting arrays
 
 
-```{python}
+```python
 # sample array
 a = np.arange(12).reshape(3, 4)
 a
@@ -1058,7 +1078,7 @@ a
 
 
 
-```{python}
+```python
 # horiz split the 2-d array into 4 array columns
 np.hsplit(a, 4)
 ```
@@ -1079,7 +1099,7 @@ np.hsplit(a, 4)
 
 
 
-```{python}
+```python
 # horiz split into two array columns
 np.hsplit(a, 2)
 ```
@@ -1096,7 +1116,7 @@ np.hsplit(a, 2)
 
 
 
-```{python}
+```python
 # split at columns 1 and 3
 np.hsplit(a, [1, 3])
 ```
@@ -1115,7 +1135,7 @@ np.hsplit(a, [1, 3])
 
 
 
-```{python}
+```python
 # along the rows
 np.split(a, 2, axis = 1)
 ```
@@ -1132,7 +1152,7 @@ np.split(a, 2, axis = 1)
 
 
 
-```{python}
+```python
 # new array for examples
 a = np.arange(12).reshape(4, 3)
 a
@@ -1149,7 +1169,7 @@ a
 
 
 
-```{python}
+```python
 # split into four rows of arrays
 np.vsplit(a, 4)
 ```
@@ -1165,7 +1185,7 @@ np.vsplit(a, 4)
 
 
 
-```{python}
+```python
 # into two rows of arrays
 np.vsplit(a, 2)
 ```
@@ -1180,7 +1200,7 @@ np.vsplit(a, 2)
 
 
 
-```{python}
+```python
 # split along axis=0
 # row 0 of original is row 0 of new array
 # rows 1 and 2 of original are row 1
@@ -1196,7 +1216,7 @@ np.vsplit(a, [1, 3])
 
 
 
-```{python}
+```python
 # split can specify axis
 np.split(a, 2, axis = 0)
 ```
@@ -1211,7 +1231,7 @@ np.split(a, 2, axis = 0)
 
 
 
-```{python}
+```python
 # 3-d array
 c = np.arange(27).reshape(3, 3, 3)
 c
@@ -1235,7 +1255,7 @@ c
 
 
 
-```{python}
+```python
 # split into 3
 np.dsplit(c, 3)
 ```
@@ -1277,10 +1297,10 @@ np.dsplit(c, 3)
 
 
 
-# Useful numerical methods of NumPy arrays
+## 3.10 Useful numerical methods of NumPy arrays
 
 
-```{python}
+```python
 # demonstrate some of the properties of NumPy arrays
 m = np.arange(10, 19).reshape(3, 3)
 print (a)
@@ -1309,7 +1329,7 @@ print ("{0} maxs across each row".format(m.max(axis = 1)))
 
 
 
-```{python}
+```python
 # demonstrate included statistical methods
 a = np.arange(10)
 a
@@ -1323,7 +1343,7 @@ a
 
 
 
-```{python}
+```python
 a.mean(), a.std(), a.var()
 ```
 
@@ -1335,7 +1355,7 @@ a.mean(), a.std(), a.var()
 
 
 
-```{python}
+```python
 # demonstrate sum and prod
 a = np.arange(1, 6)
 a
@@ -1349,7 +1369,7 @@ a
 
 
 
-```{python}
+```python
 a.sum(), a.prod()
 ```
 
@@ -1361,7 +1381,7 @@ a.sum(), a.prod()
 
 
 
-```{python}
+```python
 # and cumulative sum and prod
 a.cumsum(), a.cumprod()
 ```
@@ -1374,7 +1394,7 @@ a.cumsum(), a.cumprod()
 
 
 
-```{python}
+```python
 # applying logical operators
 a = np.arange(10)
 (a < 5).any() # any < 5?
@@ -1388,7 +1408,7 @@ a = np.arange(10)
 
 
 
-```{python}
+```python
 (a < 5).all() # all < 5?
 ```
 
@@ -1400,7 +1420,7 @@ a = np.arange(10)
 
 
 
-```{python}
+```python
 # size is always the total number of elements
 np.arange(10).reshape(2, 5).size
 ```
@@ -1413,7 +1433,7 @@ np.arange(10).reshape(2, 5).size
 
 
 
-```{python}
+```python
 # .ndim will with you the total # of dimensions
 np.arange(10).reshape(2,5).ndim
 ```
@@ -1422,3 +1442,12 @@ np.arange(10).reshape(2,5).ndim
 
 
     2
+
+
+
+## 3.11 Summary
+
+
+```python
+
+```

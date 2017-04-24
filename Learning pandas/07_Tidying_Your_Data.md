@@ -1,29 +1,15 @@
 
+# Chapter 7: Tidying Up Your Data
 <!-- toc orderedList:0 depthFrom:1 depthTo:6 -->
-
-- [Setting up the notebook](#setting-up-the-notebook)
-- [Working with missing data](#working-with-missing-data)
-	- [Setup](#setup)
-	- [Determining NaN values in Series and DataFrame objects](#determining-nan-values-in-series-and-dataframe-objects)
-- [Selecting out (dropping) missing data](#selecting-out-dropping-missing-data)
-	- [How pandas handles NaN’s in mathematical operations](#how-pandas-handles-nans-in-mathematical-operations)
-	- [Filling in missing data](#filling-in-missing-data)
-	- [Forward and backwards filling of missing values](#forward-and-backwards-filling-of-missing-values)
-	- [Filling using index labels](#filling-using-index-labels)
-	- [Interpolation of missing values](#interpolation-of-missing-values)
-- [Handling Duplicate Data](#handling-duplicate-data)
-- [Transforming Data](#transforming-data)
-	- [Mapping](#mapping)
-	- [Replacing values](#replacing-values)
-	- [Applying functions to transform data](#applying-functions-to-transform-data)
-
 <!-- tocstop -->
 
 
-# Setting up the notebook
-{python}
+## 7.1 What is tidying your data
 
-```
+## 7.2 Setting up the IPython notebook
+
+
+```python
 # import pandas, numpy and datetime
 import numpy as np
 import pandas as pd
@@ -35,12 +21,10 @@ pd.set_option('display.max_columns', 10)
 pd.set_option('display.max_rows', 10)
 ```
 
-# Working with missing data
-
-## Setup
+## 7.3 Working with missing data
 
 
-```{python}
+```python
 # create a DataFrame with 5 rows and 3 columns
 df = pd.DataFrame(np.arange(0, 15).reshape(5, 3),
                index=['a', 'b', 'c', 'd', 'e'],
@@ -61,7 +45,7 @@ df
 
 
 
-```{python}
+```python
 # add some columns and rows to the DataFrame
 # column c4 with NaN values
 df['c4'] = np.nan
@@ -90,10 +74,10 @@ df
 
 
 
-## Determining NaN values in Series and DataFrame objects
+### Determining NaN values in Series and DataFrame objects
 
 
-```{python}
+```python
 # which items are NaN?
 df.isnull()
 ```
@@ -113,7 +97,7 @@ df.isnull()
 
 
 
-```{python}
+```python
 # count the number of NaN's in each column
 df.isnull().sum()
 ```
@@ -131,7 +115,7 @@ df.isnull().sum()
 
 
 
-```{python}
+```python
 # total count of NaN values
 df.isnull().sum().sum()
 ```
@@ -144,7 +128,7 @@ df.isnull().sum().sum()
 
 
 
-```{python}
+```python
 # number of non-NaN values in each column
 df.count()
 ```
@@ -162,7 +146,7 @@ df.count()
 
 
 
-```{python}
+```python
 # and this counts the number of NaN's too
 (len(df) - df.count()).sum()
 ```
@@ -175,7 +159,7 @@ df.count()
 
 
 
-```{python}
+```python
 # which items are not null?
 df.notnull()
 ```
@@ -194,10 +178,10 @@ df.notnull()
 
 
 
-# Selecting out (dropping) missing data
+### Selecting out or dropping missing data
 
 
-```{python}
+```python
 # select the non-NaN items in column c4
 df.c4[df.c4.notnull()]
 ```
@@ -212,7 +196,7 @@ df.c4[df.c4.notnull()]
 
 
 
-```{python}
+```python
 # .dropna will also return non NaN values
 # this gets all non NaN items in column c4
 df.c4.dropna()
@@ -228,7 +212,7 @@ df.c4.dropna()
 
 
 
-```{python}
+```python
 # dropna returns a copy with the values dropped
 # the source DataFrame / column is not changed
 df.c4
@@ -249,7 +233,7 @@ df.c4
 
 
 
-```{python}
+```python
 # on a DataFrame this will drop entire rows
 # where there is at least one NaN
 # in this case, that is all rows
@@ -266,7 +250,7 @@ df.dropna()
 
 
 
-```{python}
+```python
 # using how='all', only rows that have all values
 # as NaN will be dropped
 df.dropna(how = 'all')
@@ -286,7 +270,7 @@ df.dropna(how = 'all')
 
 
 
-```{python}
+```python
 # flip to drop columns instead of rows
 df.dropna(how='all', axis=1) # say goodbye to c5
 ```
@@ -306,7 +290,7 @@ df.dropna(how='all', axis=1) # say goodbye to c5
 
 
 
-```{python}
+```python
 # make a copy of df
 df2 = df.copy()
 
@@ -332,7 +316,7 @@ df2
 
 
 
-```{python}
+```python
 # now drop columns with any NaN values
 df2.dropna(how='any', axis=1)
 ```
@@ -352,7 +336,7 @@ df2.dropna(how='any', axis=1)
 
 
 
-```{python}
+```python
 # only drop columns with at least 5 NaN values
 df.dropna(thresh=5, axis=1)
 ```
@@ -371,10 +355,10 @@ df.dropna(thresh=5, axis=1)
 
 
 
-## How pandas handles NaN’s in mathematical operations
+### How pandas handles NaN values in mathematical operations
 
 
-```{python}
+```python
 # create a NumPy array with one NaN value
 a = np.array([1, 2, np.nan, 3])
 # create a Series from the array
@@ -391,7 +375,7 @@ a.mean(), s.mean()
 
 
 
-```{python}
+```python
 # demonstrate sum, mean and cumsum handling of NaN
 # get one column
 s = df.c4
@@ -406,7 +390,7 @@ s.sum(), # NaN's treated as 0
 
 
 
-```{python}
+```python
 s.mean() # NaN also treated as 0
 ```
 
@@ -418,7 +402,7 @@ s.mean() # NaN also treated as 0
 
 
 
-```{python}
+```python
 # as 0 in the cumsum, but NaN's preserved in result Series
 s.cumsum()
 ```
@@ -438,7 +422,7 @@ s.cumsum()
 
 
 
-```{python}
+```python
 # in arithmetic, a NaN value will result in NaN
 df.c4 + 1
 ```
@@ -457,10 +441,10 @@ df.c4 + 1
 
 
 
-## Filling in missing data
+### Filling in missing data
 
 
-```{python}
+```python
 # return a new DataFrame with NaN's filled with 0
 filled = df.fillna(0)
 filled
@@ -481,7 +465,7 @@ filled
 
 
 
-```{python}
+```python
 # NaN's don't count as an item in calculating
 # the means
 df.mean()
@@ -500,7 +484,7 @@ df.mean()
 
 
 
-```{python}
+```python
 # having replaced NaN with 0 can make
 # operations such as mean have different results
 filled.mean()
@@ -519,7 +503,7 @@ filled.mean()
 
 
 
-```{python}
+```python
 # only fills the first two NaN's in each row with 0
 df.fillna(0, limit=2)
 ```
@@ -538,10 +522,10 @@ df.fillna(0, limit=2)
 
 
 
-## Forward and backwards filling of missing values
+### Forward and backward filling of missing values
 
 
-```{python}
+```python
 # extract the c4 column and fill NaNs forward
 df.c4.fillna(method="ffill")
 ```
@@ -561,7 +545,7 @@ df.c4.fillna(method="ffill")
 
 
 
-```{python}
+```python
 # perform a backwards fill
 df.c4.fillna(method="bfill")
 ```
@@ -580,10 +564,10 @@ df.c4.fillna(method="bfill")
 
 
 
-## Filling using index labels
+### Filling using index labels
 
 
-```{python}
+```python
 # create a new Series of values to be
 # used to fill NaN's where index label matches
 fill_values = pd.Series([100, 101, 102], index=['a', 'e', 'g'])
@@ -601,7 +585,7 @@ fill_values
 
 
 
-```{python}
+```python
 # using c4, fill using fill_values
 # a, e and g will be filled with matching values
 df.c4.fillna(fill_values)
@@ -622,7 +606,7 @@ df.c4.fillna(fill_values)
 
 
 
-```{python}
+```python
 # fill NaN values in each column with the
 # mean of the values in that column
 df.fillna(df.mean())
@@ -642,10 +626,10 @@ df.fillna(df.mean())
 
 
 
-## Interpolation of missing values
+### Interpolation of missing values
 
 
-```{python}
+```python
 # linear interpolate the NaN values from 1 through 2
 s = pd.Series([1, np.nan, np.nan, np.nan, 2])
 s.interpolate()
@@ -664,11 +648,11 @@ s.interpolate()
 
 
 
-```{python}
+```python
 # create a time series, but missing one date in the Series
 ts = pd.Series([1, np.nan, 2],
             index=[datetime.datetime(2014, 1, 1),
-                   datetime.datetime(2014, 2, 1),                   
+                   datetime.datetime(2014, 2, 1),
                    datetime.datetime(2014, 4, 1)])
 ts
 ```
@@ -684,7 +668,7 @@ ts
 
 
 
-```{python}
+```python
 # linear interpolate based on number of items in the Series
 ts.interpolate()
 ```
@@ -700,7 +684,7 @@ ts.interpolate()
 
 
 
-```{python}
+```python
 # this accounts for the fact that we don't have
 # an entry for 2014-03-01
 ts.interpolate(method="time")
@@ -717,7 +701,7 @@ ts.interpolate(method="time")
 
 
 
-```{python}
+```python
 # a Series to demonstrate index label based interpolation
 s = pd.Series([0, np.nan, 100], index=[0, 1, 10])
 s
@@ -734,7 +718,7 @@ s
 
 
 
-```{python}
+```python
 # linear interpolate
 s.interpolate()
 ```
@@ -750,7 +734,7 @@ s.interpolate()
 
 
 
-```{python}
+```python
 # interpolate based upon the values in the index
 s.interpolate(method="values")
 ```
@@ -765,10 +749,10 @@ s.interpolate(method="values")
 
 
 
-# Handling Duplicate Data
+## 7.4 Handling duplicate data
 
 
-```{python}
+```python
 # a DataFrame with lots of duplicate data
 data = pd.DataFrame({'a': ['x'] * 3 + ['y'] * 4,
                      'b': [1, 1, 2, 3, 3, 4, 4]})
@@ -790,7 +774,7 @@ data
 
 
 
-```{python}
+```python
 # reports which rows are duplicates based upon
 # if the data in all columns was seen before
 data.duplicated()
@@ -811,7 +795,7 @@ data.duplicated()
 
 
 
-```{python}
+```python
 # drop duplicate rows retaining first row of the duplicates
 data.drop_duplicates()
 ```
@@ -828,7 +812,7 @@ data.drop_duplicates()
 
 
 
-```{python}
+```python
 # drop duplicate rows, only keeping the first
 # instance of any data
 data.drop_duplicates(take_last=True)
@@ -846,7 +830,7 @@ data.drop_duplicates(take_last=True)
 
 
 
-```{python}
+```python
 # add a column c with values 0..6
 # this makes .duplicated() report no duplicate rows
 data['c'] = range(7)
@@ -868,7 +852,7 @@ data.duplicated()
 
 
 
-```{python}
+```python
 # but if we specify duplicates to be dropped only in columns a & b
 # they will be dropped
 data.drop_duplicates(['a', 'b'])
@@ -885,12 +869,12 @@ data.drop_duplicates(['a', 'b'])
 
 
 
-# Transforming Data
+## 7.5 Transforming Data
 
-## Mapping
+### Mapping
 
 
-```{python}
+```python
 # create two Series objects to demonstrate mapping
 x = pd.Series({"one": 1, "two": 2, "three": 3})
 y = pd.Series({1: "a", 2: "b", 3: "c"})
@@ -908,7 +892,7 @@ x
 
 
 
-```{python}
+```python
 y
 ```
 
@@ -923,7 +907,7 @@ y
 
 
 
-```{python}
+```python
 # map values in x to values in y
 x.map(y)
 ```
@@ -939,7 +923,7 @@ x.map(y)
 
 
 
-```{python}
+```python
 # three in x will not align / map to a value in y
 x = pd.Series({"one": 1, "two": 2, "three": 3})
 y = pd.Series({1: "a", 2: "b"})
@@ -956,10 +940,10 @@ x.map(y)
 
 
 
-## Replacing values
+### Replacing values
 
 
-```{python}
+```python
 # create a Series to demonstrate replace
 s = pd.Series([0., 1., 2., 3., 2., 4.])
 s
@@ -979,7 +963,7 @@ s
 
 
 
-```{python}
+```python
 # replace all items with index label 2 with value 5
 s.replace(2, 5)
 ```
@@ -998,7 +982,7 @@ s.replace(2, 5)
 
 
 
-```{python}
+```python
 # replace all items with new values
 s.replace([0, 1, 2, 3, 4], [4, 3, 2, 1, 0])
 ```
@@ -1017,7 +1001,7 @@ s.replace([0, 1, 2, 3, 4], [4, 3, 2, 1, 0])
 
 
 
-```{python}
+```python
 # replace using entries in a dictionary
 s.replace({0: 10, 1: 100})
 ```
@@ -1036,7 +1020,7 @@ s.replace({0: 10, 1: 100})
 
 
 
-```{python}
+```python
 # DataFrame with two columns
 df = pd.DataFrame({'a': [0, 1, 2, 3, 4], 'b': [5, 6, 7, 8, 9]})
 df
@@ -1055,7 +1039,7 @@ df
 
 
 
-```{python}
+```python
 # specify different replacement values for each column
 df.replace({'a': 1, 'b': 8}, 100)
 ```
@@ -1073,7 +1057,7 @@ df.replace({'a': 1, 'b': 8}, 100)
 
 
 
-```{python}
+```python
 # demonstrate replacement with pad method
 # set first item to 10, to have a distinct replacement value
 s[0] = 10
@@ -1094,7 +1078,7 @@ s
 
 
 
-```{python}
+```python
 # replace items with index label 1, 2, 3, using fill from the
 # most recent value prior to the specified labels (10)
 s.replace([1, 2, 3], method='pad')
@@ -1113,10 +1097,10 @@ s.replace([1, 2, 3], method='pad')
 
 
 
-## Applying functions to transform data
+### Applying functions to transform data
 
 
-```{python}
+```python
 # demonstrate applying a function to every item of a Series
 s = pd.Series(np.arange(0, 5))
 s.apply(lambda v: v * 2)
@@ -1135,7 +1119,7 @@ s.apply(lambda v: v * 2)
 
 
 
-```{python}
+```python
 # demonstrate applying a sum on each column
 df = pd.DataFrame(np.arange(12).reshape(4, 3),
                   columns=['a', 'b', 'c'])
@@ -1154,7 +1138,7 @@ df
 
 
 
-```{python}
+```python
 # calculate cumulative sum of items in each column
 df.apply(lambda col: col.sum())
 ```
@@ -1170,7 +1154,7 @@ df.apply(lambda col: col.sum())
 
 
 
-```{python}
+```python
 # calculate sum of items in each row
 df.apply(lambda row: row.sum(), axis=1)
 ```
@@ -1187,7 +1171,7 @@ df.apply(lambda row: row.sum(), axis=1)
 
 
 
-```{python}
+```python
 # create a new column 'interim' with a * b
 df['interim'] = df.apply(lambda r: r.a * r.b, axis=1)
 df
@@ -1205,7 +1189,7 @@ df
 
 
 
-```{python}
+```python
 # and now a 'result' column with 'interim' + 'c'
 df['result'] = df.apply(lambda r: r.interim + r.c, axis=1)
 df
@@ -1223,7 +1207,7 @@ df
 
 
 
-```{python}
+```python
 # replace column a with the sum of columns a, b and c
 df.a = df.a + df.b + df.c
 df
@@ -1241,7 +1225,7 @@ df
 
 
 
-```{python}
+```python
 # create a 3x5 DataFrame
 # only second row has a NaN
 df = pd.DataFrame(np.arange(0, 15).reshape(3,5))
@@ -1260,7 +1244,7 @@ df
 
 
 
-```{python}
+```python
 # demonstrate applying a function to only rows having
 # a count of 0 NaN values
 df.dropna().apply(lambda x: x.sum(), axis=1)
@@ -1276,7 +1260,7 @@ df.dropna().apply(lambda x: x.sum(), axis=1)
 
 
 
-```{python}
+```python
 # use applymap to format all items of the DataFrame
 df.applymap(lambda x: '%.2f' % x)
 ```
@@ -1288,3 +1272,7 @@ df.applymap(lambda x: '%.2f' % x)
     0   0.00   1.00   2.00   3.00   4.00
     1   5.00   6.00    nan   8.00   9.00
     2  10.00  11.00  12.00  13.00  14.00
+
+
+
+## 7.6 Summary

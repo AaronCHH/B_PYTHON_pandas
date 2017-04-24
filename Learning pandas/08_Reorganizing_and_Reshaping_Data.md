@@ -1,25 +1,25 @@
 
+# Chapter 8: Combining and Reshaping Data
 <!-- toc orderedList:0 depthFrom:1 depthTo:6 -->
 
-- [Setting up the notebook](#setting-up-the-notebook)
-- [Concatenating data](#concatenating-data)
-- [Merging and Joining Data](#merging-and-joining-data)
-	- [Overview of merges](#overview-of-merges)
-	- [Specifying the join semantics of a merge operation](#specifying-the-join-semantics-of-a-merge-operation)
-- [Pivoting](#pivoting)
-- [Stacking and Unstacking](#stacking-and-unstacking)
-	- [Stacking using non-hierarchical indexes](#stacking-using-non-hierarchical-indexes)
-	- [Unstacking using hierarchical indexes](#unstacking-using-hierarchical-indexes)
-- [Melting](#melting)
-- [A note on the performance benefits of stacked data](#a-note-on-the-performance-benefits-of-stacked-data)
+* [Chapter 8: Combining and Reshaping Data](#chapter-8-combining-and-reshaping-data)
+  * [8.1 Setting up the IPython notebook](#81-setting-up-the-ipython-notebook)
+  * [8.2 Concatenating data](#82-concatenating-data)
+  * [8.3 Merging and joining data](#83-merging-and-joining-data)
+    * [An overview of merges](#an-overview-of-merges)
+    * [Specifying the join semantics of a merge operation](#specifying-the-join-semantics-of-a-merge-operation)
+    * [Pivoting](#pivoting)
+  * [8.4 Stacking and unstacking](#84-stacking-and-unstacking)
+    * [Stacking using nonhierarchical indexes](#stacking-using-nonhierarchical-indexes)
+    * [Unstacking using hierarchical indexes](#unstacking-using-hierarchical-indexes)
+    * [Melting](#melting)
+  * [8.5 Performance benefits of stacked data](#85-performance-benefits-of-stacked-data)
+  * [8.6 Summary](#86-summary)
 
 <!-- tocstop -->
+## 8.1 Setting up the IPython notebook
 
-
-# Setting up the notebook
-{python}
-
-```
+```python
 # import pandas, numpy and datetime
 import numpy as np
 import pandas as pd
@@ -31,10 +31,10 @@ pd.set_option('display.max_columns', 10)
 pd.set_option('display.max_rows', 10)
 ```
 
-# Concatenating data
+## 8.2 Concatenating data
 
 
-```{python}
+```python
 # two Series objects to concatenate
 s1 = pd.Series(np.arange(0, 3))
 s2 = pd.Series(np.arange(5, 8))
@@ -52,7 +52,7 @@ s1
 
 
 
-```{python}
+```python
 s2
 ```
 
@@ -67,7 +67,7 @@ s2
 
 
 
-```{python}
+```python
 # concatenate them
 pd.concat([s1, s2])
 ```
@@ -86,7 +86,7 @@ pd.concat([s1, s2])
 
 
 
-```{python}
+```python
 # create two DataFrame objects to concatenate
 # using the same index labels and column names,
 # but different values
@@ -109,7 +109,7 @@ df1
 
 
 
-```{python}
+```python
 df2
 ```
 
@@ -124,7 +124,7 @@ df2
 
 
 
-```{python}
+```python
 # do the concat
 pd.concat([df1, df2])
 ```
@@ -143,7 +143,7 @@ pd.concat([df1, df2])
 
 
 
-```{python}
+```python
 # demonstrate concatenating two DataFrame objects with
 # different columns
 df1 = pd.DataFrame(np.arange(9).reshape(3, 3),
@@ -164,7 +164,7 @@ df1
 
 
 
-```{python}
+```python
 df2
 ```
 
@@ -179,7 +179,7 @@ df2
 
 
 
-```{python}
+```python
 # do the concat, NaN's will be filled in for
 # the d column for df1 and b column for df2
 pd.concat([df1, df2])
@@ -199,7 +199,7 @@ pd.concat([df1, df2])
 
 
 
-```{python}
+```python
 # concat the two objects, but create an index using the
 # given keys
 c = pd.concat([df1, df2], keys=['df1', 'df2'])
@@ -221,7 +221,7 @@ c
 
 
 
-```{python}
+```python
 # we can extract the data originating from
 # the first or second source DataFrame
 c.ix['df2']
@@ -238,7 +238,7 @@ c.ix['df2']
 
 
 
-```{python}
+```python
 # concat df1 and df2 along columns
 # aligns on row labels, has duplicate columns
 pd.concat([df1, df2], axis=1)
@@ -255,7 +255,7 @@ pd.concat([df1, df2], axis=1)
 
 
 
-```{python}
+```python
 # a new DataFrame to merge with df1
 # this has two common row labels (2, 3)
 # common columns (a) and one disjoint column
@@ -277,7 +277,7 @@ df3
 
 
 
-```{python}
+```python
 # concat them. Alignment is along row labels
 # columns first from df1 and then df3, with duplicates.
 # NaN filled in where those columns do not exist in the source
@@ -297,7 +297,7 @@ pd.concat([df1, df3], axis=1)
 
 
 
-```{python}
+```python
 # do an inner join instead of outer
 # results in one row
 pd.concat([df1, df3], axis=1, join='inner')
@@ -312,7 +312,7 @@ pd.concat([df1, df3], axis=1, join='inner')
 
 
 
-```{python}
+```python
 # add keys to the columns
 df = pd.concat([df1, df2],
                axis=1,
@@ -323,7 +323,7 @@ df
 
 
 
-      df1       df2        
+      df1       df2
         a  b  c   a   c   d
     0   0  1  2   9  10  11
     1   3  4  5  12  13  14
@@ -332,7 +332,7 @@ df
 
 
 
-```{python}
+```python
 # retrieve the data that originated from the
 # DataFrame with key 'df2'
 df.ix[:, 'df2']
@@ -349,7 +349,7 @@ df.ix[:, 'df2']
 
 
 
-```{python}
+```python
 # append does a concatenate along axis=0
 # duplicate row index labels can result
 df1.append(df2)
@@ -369,7 +369,7 @@ df1.append(df2)
 
 
 
-```{python}
+```python
 # remove duplicates in the result index by ignoring the
 # index labels in the source DataFrame objects
 df1.append(df2, ignore_index=True)
@@ -388,12 +388,12 @@ df1.append(df2, ignore_index=True)
 
 
 
-# Merging and Joining Data
+## 8.3 Merging and joining data
 
-## Overview of merges
+### An overview of merges
 
 
-```{python}
+```python
 # these are our customers
 customers = {'CustomerID': [10, 11],
              'Name': ['Mike', 'Marcia'],
@@ -413,7 +413,7 @@ customers
 
 
 
-```{python}
+```python
 # and these are the orders made by our customers
 # they are related to customers by CustomerID
 orders = {'CustomerID': [10, 11, 10],
@@ -435,7 +435,7 @@ orders
 
 
 
-```{python}
+```python
 # merge customers and orders so we can ship the items
 customers.merge(orders)
 ```
@@ -451,7 +451,7 @@ customers.merge(orders)
 
 
 
-```{python}
+```python
 # data to be used in the remainder of this section's examples
 left_data = {'key1': ['a', 'b', 'c'],
             'key2': ['x', 'y', 'z'],
@@ -475,7 +475,7 @@ left
 
 
 
-```{python}
+```python
 right
 ```
 
@@ -490,7 +490,7 @@ right
 
 
 
-```{python}
+```python
 # demonstrate merge without specifying columns to merge
 # this will implicitly merge on all common columns
 left.merge(right)
@@ -506,7 +506,7 @@ left.merge(right)
 
 
 
-```{python}
+```python
 # demonstrate merge using an explicit column
 # on needs the value to be in both DataFrame objects
 left.merge(right, on='key1')
@@ -523,7 +523,7 @@ left.merge(right, on='key1')
 
 
 
-```{python}
+```python
 # merge explicitly using two columns
 left.merge(right, on=['key1', 'key2'])
 ```
@@ -538,7 +538,7 @@ left.merge(right, on=['key1', 'key2'])
 
 
 
-```{python}
+```python
 # join on the row indices of both matrices
 pd.merge(left, right, left_index=True, right_index=True)
 ```
@@ -552,10 +552,10 @@ pd.merge(left, right, left_index=True, right_index=True)
 
 
 
-## Specifying the join semantics of a merge operation
+### Specifying the join semantics of a merge operation
 
 
-```{python}
+```python
 # outer join, merges all matched data,
 # and fills unmatched items with NaN
 left.merge(right, how='outer')
@@ -573,7 +573,7 @@ left.merge(right, how='outer')
 
 
 
-```{python}
+```python
 # left join, merges all matched data, and only fills unmatched
 # items from the left dataframe with NaN filled for the
 # unmatched items in the result
@@ -594,7 +594,7 @@ left.merge(right, how='left')
 
 
 
-```{python}
+```python
 # right join, merges all matched data, and only fills unmatched
 # item from the right with NaN filled for the unmatched items
 # in the result
@@ -614,7 +614,7 @@ left.merge(right, how='right')
 
 
 
-```{python}
+```python
 # join left with right (default method is outer)
 # and since these DataFrame objects have duplicate column names
 # we just specify lsuffix and rsuffix
@@ -632,7 +632,7 @@ left.join(right, lsuffix='_left', rsuffix='_right')
 
 
 
-```{python}
+```python
 # join left with right with an inner join
 left.join(right, lsuffix='_left', rsuffix='_right', how='inner')
 ```
@@ -646,10 +646,10 @@ left.join(right, lsuffix='_left', rsuffix='_right', how='inner')
 
 
 
-# Pivoting
+### Pivoting
 
 
-```{python}
+```python
 # read in accellerometer data
 sensor_readings = pd.read_csv("data/accel.csv")
 sensor_readings
@@ -676,7 +676,7 @@ sensor_readings
 
 
 
-```{python}
+```python
 # extract X-axis readings
 sensor_readings[sensor_readings['axis'] == 'X']
 ```
@@ -693,7 +693,7 @@ sensor_readings[sensor_readings['axis'] == 'X']
 
 
 
-```{python}
+```python
 # pivot the data.  Interval becomes the index, the columns are
 # the current axes values, and use the readings as values
 sensor_readings.pivot(index='interval',
@@ -705,7 +705,7 @@ sensor_readings.pivot(index='interval',
 
 
     axis        X    Y    Z
-    interval               
+    interval
     0         0.0  0.5  1.0
     1         0.1  0.4  0.9
     2         0.2  0.3  0.8
@@ -713,12 +713,12 @@ sensor_readings.pivot(index='interval',
 
 
 
-# Stacking and Unstacking
+## 8.4 Stacking and unstacking
 
-## Stacking using non-hierarchical indexes
+### Stacking using nonhierarchical indexes
 
 
-```{python}
+```python
 # simple DataFrame with one column
 df = pd.DataFrame({'a': [1, 2]}, index={'one', 'two'})
 df
@@ -734,7 +734,7 @@ df
 
 
 
-```{python}
+```python
 # push the column to another level of the index
 # the result is a Series where values are looked up through
 # a multi-index
@@ -752,7 +752,7 @@ stacked1
 
 
 
-```{python}
+```python
 # lookup one / a using just the index via a tuple
 stacked1[('one', 'a')]
 ```
@@ -765,7 +765,7 @@ stacked1[('one', 'a')]
 
 
 
-```{python}
+```python
 # DataFrame with two columns
 df = pd.DataFrame({'a': [1, 2],
                    'b': [3, 4]},
@@ -783,7 +783,7 @@ df
 
 
 
-```{python}
+```python
 # push the two columns into a single level of the index
 stacked2 = df.stack()
 stacked2
@@ -801,7 +801,7 @@ stacked2
 
 
 
-```{python}
+```python
 # lookup value with index of one / b
 stacked2[('one', 'b')]
 ```
@@ -813,10 +813,10 @@ stacked2[('one', 'b')]
 
 
 
-## Unstacking using hierarchical indexes
+### Unstacking using hierarchical indexes
 
 
-```{python}
+```python
 # make two copies of the sensor data, one for each user
 user1 = sensor_readings.copy()
 user2 = sensor_readings.copy()
@@ -835,7 +835,7 @@ multi_user_sensor_data
 
 
                           reading
-    who    interval axis         
+    who    interval axis
     Mike   0        X         0.0
                     Y         0.5
                     Z         1.0
@@ -853,7 +853,7 @@ multi_user_sensor_data
 
 
 
-```{python}
+```python
 # lookup user data for Mike using just the index
 multi_user_sensor_data.ix['Mike']
 ```
@@ -862,7 +862,7 @@ multi_user_sensor_data.ix['Mike']
 
 
                    reading
-    interval axis         
+    interval axis
     0        X         0.0
              Y         0.5
              Z         1.0
@@ -880,7 +880,7 @@ multi_user_sensor_data.ix['Mike']
 
 
 
-```{python}
+```python
 # readings for all users and axes at interval 1
 multi_user_sensor_data.xs(1, level='interval')
 ```
@@ -889,7 +889,7 @@ multi_user_sensor_data.xs(1, level='interval')
 
 
                  reading
-    who    axis         
+    who    axis
     Mike   X         0.1
            Y         0.4
            Z         0.9
@@ -900,7 +900,7 @@ multi_user_sensor_data.xs(1, level='interval')
 
 
 
-```{python}
+```python
 # unstack the who level
 multi_user_sensor_data.unstack()
 ```
@@ -908,9 +908,9 @@ multi_user_sensor_data.unstack()
 
 
 
-                    reading             
+                    reading
     axis                  X     Y      Z
-    who    interval                     
+    who    interval
     Mikael 0            0.0  50.0  100.0
            1           10.0  40.0   90.0
            2           20.0  30.0   80.0
@@ -923,7 +923,7 @@ multi_user_sensor_data.unstack()
 
 
 
-```{python}
+```python
 # unstack at level=0
 multi_user_sensor_data.unstack(level=0)
 ```
@@ -931,9 +931,9 @@ multi_user_sensor_data.unstack(level=0)
 
 
 
-                  reading     
+                  reading
     who            Mikael Mike
-    interval axis             
+    interval axis
     0        X          0  0.0
              Y         50  0.5
              Z        100  1.0
@@ -951,7 +951,7 @@ multi_user_sensor_data.unstack(level=0)
 
 
 
-```{python}
+```python
 # unstack who and axis levels
 unstacked = multi_user_sensor_data.unstack(['who', 'axis'])
 unstacked
@@ -960,10 +960,10 @@ unstacked
 
 
 
-             reading                          
-    who         Mike           Mikael         
+             reading
+    who         Mike           Mikael
     axis           X    Y    Z      X   Y    Z
-    interval                                  
+    interval
     0            0.0  0.5  1.0      0  50  100
     1            0.1  0.4  0.9     10  40   90
     2            0.2  0.3  0.8     20  30   80
@@ -972,7 +972,7 @@ unstacked
 
 
 
-```{python}
+```python
 # and we can of course stack what we have unstacked
 # this re-stacks who
 unstacked.stack(level='who')
@@ -981,9 +981,9 @@ unstacked.stack(level='who')
 
 
 
-                    reading             
+                    reading
     axis                  X     Y      Z
-    interval who                        
+    interval who
     0        Mikael     0.0  50.0  100.0
              Mike       0.0   0.5    1.0
     1        Mikael    10.0  40.0   90.0
@@ -995,10 +995,10 @@ unstacked.stack(level='who')
 
 
 
-# Melting
+### Melting
 
 
-```{python}
+```python
 # we will demonstrate melting with this DataFrame
 data = pd.DataFrame({'Name' : ['Mike', 'Mikael'],
                      'Height' : [6.1, 6.0],
@@ -1016,7 +1016,7 @@ data
 
 
 
-```{python}
+```python
 # melt it, use Name as the id's,
 # Height and Weight columns as the variables
 pd.melt(data,
@@ -1035,10 +1035,10 @@ pd.melt(data,
 
 
 
-# A note on the performance benefits of stacked data
+## 8.5 Performance benefits of stacked data
 
 
-```{python}
+```python
 # stacked scalar access can be a lot faster than
 # column access
 
@@ -1061,3 +1061,12 @@ r1, r2, r3
 
 
     (0.5667150020599365, 0.9489731788635254, 1.2142961025238037)
+
+
+
+## 8.6 Summary
+
+
+```python
+
+```

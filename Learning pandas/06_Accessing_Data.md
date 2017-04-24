@@ -1,37 +1,29 @@
 
-
+# Chapter 6: Accessing Data
 <!-- toc orderedList:0 depthFrom:1 depthTo:6 -->
 
-- [Setting up the notebook](#setting-up-the-notebook)
-- [Reading from CSV files](#reading-from-csv-files)
-	- [The sample CSV data set](#the-sample-csv-data-set)
-	- [Reading a CSV into a DataFrame](#reading-a-csv-into-a-dataframe)
-	- [Specifying the index column when reading a CSV file](#specifying-the-index-column-when-reading-a-csv-file)
-		- [Data type inference and specification](#data-type-inference-and-specification)
-	- [Specifying column names](#specifying-column-names)
-		- [Specifying specific columns to load](#specifying-specific-columns-to-load)
-	- [Saving a DataFrame to a CSV](#saving-a-dataframe-to-a-csv)
-	- [General field-delimited data](#general-field-delimited-data)
-	- [Handling variants of formats in field-delimited data](#handling-variants-of-formats-in-field-delimited-data)
-- [Reading and writing data in Excel format](#reading-and-writing-data-in-excel-format)
-- [Reading and writing JSON files](#reading-and-writing-json-files)
-- [Reading HTML data from the Web](#reading-html-data-from-the-web)
-- [Reading and writing HDF5 format files](#reading-and-writing-hdf5-format-files)
-- [Accessing data on the web and in the cloud](#accessing-data-on-the-web-and-in-the-cloud)
-- [Reading and writing from/to SQL databases](#reading-and-writing-fromto-sql-databases)
-- [Reading data from remote data services](#reading-data-from-remote-data-services)
-	- [Reading stock data from Yahoo! and Google Finance](#reading-stock-data-from-yahoo-and-google-finance)
-	- [Retrieving options data from Yahoo! Finance](#retrieving-options-data-from-yahoo-finance)
-	- [Reading economic data from the Federal Reserve](#reading-economic-data-from-the-federal-reserve)
-	- [Accessing Kenneth French data](#accessing-kenneth-french-data)
-	- [Reading from the World Bank](#reading-from-the-world-bank)
+* [Chapter 6: Accessing Data](#chapter-6-accessing-data)
+  * [6.1 Setting up the IPython notebook](#61-setting-up-the-ipython-notebook)
+    * [CSV and Text/Tabular format](#csv-and-texttabular-format)
+  * [The sample CSV data set](#the-sample-csv-data-set)
+    * [General field-delimited data](#general-field-delimited-data)
+    * [Reading and writing data in an Excel format](#reading-and-writing-data-in-an-excel-format)
+  * [6.2 Reading and writing JSON files](#62-reading-and-writing-json-files)
+    * [Reading HTML data from the Web](#reading-html-data-from-the-web)
+    * [Reading and writing HDF5 format files](#reading-and-writing-hdf5-format-files)
+  * [6.3 Accessing data on the web and in the cloud](#63-accessing-data-on-the-web-and-in-the-cloud)
+  * [6.4 Reading and writing from/to SQL databases](#64-reading-and-writing-fromto-sql-databases)
+  * [6.5 Reading data from remote data services](#65-reading-data-from-remote-data-services)
+    * [Reading stock data from Yahoo! and Google Finance](#reading-stock-data-from-yahoo-and-google-finance)
+  * [6.6 Summary](#66-summary)
 
 <!-- tocstop -->
 
-# Setting up the notebook
+
+## 6.1 Setting up the IPython notebook
 
 
-```{python}
+```python
 # import pandas and numpy
 import numpy as np
 import pandas as pd
@@ -42,28 +34,27 @@ pd.set_option('display.max_columns', 10)
 pd.set_option('display.max_rows', 10)
 ```
 
-# Reading from CSV files
+### CSV and Text/Tabular format
 
 ## The sample CSV data set
 
+* The sample CSV data set
 
-```{python}
+
+```python
 # view the first five lines of data/msft.csv
 !head -n 5 data/msft.csv # mac or Linux
 # type data/msft.csv # on windows, but shows the entire file
 ```
 
-    Date,Open,High,Low,Close,Volume,Adj Close
-    2014-07-21,83.46,83.53,81.81,81.93,2359300,81.93
-    2014-07-18,83.30,83.40,82.52,83.35,4020800,83.35
-    2014-07-17,84.35,84.63,83.33,83.63,1974000,83.63
-    2014-07-16,83.77,84.91,83.66,84.91,1755600,84.91
+    'head' is not recognized as an internal or external command,
+    operable program or batch file.
 
 
-## Reading a CSV into a DataFrame
+* Reading a CSV file into a DataFrame
 
 
-```{python}
+```python
 # read in msft.csv into a DataFrame
 msft = pd.read_csv("data/msft.csv")
 msft.head()
@@ -81,10 +72,10 @@ msft.head()
 
 
 
-## Specifying the index column when reading a CSV file
+* Specifying the index column when reading CSV file
 
 
-```{python}
+```python
 # use column 0 as the index
 msft = pd.read_csv("data/msft.csv", index_col=0)
 msft.head()
@@ -94,7 +85,7 @@ msft.head()
 
 
                  Open   High    Low  Close   Volume  Adj Close
-    Date                                                      
+    Date
     2014-07-21  83.46  83.53  81.81  81.93  2359300      81.93
     2014-07-18  83.30  83.40  82.52  83.35  4020800      83.35
     2014-07-17  84.35  84.63  83.33  83.63  1974000      83.63
@@ -103,10 +94,10 @@ msft.head()
 
 
 
-### Data type inference and specification
+* Data type inference and specification
 
 
-```{python}
+```python
 # examine the types of the columns in this DataFrame
 msft.dtypes
 ```
@@ -125,7 +116,7 @@ msft.dtypes
 
 
 
-```{python}
+```python
 # specify that the Volume column should be a float64
 msft = pd.read_csv("data/msft.csv",
                    dtype = { 'Volume' : np.float64})
@@ -146,10 +137,10 @@ msft.dtypes
 
 
 
-## Specifying column names
+* Specifying column names
 
 
-```{python}
+```python
 # specify a new set of names for the columns
 # all lower case, remove space in Adj Close
 # also, header=0 skips the header row
@@ -172,10 +163,10 @@ df.head()
 
 
 
-### Specifying specific columns to load
+* Specifying specific columns to load
 
 
-```{python}
+```python
 # read in data only in the Date and Close columns
 # and index by the Date column
 df2 = pd.read_csv("data/msft.csv",
@@ -188,7 +179,7 @@ df2.head()
 
 
                 Close
-    Date             
+    Date
     2014-07-21  81.93
     2014-07-18  83.35
     2014-07-17  83.63
@@ -197,38 +188,48 @@ df2.head()
 
 
 
-## Saving a DataFrame to a CSV
-{python}
+* Saving DataFrame to a CSV file
 
-```
+
+```python
 # save df2 to a new csv file
 # also specify naming the index as date
 df2.to_csv("data/msft_modified.csv", index_label='date')
 ```
 
 
-```{python}
+```python
 # view the start of the file just saved
 !head data/msft_modified.csv
 #type data/msft_modified.csv # windows
 ```
 
-    date,Close
-    2014-07-21,81.93
-    2014-07-18,83.35
-    2014-07-17,83.63
-    2014-07-16,84.91
-    2014-07-15,83.58
-    2014-07-14,84.4
-    2014-07-11,83.35
-    2014-07-10,83.42
-    2014-07-09,85.5
+    date,Close
+
+    2014-07-21,81.93
+
+    2014-07-18,83.35
+
+    2014-07-17,83.63
+
+    2014-07-16,84.91
+
+    2014-07-15,83.58
+
+    2014-07-14,84.4
+
+    2014-07-11,83.35
+
+    2014-07-10,83.42
+
+    2014-07-09,85.5
 
 
-## General field-delimited data
+
+### General field-delimited data
 
 
-```{python}
+```python
 # use read_table with sep=',' to read a CSV
 df = pd.read_table("data/msft.csv", sep=',')
 df.head()
@@ -247,7 +248,7 @@ df.head()
 
 
 
-```{python}
+```python
 # save as pipe delimited
 df.to_csv("data/msft_piped.txt", sep='|')
 # check that it worked
@@ -255,36 +256,51 @@ df.to_csv("data/msft_piped.txt", sep='|')
 # type data/psft_piped.txt # on windows
 ```
 
-    |Date|Open|High|Low|Close|Volume|Adj Close
-    0|2014-07-21|83.46|83.53|81.81|81.93|2359300|81.93
-    1|2014-07-18|83.3|83.4|82.52|83.35|4020800|83.35
-    2|2014-07-17|84.35|84.63|83.33|83.63|1974000|83.63
-    3|2014-07-16|83.77|84.91|83.66|84.91|1755600|84.91
+    |Date|Open|High|Low|Close|Volume|Adj Close
+
+    0|2014-07-21|83.46|83.53|81.81|81.93|2359300|81.93
+
+    1|2014-07-18|83.3|83.4|82.52|83.35|4020800|83.35
+
+    2|2014-07-17|84.35|84.63|83.33|83.63|1974000|83.63
+
+    3|2014-07-16|83.77|84.91|83.66|84.91|1755600|84.91
 
 
-## Handling variants of formats in field-delimited data
+
+* Handling noise rows in field-delimited data
 
 
-```{python}
+```python
 # messy file
 !head data/msft2.csv # osx or Linux
 # type data/msft2.csv # windows
 ```
 
-    This is fun because the data does not start on the first line
-    Date,Open,High,Low,Close,Volume,Adj Close
-
-    And there is space between the header row and data
-    2014-07-21,83.46,83.53,81.81,81.93,2359300,81.93
-    2014-07-18,83.30,83.40,82.52,83.35,4020800,83.35
-    2014-07-17,84.35,84.63,83.33,83.63,1974000,83.63
-    2014-07-16,83.77,84.91,83.66,84.91,1755600,84.91
-    2014-07-15,84.30,84.38,83.20,83.58,1874700,83.58
-    2014-07-14,83.66,84.64,83.11,84.40,1432100,84.40
+    This is fun because the data does not start on the first line
+
+    Date,Open,High,Low,Close,Volume,Adj Close
 
 
 
-```{python}
+    And there is space between the header row and data
+
+    2014-07-21,83.46,83.53,81.81,81.93,2359300,81.93
+
+    2014-07-18,83.30,83.40,82.52,83.35,4020800,83.35
+
+    2014-07-17,84.35,84.63,83.33,83.63,1974000,83.63
+
+    2014-07-16,83.77,84.91,83.66,84.91,1755600,84.91
+
+    2014-07-15,84.30,84.38,83.20,83.58,1874700,83.58
+
+    2014-07-14,83.66,84.64,83.11,84.40,1432100,84.40
+
+
+
+
+```python
 # read, but skip rows 0, 2 and 3
 df = pd.read_csv("data/msft2.csv", skiprows=[0, 2, 3])
 df
@@ -308,20 +324,24 @@ df
 
 
 
-```{python}
+```python
 # another messy file, with the mess at the end
 !cat data/msft_with_footer.csv # osx or Linux
 # type data/msft_with_footer.csv # windows
 ```
 
-    Date,Open,High,Low,Close,Volume,Adj Close
-    2014-07-21,83.46,83.53,81.81,81.93,2359300,81.93
-    2014-07-18,83.30,83.40,82.52,83.35,4020800,83.35
-
+    Date,Open,High,Low,Close,Volume,Adj Close
+
+    2014-07-21,83.46,83.53,81.81,81.93,2359300,81.93
+
+    2014-07-18,83.30,83.40,82.52,83.35,4020800,83.35
+
+
+
     Uh oh, there is stuff at the end.
 
 
-```{python}
+```python
 # skip only two lines at the end
 df = pd.read_csv("data/msft_with_footer.csv",
                  skip_footer=2,
@@ -339,7 +359,7 @@ df
 
 
 
-```{python}
+```python
 # only process the first three rows
 pd.read_csv("data/msft.csv", nrows=3)
 ```
@@ -355,7 +375,7 @@ pd.read_csv("data/msft.csv", nrows=3)
 
 
 
-```{python}
+```python
 # skip 100 lines, then only process the next five
 pd.read_csv("data/msft.csv", skiprows=100, nrows=5,
             header=0,
@@ -375,10 +395,10 @@ pd.read_csv("data/msft.csv", skiprows=100, nrows=5,
 
 
 
-# Reading and writing data in Excel format
+### Reading and writing data in an Excel format
 
 
-```{python}
+```python
 # read excel file
 # only reads first sheet (msft in this case)
 df = pd.read_excel("data/stocks.xlsx")
@@ -398,7 +418,7 @@ df.head()
 
 
 
-```{python}
+```python
 # read from the aapl worksheet
 aapl = pd.read_excel("data/stocks.xlsx", sheetname='aapl')
 aapl.head()
@@ -417,19 +437,19 @@ aapl.head()
 
 
 
-```{python}
+```python
 # save to an .XLS file, in worksheet 'Sheet1'
 df.to_excel("data/stocks2.xls")
 ```
 
 
-```{python}
+```python
 # write making the worksheet name MSFT
 df.to_excel("data/stocks_msft.xls", sheet_name='MSFT')
 ```
 
 
-```{python}
+```python
 # write multiple sheets
 # requires use of the ExcelWriter class
 from pandas import ExcelWriter
@@ -439,15 +459,15 @@ with ExcelWriter("data/all_stocks.xls") as writer:
 ```
 
 
-```{python}
+```python
 # write to xlsx
 df.to_excel("data/msft2.xlsx")
 ```
 
-# Reading and writing JSON files
+## 6.2 Reading and writing JSON files
 
 
-```{python}
+```python
 # wirite the excel data to a JSON file
 df.head().to_json("data/stocks.json")
 !cat data/stocks.json # osx or Linux
@@ -457,7 +477,7 @@ df.head().to_json("data/stocks.json")
     {"Date":{"0":1405900800000,"1":1405641600000,"2":1405555200000,"3":1405468800000,"4":1405382400000},"Open":{"0":83.46,"1":83.3,"2":84.35,"3":83.77,"4":84.3},"High":{"0":83.53,"1":83.4,"2":84.63,"3":84.91,"4":84.38},"Low":{"0":81.81,"1":82.52,"2":83.33,"3":83.66,"4":83.2},"Close":{"0":81.93,"1":83.35,"2":83.63,"3":84.91,"4":83.58},"Volume":{"0":2359300,"1":4020800,"2":1974000,"3":1755600,"4":1874700},"Adj Close":{"0":81.93,"1":83.35,"2":83.63,"3":84.91,"4":83.58}}
 
 
-```{python}
+```python
 # read data in from JSON
 df_from_json = pd.read_json("data/stocks.json")
 df_from_json.head(5)
@@ -475,10 +495,10 @@ df_from_json.head(5)
 
 
 
-# Reading HTML data from the Web
+### Reading HTML data from the Web
 
 
-```{python}
+```python
 # the URL to read
 url = "http://www.fdic.gov/bank/individual/failed/banklist.html"
 # read it
@@ -500,7 +520,7 @@ banks[0][0:5].ix[:,0:4]
 
 
 
-```{python}
+```python
 # read the stock data
 df = pd.read_excel("data/stocks.xlsx")
 # write the first two rows to HTML
@@ -510,40 +530,68 @@ df.head(2).to_html("data/stocks.html")
 # type data/stocks.html # window, but prints the entire file
 ```
 
-    <table border="1" class="dataframe">
-      <thead>
-        <tr style="text-align: right;">
-          <th></th>
-          <th>Date</th>
-          <th>Open</th>
-          <th>High</th>
-          <th>Low</th>
-          <th>Close</th>
-          <th>Volume</th>
-          <th>Adj Close</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th>0</th>
-          <td>2014-07-21</td>
-          <td> 83.46</td>
-          <td> 83.53</td>
-          <td> 81.81</td>
-          <td> 81.93</td>
-          <td> 2359300</td>
-          <td> 81.93</td>
-        </tr>
-        <tr>
-          <th>1</th>
-          <td>2014-07-18</td>
-          <td> 83.30</td>
+    <table border="1" class="dataframe">
+
+      <thead>
+
+        <tr style="text-align: right;">
+
+          <th></th>
+
+          <th>Date</th>
+
+          <th>Open</th>
+
+          <th>High</th>
+
+          <th>Low</th>
+
+          <th>Close</th>
+
+          <th>Volume</th>
+
+          <th>Adj Close</th>
+
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+        <tr>
+
+          <th>0</th>
+
+          <td>2014-07-21</td>
+
+          <td> 83.46</td>
+
+          <td> 83.53</td>
+
+          <td> 81.81</td>
+
+          <td> 81.93</td>
+
+          <td> 2359300</td>
+
+          <td> 81.93</td>
+
+        </tr>
+
+        <tr>
+
+          <th>1</th>
+
+          <td>2014-07-18</td>
+
+          <td> 83.30</td>
 
 
-# Reading and writing HDF5 format files
+
+### Reading and writing HDF5 format files
 
 
-```{python}
+```python
 # seed for replication
 np.random.seed(123456)
 # create a DataFrame of dates and random numbers in three columns
@@ -567,7 +615,7 @@ store
 
 
 
-```{python}
+```python
 # read in data from HDF5
 store = pd.HDFStore("data/store.h5")
 df = store['df']
@@ -590,7 +638,7 @@ df
 
 
 
-```{python}
+```python
 # this changes the DataFrame, but did not persist
 df.ix[0].A = 1
 
@@ -614,10 +662,10 @@ pd.HDFStore("data/store.h5")['df'].head(2) # it's now in there
 
 
 
-# Accessing data on the web and in the cloud
+## 6.3 Accessing data on the web and in the cloud
 
 
-```{python}
+```python
 # read csv directly from Yahoo! Finance from a URL
 df = pd.read_csv("http://ichart.yahoo.com/table.csv?s=MSFT&" +
                  "a=5&b=1&c=2014&" +
@@ -638,10 +686,10 @@ df[:5]
 
 
 
-# Reading and writing from/to SQL databases
+## 6.4 Reading and writing from/to SQL databases
 
 
-```{python}
+```python
 # reference SQLite
 import sqlite3
 
@@ -669,7 +717,7 @@ connection.close()
 
 
 
-```{python}
+```python
 # connect to the database file
 connection = sqlite3.connect("data/stocks.sqlite")
 
@@ -690,7 +738,7 @@ stocks.head()
 
 
                  Date   Open   High    Low  Close   Volume  Adj Close Symbol
-    index                                                                   
+    index
     0      2014-07-21  83.46  83.53  81.81  81.93  2359300      81.93   MSFT
     1      2014-07-18  83.30  83.40  82.52  83.35  4020800      83.35   MSFT
     2      2014-07-17  84.35  84.63  83.33  83.63  1974000      83.63   MSFT
@@ -700,7 +748,7 @@ stocks.head()
 
 
 
-```{python}
+```python
 # open the connection
 connection = sqlite3.connect("data/stocks.sqlite")
 
@@ -719,7 +767,7 @@ items
 
 
                  Date   Open   High    Low  Close    Volume  Adj Close Symbol
-    index                                                                    
+    index
     1081   2010-05-21  42.22  42.35  40.99  42.00  33610800      36.48   MSFT
     1097   2010-04-29  46.80  46.95  44.65  45.92  47076200      38.41   MSFT
     1826   2007-06-15  89.80  92.10  89.55  92.04  30656400      35.87   MSFT
@@ -728,12 +776,12 @@ items
 
 
 
-# Reading data from remote data services
+## 6.5 Reading data from remote data services
 
-## Reading stock data from Yahoo! and Google Finance
+### Reading stock data from Yahoo! and Google Finance
 
 
-```{python}
+```python
 # import pandas.io.data namespace, alias as web
 import pandas.io.data as web
 # and datetime for the dates
@@ -752,7 +800,7 @@ yahoo.head()
 
 
                  Open   High    Low  Close    Volume  Adj Close
-    Date                                                       
+    Date
     2012-01-03  26.55  26.96  26.39  26.77  64731500      24.42
     2012-01-04  26.82  27.47  26.78  27.40  80516100      25.00
     2012-01-05  27.38  27.73  27.29  27.68  56081400      25.25
@@ -762,7 +810,7 @@ yahoo.head()
 
 
 
-```{python}
+```python
 # read from google and display the head of the data
 goog = web.DataReader("MSFT", 'google', start, end)
 goog.head()
@@ -772,7 +820,7 @@ goog.head()
 
 
                  Open   High    Low  Close    Volume
-    ﻿Date                                           
+    ﻿Date
     2012-01-03  26.55  26.96  26.39  26.76  64735391
     2012-01-04  26.82  27.47  26.78  27.40  80519402
     2012-01-05  27.38  27.73  27.29  27.68  56082205
@@ -781,10 +829,10 @@ goog.head()
 
 
 
-## Retrieving options data from Yahoo! Finance
+* Retrieving data from Yahoo! Finance Options
 
 
-```{python}
+```python
 # specify we want all yahoo options data for AAPL
 # this can take a little time...
 aapl = pd.io.data.Options('AAPL', 'yahoo')
@@ -798,7 +846,7 @@ data.iloc[0:6, 0:4]
 
 
                                                  Last  Bid  Ask  Chg
-    Strike Expiry     Type Symbol                                   
+    Strike Expiry     Type Symbol
     34.29  2016-01-15 call AAPL160115C00034290  92.00    0    0    0
                       put  AAPL160115P00034290   0.03    0    0    0
     35.71  2016-01-15 call AAPL160115C00035710  90.00    0    0    0
@@ -809,7 +857,7 @@ data.iloc[0:6, 0:4]
 
 
 
-```{python}
+```python
 # get all puts at strike price of $80 (first four columns only)
 data.loc[(80, slice(None), 'put'), :].iloc[0:5, 0:4]
 ```
@@ -818,7 +866,7 @@ data.loc[(80, slice(None), 'put'), :].iloc[0:5, 0:4]
 
 
                                                 Last  Bid  Ask  Chg
-    Strike Expiry     Type Symbol                                  
+    Strike Expiry     Type Symbol
     80     2015-04-17 put  AAPL150417P00080000  0.01    0    0    0
            2015-05-15 put  AAPL150515P00080000  0.02    0    0    0
            2015-07-17 put  AAPL150717P00080000  0.12    0    0    0
@@ -828,7 +876,7 @@ data.loc[(80, slice(None), 'put'), :].iloc[0:5, 0:4]
 
 
 
-```{python}
+```python
 # put options at strike of $80, between 2015-01-17 and 2015-04-17
 data.loc[(80, slice('20150117','20150417'),
           'put'), :].iloc[:, 0:4]
@@ -838,13 +886,13 @@ data.loc[(80, slice('20150117','20150417'),
 
 
                                                 Last  Bid  Ask  Chg
-    Strike Expiry     Type Symbol                                  
+    Strike Expiry     Type Symbol
     80     2015-04-17 put  AAPL150417P00080000  0.01    0    0    0
 
 
 
 
-```{python}
+```python
 # msft calls expiring on 2015-01-05
 expiry = datetime.date(2015, 1, 5)
 msft_calls = pd.io.data.Options('MSFT', 'yahoo').get_call_data(
@@ -856,7 +904,7 @@ msft_calls.iloc[0:5, 0:5]
 
 
                                                 Last  Bid  Ask  Chg PctChg
-    Strike Expiry     Type Symbol                                         
+    Strike Expiry     Type Symbol
     26     2015-04-17 call MSFT150417C00026000  17.0    0    0    0  0.00%
     29     2015-04-17 call MSFT150417C00029000  12.9    0    0    0  0.00%
     30     2015-04-17 call MSFT150417C00030000  11.2    0    0    0  0.00%
@@ -866,7 +914,7 @@ msft_calls.iloc[0:5, 0:5]
 
 
 
-```{python}
+```python
 # msft calls expiring on 2015-01-05
 expiry = datetime.date(2015, 1, 17)
 aapl_calls = aapl.get_call_data(expiry=expiry)
@@ -877,7 +925,7 @@ aapl_calls.iloc[0:5, 0:4]
 
 
                                                  Last  Bid  Ask  Chg
-    Strike Expiry     Type Symbol                                   
+    Strike Expiry     Type Symbol
     45.71  2015-04-17 call AAPL150417C00045710  80.18    0    0    0
     46.43  2015-04-17 call AAPL150417C00046430  62.42    0    0    0
     47.86  2015-04-17 call AAPL150417C00047860  69.39    0    0    0
@@ -886,10 +934,10 @@ aapl_calls.iloc[0:5, 0:4]
 
 
 
-## Reading economic data from the Federal Reserve
+* Reading economic data from the Federal Reserve Bank of St. Louis
 
 
-```{python}
+```python
 # read GDP data from FRED
 gdp = web.DataReader("GDP", "fred",
                      datetime.date(2012, 1, 1),
@@ -901,7 +949,7 @@ gdp
 
 
                     GDP
-    DATE               
+    DATE
     2012-01-01  15956.5
     2012-04-01  16094.7
     2012-07-01  16268.9
@@ -915,7 +963,7 @@ gdp
 
 
 
-```{python}
+```python
 # Get Compensation of employees: Wages and salaries
 web.DataReader("A576RC1A027NBEA",
                "fred",
@@ -927,7 +975,7 @@ web.DataReader("A576RC1A027NBEA",
 
 
                 A576RC1A027NBEA
-    DATE                       
+    DATE
     1929-01-01             50.5
     1930-01-01             46.2
     1931-01-01             39.2
@@ -944,10 +992,10 @@ web.DataReader("A576RC1A027NBEA",
 
 
 
-## Accessing Kenneth French data
+* Accessing Kenneth French's data
 
 
-```{python}
+```python
 # read from Kenneth French fama global factors data set
 factors = web.DataReader("Global_Factors", "famafrench")
 factors
@@ -973,10 +1021,10 @@ factors
 
 
 
-## Reading from the World Bank
+* Reading from the World Bank
 
 
-```{python}
+```python
 # make referencing pandas.io.wb a little less typing
 import pandas.io.wb as wb
 # get all indicators
@@ -984,7 +1032,7 @@ all_indicators = wb.get_indicators()
 ```
 
 
-```{python}
+```python
 # examine some of the indicators
 all_indicators.ix[:,0:1]
 ```
@@ -1010,7 +1058,7 @@ all_indicators.ix[:,0:1]
 
 
 
-```{python}
+```python
 # search of life expectancy indicators
 le_indicators = wb.search("life expectancy")
 # report first three rows, first two columns
@@ -1028,7 +1076,7 @@ le_indicators.iloc[:3,:2]
 
 
 
-```{python}
+```python
 # get countries and show the 3 digit code and name
 countries = wb.get_countries()
 # show a subset of the country data
@@ -1053,7 +1101,7 @@ countries.iloc[0:10].ix[:,['name', 'capitalCity', 'iso2c']]
 
 
 
-```{python}
+```python
 # get life expectancy at birth for all countries from 1980 to 2014
 le_data_all = wb.download(indicator="SP.DYN.LE00.IN",
                           start='1980',
@@ -1065,7 +1113,7 @@ le_data_all
 
 
                         SP.DYN.LE00.IN
-    country       year                
+    country       year
     Canada        2014             NaN
                   2013             NaN
                   2012       81.238049
@@ -1083,7 +1131,7 @@ le_data_all
 
 
 
-```{python}
+```python
 # only US, CAN, and MEX are returned by default
 le_data_all.index.levels[0]
 ```
@@ -1096,7 +1144,7 @@ le_data_all.index.levels[0]
 
 
 
-```{python}
+```python
 # retrieve life expectancy at birth for all countries
 # from 1980 to 2014
 le_data_all = wb.download(indicator="SP.DYN.LE00.IN",
@@ -1114,7 +1162,7 @@ le_data_all
 
 
                    SP.DYN.LE00.IN
-    country  year                
+    country  year
     Aruba    2012       75.206756
              2011       75.080390
              2010       74.952024
@@ -1132,7 +1180,7 @@ le_data_all
 
 
 
-```{python}
+```python
 #le_data_all.pivot(index='country', columns='year')
 le_data = le_data_all.reset_index().pivot(index='country',
                                           columns='year')
@@ -1143,9 +1191,9 @@ le_data.ix[:,0:3]
 
 
 
-                       SP.DYN.LE00.IN                      
+                       SP.DYN.LE00.IN
     year                         1980       1981       1982
-    country                                                
+    country
     Afghanistan             41.233659  41.760634  42.335610
     Albania                 70.235976  70.454463  70.685122
     Algeria                 58.164024  59.486756  60.786341
@@ -1163,7 +1211,7 @@ le_data.ix[:,0:3]
 
 
 
-```{python}
+```python
 # ask what is the name of country for each year
 # with the least life expectancy
 country_with_least_expectancy = le_data.idxmin(axis=0)
@@ -1186,7 +1234,7 @@ country_with_least_expectancy
 
 
 
-```{python}
+```python
 # and what is the minimum life expectancy for each year
 expectancy_for_least_country = le_data.min(axis=0)
 expectancy_for_least_country
@@ -1208,7 +1256,7 @@ expectancy_for_least_country
 
 
 
-```{python}
+```python
 # this merges the two frames together and gives us
 # year, country and expectancy where there minimum exists
 least = pd.DataFrame(
@@ -1222,7 +1270,7 @@ least
 
 
                Country  Expectancy
-    year                          
+    year
     1980      Cambodia   29.613537
     1981      Cambodia   35.856341
     1982   Timor-Leste   38.176220
@@ -1236,3 +1284,12 @@ least
     2012  Sierra Leone   45.329049
 
     [33 rows x 2 columns]
+
+
+
+## 6.6 Summary
+
+
+```python
+
+```

@@ -1,33 +1,38 @@
 
+# Chapter 10: Time-series Data
 <!-- toc orderedList:0 depthFrom:1 depthTo:6 -->
 
-- [Setting up the notebook](#setting-up-the-notebook)
-- [Representation of dates, time, and intervals](#representation-of-dates-time-and-intervals)
-	- [Datetime, date and time objects](#datetime-date-and-time-objects)
-	- [Timestamps](#timestamps)
-	- [Timedelta](#timedelta)
-- [Time-series data](#time-series-data)
-	- [The DatetimeIndex](#the-datetimeindex)
-	- [Creating time-series data with specific frequencies](#creating-time-series-data-with-specific-frequencies)
-- [Calculating new dates using offsets](#calculating-new-dates-using-offsets)
-	- [Date offsets](#date-offsets)
-	- [Anchored Offsets](#anchored-offsets)
-- [Durations of time using Period objects](#durations-of-time-using-period-objects)
-	- [The Period](#the-period)
-	- [The PeriodIndex](#the-periodindex)
-- [Handling holidays using calendars](#handling-holidays-using-calendars)
-- [Normalizing timestamps using time zones](#normalizing-timestamps-using-time-zones)
-- [Manipulating time-series data](#manipulating-time-series-data)
-	- [Shifting and lagging](#shifting-and-lagging)
-	- [Frequency Conversion](#frequency-conversion)
-	- [Up and down resampling](#up-and-down-resampling)
-- [Time series moving window operations](#time-series-moving-window-operations)
+* [Chapter 10: Time-series Data](#chapter-10-time-series-data)
+  * [10.1 Setting up the IPython notebook](#101-setting-up-the-ipython-notebook)
+  * [10.2 Representation of dates, time, and intervals](#102-representation-of-dates-time-and-intervals)
+    * [The datetime, day, and time objects](#the-datetime-day-and-time-objects)
+    * [Timestamp objects](#timestamp-objects)
+    * [Timedelta](#timedelta)
+  * [10.3 Introducing time-series data](#103-introducing-time-series-data)
+    * [DatetimeIndex](#datetimeindex)
+    * [Creating time-series data with specific frequencies](#creating-time-series-data-with-specific-frequencies)
+  * [10.4 Calculating new dates using offsets](#104-calculating-new-dates-using-offsets)
+    * [Date offsets](#date-offsets)
+    * [Anchored offsets](#anchored-offsets)
+    * [Representing durations of time using Period objects](#representing-durations-of-time-using-period-objects)
+    * [The Period object](#the-period-object)
+    * [PeriodIndex](#periodindex)
+  * [10.5 Handling holidays using calendars](#105-handling-holidays-using-calendars)
+  * [10.6 Normalizing timestamps using time zones](#106-normalizing-timestamps-using-time-zones)
+  * [10.7 Manipulating time-series data](#107-manipulating-time-series-data)
+    * [Shifting and lagging](#shifting-and-lagging)
+    * [Frequency conversion](#frequency-conversion)
+    * [Up and down resampling](#up-and-down-resampling)
+    * [Time-series moving-window operations](#time-series-moving-window-operations)
+  * [10.8 Summary](#108-summary)
 
 <!-- tocstop -->
 
 
-# Setting up the notebook
-```{python}
+## 10.1 Setting up the IPython notebook
+
+
+```python
 # import pandas, numpy and datetime
 import numpy as np
 import pandas as pd
@@ -46,12 +51,12 @@ import matplotlib.pyplot as plt
 %matplotlib inline
 ```
 
-# Representation of dates, time, and intervals
+## 10.2 Representation of dates, time, and intervals
 
-## Datetime, date and time objects
+### The datetime, day, and time objects
 
 
-```{python}
+```python
 # datetime object for Dec 15 2014
 datetime(2014, 12, 15)
 ```
@@ -64,7 +69,7 @@ datetime(2014, 12, 15)
 
 
 
-```{python}
+```python
 # specific date and also with a time of 5:30 pm
 datetime(2014, 12, 15, 17, 30)
 ```
@@ -77,7 +82,7 @@ datetime(2014, 12, 15, 17, 30)
 
 
 
-```{python}
+```python
 # get the local "now" (date and time)
 # can take a timezone, but that's not demonstrated here
 datetime.now()
@@ -91,7 +96,7 @@ datetime.now()
 
 
 
-```{python}
+```python
 # a date without time can be represented
 # by creating a date using a datetime object
 datetime.date(datetime(2014, 12, 15))
@@ -105,7 +110,7 @@ datetime.date(datetime(2014, 12, 15))
 
 
 
-```{python}
+```python
 # get just the current date
 datetime.now().date()
 ```
@@ -113,12 +118,12 @@ datetime.now().date()
 
 
 
-    datetime.date(2015, 4, 14)
+    datetime.date(2015, 8, 28)
 
 
 
 
-```{python}
+```python
 # get just a time from a datetime
 datetime.time(datetime(2014, 12, 15, 17, 30))
 ```
@@ -131,7 +136,7 @@ datetime.time(datetime(2014, 12, 15, 17, 30))
 
 
 
-```{python}
+```python
 # get the current local time
 datetime.now().time()
 ```
@@ -139,14 +144,14 @@ datetime.now().time()
 
 
 
-    datetime.time(0, 27, 53, 388752)
+    datetime.time(11, 59, 8, 241562)
 
 
 
-## Timestamps
+### Timestamp objects
 
 
-```{python}
+```python
 # a timestamp representing a specific date
 pd.Timestamp('2014-12-15')
 ```
@@ -159,7 +164,7 @@ pd.Timestamp('2014-12-15')
 
 
 
-```{python}
+```python
 # a timestamp with both date and time
 pd.Timestamp('2014-12-15 17:30')
 ```
@@ -172,7 +177,7 @@ pd.Timestamp('2014-12-15 17:30')
 
 
 
-```{python}
+```python
 # timestamp with just a time
 # which adds in the current local date
 pd.Timestamp('17:30')
@@ -181,12 +186,12 @@ pd.Timestamp('17:30')
 
 
 
-    Timestamp('2015-04-14 17:30:00')
+    Timestamp('2015-08-28 17:30:00')
 
 
 
 
-```{python}
+```python
 # get the current date and time (now)
 pd.Timestamp("now")
 ```
@@ -194,14 +199,14 @@ pd.Timestamp("now")
 
 
 
-    Timestamp('2015-04-14 00:27:53.402828')
+    Timestamp('2015-08-28 11:59:22.150358')
 
 
 
-## Timedelta
+### Timedelta
 
 
-```{python}
+```python
 # what is one day from 2014-11-30?
 today = datetime(2014, 11, 30)
 tomorrow = today + pd.Timedelta(days=1)
@@ -216,7 +221,7 @@ tomorrow
 
 
 
-```{python}
+```python
 # how many days between these two dates?
 date1 = datetime(2014, 12, 2)
 date2 = datetime(2014, 11, 28)
@@ -230,12 +235,11 @@ date1 - date2
 
 
 
-# Time-series data
+## 10.3 Introducing time-series data
+### DatetimeIndex
 
-## The DatetimeIndex
 
-
-```{python}
+```python
 # create a very simple time-series with two index labels
 # and random values
 dates = [datetime(2014, 8, 1), datetime(2014, 8, 2)]
@@ -253,7 +257,7 @@ ts
 
 
 
-```{python}
+```python
 # what is the type of the index?
 type(ts.index)
 ```
@@ -266,7 +270,7 @@ type(ts.index)
 
 
 
-```{python}
+```python
 # and we can see it is a collection of timestamps
 type(ts.index[0])
 ```
@@ -279,7 +283,7 @@ type(ts.index[0])
 
 
 
-```{python}
+```python
 # create from just a list of dates as strings!
 np.random.seed(123456)
 dates = ['2014-08-01', '2014-08-02']
@@ -297,7 +301,7 @@ ts
 
 
 
-```{python}
+```python
 # convert a sequence of objects to a DatetimeIndex
 dti = pd.to_datetime(['Aug 1, 2014',
                       '2014-08-02',
@@ -313,7 +317,7 @@ for l in dti: print (l)
 
 
 
-```{python}
+```python
 # this is a list of objects, not timestamps...
 pd.to_datetime(['Aug 1, 2014', 'foo'])
 ```
@@ -326,7 +330,7 @@ pd.to_datetime(['Aug 1, 2014', 'foo'])
 
 
 
-```{python}
+```python
 # force the conversion, NaT for items that dont work
 pd.to_datetime(['Aug 1, 2014', 'foo'], coerce=True)
 ```
@@ -341,7 +345,7 @@ pd.to_datetime(['Aug 1, 2014', 'foo'], coerce=True)
 
 
 
-```{python}
+```python
 # create a range of dates starting at a specific date
 # and for a specific number of days, creating a Series
 np.random.seed(123456)
@@ -368,7 +372,7 @@ date_series
 
 
 
-```{python}
+```python
 # slice by location
 subset = date_series[3:7]
 subset
@@ -386,7 +390,7 @@ subset
 
 
 
-```{python}
+```python
 # a Series to demonstrate alignment
 s2 = pd.Series([10, 100, 1000, 10000], subset.index)
 s2
@@ -404,7 +408,7 @@ s2
 
 
 
-```{python}
+```python
 # demonstrate alignment by date on a subset of items
 date_series + s2
 ```
@@ -427,7 +431,7 @@ date_series + s2
 
 
 
-```{python}
+```python
 # lookup item by a string representing a date
 date_series['2014-08-05']
 ```
@@ -440,7 +444,7 @@ date_series['2014-08-05']
 
 
 
-```{python}
+```python
 # slice between two dates specified by string representing dates
 date_series['2014-08-05':'2014-08-07']
 ```
@@ -456,7 +460,7 @@ date_series['2014-08-05':'2014-08-07']
 
 
 
-```{python}
+```python
 # a two year range of daily data in a Series
 # only select those in 2013
 s3 = pd.Series(0, pd.date_range('2013-01-01', '2014-12-31'))
@@ -478,7 +482,7 @@ s3['2013']
 
 
 
-```{python}
+```python
 # 31 items for May 2014
 s3['2014-05']
 ```
@@ -498,7 +502,7 @@ s3['2014-05']
 
 
 
-```{python}
+```python
 # items between two months
 s3['2014-08':'2014-09']
 ```
@@ -517,10 +521,10 @@ s3['2014-08':'2014-09']
 
 
 
-## Creating time-series data with specific frequencies
+### Creating time-series data with specific frequencies
 
 
-```{python}
+```python
 # generate a Series at one minute intervals
 np.random.seed(123456)
 bymin = pd.Series(np.random.randn(24*60*90),
@@ -545,7 +549,7 @@ bymin
 
 
 
-```{python}
+```python
 # slice down to the minute
 bymin['2014-08-01 00:02':'2014-08-01 00:10']
 ```
@@ -567,7 +571,7 @@ bymin['2014-08-01 00:02':'2014-08-01 00:10']
 
 
 
-```{python}
+```python
 # generate a series based upon business days
 days = pd.date_range('2014-08-29', '2014-09-05', freq='B')
 for d in days : print (d)
@@ -582,7 +586,7 @@ for d in days : print (d)
 
 
 
-```{python}
+```python
 # periods will use the frequency as the increment
 pd.date_range('2014-08-01 12:10:01', freq='S', periods=10)
 ```
@@ -596,12 +600,12 @@ pd.date_range('2014-08-01 12:10:01', freq='S', periods=10)
 
 
 
-# Calculating new dates using offsets
+## 10.4 Calculating new dates using offsets
 
-## Date offsets
+### Date offsets
 
 
-```{python}
+```python
 # get all business days between and inclusive of these two dates
 dti = pd.date_range('2014-08-29', '2014-09-05', freq='B')
 dti.values
@@ -620,7 +624,7 @@ dti.values
 
 
 
-```{python}
+```python
 # check the frequency is BusinessDay
 dti.freq
 ```
@@ -633,7 +637,7 @@ dti.freq
 
 
 
-```{python}
+```python
 # calculate a one day offset from 2014-8-29
 d = datetime(2014, 8, 29)
 do = pd.DateOffset(days = 1)
@@ -648,7 +652,7 @@ d + do
 
 
 
-```{python}
+```python
 # import the data offset types
 from pandas.tseries.offsets import *
 # calculate one business day from 2014-8-31
@@ -663,7 +667,7 @@ d + BusinessDay()
 
 
 
-```{python}
+```python
 # determine 2 business days from 2014-8-29
 d + 2 * BusinessDay()
 ```
@@ -676,7 +680,7 @@ d + 2 * BusinessDay()
 
 
 
-```{python}
+```python
 # what is the next business month end
 # from a specific date?
 d + BMonthEnd()
@@ -690,7 +694,7 @@ d + BMonthEnd()
 
 
 
-```{python}
+```python
 # calculate the next month end by
 # rolling forward from a specific date
 BMonthEnd().rollforward(datetime(2014, 9, 15))
@@ -704,7 +708,7 @@ BMonthEnd().rollforward(datetime(2014, 9, 15))
 
 
 
-```{python}
+```python
 # calculate the date of the Tuesday previous
 # to a specified date
 d - Week(weekday = 1)
@@ -717,10 +721,10 @@ d - Week(weekday = 1)
 
 
 
-## Anchored Offsets
+### Anchored offsets
 
 
-```{python}
+```python
 # calculate all Wednesdays between 2014-06-01
 # and 2014-08-31
 wednesdays = pd.date_range('2014-06-01',
@@ -748,7 +752,7 @@ wednesdays.values
 
 
 
-```{python}
+```python
 # what are all of the business quarterly end
 # dates in 2014?
 qends = pd.date_range('2014-01-01', '2014-12-31',
@@ -766,12 +770,11 @@ qends.values
 
 
 
-# Durations of time using Period objects
+### Representing durations of time using Period objects
+### The Period object
 
-## The Period
 
-
-```{python}
+```python
 # create a period representing a month of time
 # starting in August 2014
 aug2014 = pd.Period('2014-08', freq='M')
@@ -786,7 +789,7 @@ aug2014
 
 
 
-```{python}
+```python
 # examine the start and end times of this period
 aug2014.start_time, aug2014.end_time
 ```
@@ -799,7 +802,7 @@ aug2014.start_time, aug2014.end_time
 
 
 
-```{python}
+```python
 # calculate the period that is one frequency
 # unit of the aug2014 period further along in time
 # This happens to be September 2014
@@ -815,7 +818,7 @@ sep2014
 
 
 
-```{python}
+```python
 sep2014.start_time, sep2014.end_time
 ```
 
@@ -826,10 +829,10 @@ sep2014.start_time, sep2014.end_time
 
 
 
-## The PeriodIndex
+### PeriodIndex
 
 
-```{python}
+```python
 # create a period index representing all monthly boundaries in 2013
 mp2013 = pd.period_range('1/1/2013', '12/31/2013', freq='M')
 mp2013
@@ -845,7 +848,7 @@ mp2013
 
 
 
-```{python}
+```python
 # loop through all period objects in the index
 # printing start and end time for each
 for p in mp2013:
@@ -867,7 +870,7 @@ for p in mp2013:
 
 
 
-```{python}
+```python
 # create a Series with a PeriodIndex
 np.random.seed(123456)
 ps = pd.Series(np.random.randn(12), mp2013)
@@ -889,7 +892,7 @@ ps
 
 
 
-```{python}
+```python
 # create a Series with a PeriodIndex and which
 # represents all calendar month periods in 2013 and 2014
 np.random.seed(123456)
@@ -914,7 +917,7 @@ ps
 
 
 
-```{python}
+```python
 # get value for period represented with 2014-06
 ps['2014-06']
 ```
@@ -927,7 +930,7 @@ ps['2014-06']
 
 
 
-```{python}
+```python
 # get values for all periods in 2014
 ps['2014']
 ```
@@ -947,7 +950,7 @@ ps['2014']
 
 
 
-```{python}
+```python
 # all values between (and including) March and June 2014
 ps['2014-03':'2014-06']
 ```
@@ -963,10 +966,10 @@ ps['2014-03':'2014-06']
 
 
 
-# Handling holidays using calendars
+## 10.5 Handling holidays using calendars
 
 
-```{python}
+```python
 # demonstrate using the US federal holiday calendar
 # first need to import it
 from pandas.tseries.holiday import *
@@ -989,7 +992,7 @@ for d in cal.holidays(start='2014-01-01', end='2014-12-31'):
 
 
 
-```{python}
+```python
 # create CustomBusinessDay object based on the federal calendar
 cbd = CustomBusinessDay(holidays=cal.holidays())
 
@@ -1004,10 +1007,10 @@ datetime(2014, 8, 29) + cbd
 
 
 
-# Normalizing timestamps using time zones
+## 10.6 Normalizing timestamps using time zones
 
 
-```{python}
+```python
 # get the current local time and demonstrate there is no
 # timezone info by default
 now = pd.Timestamp('now')
@@ -1022,7 +1025,7 @@ now, now.tz is None
 
 
 
-```{python}
+```python
 # default DatetimeIndex and its Timestamps do not have
 # time zone information
 rng = pd.date_range('3/6/2012 00:00', periods=15, freq='D')
@@ -1037,7 +1040,7 @@ rng.tz is None, rng[0].tz is None
 
 
 
-```{python}
+```python
 # import common timezones from pytz
 from pytz import common_timezones
 # report the first 5
@@ -1056,7 +1059,7 @@ common_timezones[:5]
 
 
 
-```{python}
+```python
 # get now, and now localized to UTC
 now = Timestamp("now")
 local_now = now.tz_localize('UTC')
@@ -1072,7 +1075,7 @@ now, local_now
 
 
 
-```{python}
+```python
 # localize a timestamp to US/Mountain time zone
 tstamp = Timestamp('2014-08-01 12:00:00', tz='US/Mountain')
 tstamp
@@ -1086,7 +1089,7 @@ tstamp
 
 
 
-```{python}
+```python
 # create a DatetimeIndex using a timezone
 rng = pd.date_range('3/6/2012 00:00:00',
                     periods=10, freq='D', tz='US/Mountain')
@@ -1102,7 +1105,7 @@ rng.tz, rng[0].tz
 
 
 
-```{python}
+```python
 # show use of timezone objects
 # need to reference pytz
 import pytz
@@ -1122,7 +1125,7 @@ mountain_tz.localize(now), eastern_tz.localize(now)
 
 
 
-```{python}
+```python
 # create two Series, same start, same periods, same frequencies,
 # each with a different timezone
 s_mountain = Series(np.arange(0, 5),
@@ -1149,7 +1152,7 @@ s_mountain
 
 
 
-```{python}
+```python
 s_eastern
 ```
 
@@ -1166,7 +1169,7 @@ s_eastern
 
 
 
-```{python}
+```python
 # add the two Series. This only results in three items being aligned
 s_eastern + s_mountain
 ```
@@ -1186,7 +1189,7 @@ s_eastern + s_mountain
 
 
 
-```{python}
+```python
 # convert s1 from US/Eastern to US/Pacific
 s_pacific = s_eastern.tz_convert("US/Pacific")
 s_pacific
@@ -1205,7 +1208,7 @@ s_pacific
 
 
 
-```{python}
+```python
 # this will be the same result as s_eastern + s_mountain
 # as the timezones still get aligned to be the same
 s_mountain + s_pacific
@@ -1225,12 +1228,12 @@ s_mountain + s_pacific
 
 
 
-# Manipulating time-series data
+## 10.7 Manipulating time-series data
 
-## Shifting and lagging
+### Shifting and lagging
 
 
-```{python}
+```python
 # create a Series to work with
 np.random.seed(123456)
 ts = Series([1, 2, 2.5, 1.5, 0.5],
@@ -1251,7 +1254,7 @@ ts
 
 
 
-```{python}
+```python
 # shift forward one day
 ts.shift(1)
 ```
@@ -1269,7 +1272,7 @@ ts.shift(1)
 
 
 
-```{python}
+```python
 # lag two days
 ts.shift(-2)
 ```
@@ -1287,7 +1290,7 @@ ts.shift(-2)
 
 
 
-```{python}
+```python
 # calculate daily percentage change
 ts / ts.shift(1)
 ```
@@ -1305,7 +1308,7 @@ ts / ts.shift(1)
 
 
 
-```{python}
+```python
 # shift forward one business day
 ts.shift(1, freq="B")
 ```
@@ -1323,7 +1326,7 @@ ts.shift(1, freq="B")
 
 
 
-```{python}
+```python
 # shift forward five hours
 ts.tshift(5, freq="H")
 ```
@@ -1341,7 +1344,7 @@ ts.tshift(5, freq="H")
 
 
 
-```{python}
+```python
 # shift using a DateOffset
 ts.shift(1, DateOffset(minutes=0.5))
 ```
@@ -1359,7 +1362,7 @@ ts.shift(1, DateOffset(minutes=0.5))
 
 
 
-```{python}
+```python
 # shift just the index values
 ts.tshift(-1, freq='H')
 ```
@@ -1376,10 +1379,10 @@ ts.tshift(-1, freq='H')
 
 
 
-## Frequency Conversion
+### Frequency conversion
 
 
-```{python}
+```python
 # create a Series of incremental values
 # index by hour through all of August 2014
 periods = 31 * 24
@@ -1404,7 +1407,7 @@ hourly
 
 
 
-```{python}
+```python
 # convert to daily frequency
 # many items will be dropped due to alignment
 daily = hourly.asfreq('D')
@@ -1426,7 +1429,7 @@ daily
 
 
 
-```{python}
+```python
 # convert back to hourly.  Results in many NaNs
 # as the new index has many labels that do not
 # align from the source
@@ -1448,7 +1451,7 @@ daily.asfreq('H')
 
 
 
-```{python}
+```python
 # forward fill values
 daily.asfreq('H', method='ffill')
 ```
@@ -1468,7 +1471,7 @@ daily.asfreq('H', method='ffill')
 
 
 
-```{python}
+```python
 daily.asfreq('H', method='bfill')
 ```
 
@@ -1486,10 +1489,10 @@ daily.asfreq('H', method='bfill')
 
 
 
-## Up and down resampling
+### Up and down resampling
 
 
-```{python}
+```python
 # calculate a random walk five days long at one second intervals
 # this many items will be needed
 count = 24 * 60 * 60 * 5
@@ -1519,7 +1522,7 @@ walk
 
 
 
-```{python}
+```python
 # resample to minute intervals
 walk.resample("1Min")
 ```
@@ -1539,7 +1542,7 @@ walk.resample("1Min")
 
 
 
-```{python}
+```python
 # calculate the mean of the first minute of the walk
 walk['2014-08-01 00:00'].mean()
 ```
@@ -1552,7 +1555,7 @@ walk['2014-08-01 00:00'].mean()
 
 
 
-```{python}
+```python
 # use a right close
 walk.resample("1Min", closed='right')
 ```
@@ -1572,7 +1575,7 @@ walk.resample("1Min", closed='right')
 
 
 
-```{python}
+```python
 # take the first value of each bucket
 walk.resample("1Min", how='first')
 ```
@@ -1592,7 +1595,7 @@ walk.resample("1Min", how='first')
 
 
 
-```{python}
+```python
 # resample to 1 minute intervales, then back to 1 sec
 bymin = walk.resample("1Min")
 bymin.resample('S')
@@ -1613,7 +1616,7 @@ bymin.resample('S')
 
 
 
-```{python}
+```python
 # resample to 1 second intervales using forward fill
 bymin.resample("S", fill_method="bfill")
 ```
@@ -1633,7 +1636,7 @@ bymin.resample("S", fill_method="bfill")
 
 
 
-```{python}
+```python
 # demonstate interoplating the NaN values
 interpolated = bymin.resample("S").interpolate()
 interpolated
@@ -1654,7 +1657,7 @@ interpolated
 
 
 
-```{python}
+```python
 # show ohlc resampling
 ohlc = walk.resample("H", how="ohlc")
 ohlc
@@ -1680,10 +1683,10 @@ ohlc
 
 
 
-# Time series moving window operations
+### Time-series moving-window operations
 
 
-```{python}
+```python
 first_minute = walk['2014-08-01 00:00']
 # calculate a rol1ing mean window of 5 periods
 pd.rolling_mean(first_minute, 5).plot()
@@ -1698,7 +1701,7 @@ plt.legend(labels=['Rolling Mean', 'Raw']);
 
 
 
-```{python}
+```python
 # demonstrate the difference between 2, 5 and
 # 10 interval rolling windows
 h1w = walk['2014-08-01 00:00']
@@ -1716,7 +1719,7 @@ plt.legend(labels=['Raw', '2-interval RM',
 
 
 
-```{python}
+```python
 # calculate mean average deviation with window of 5 intervals
 mean_abs_dev = lambda x: np.fabs(x - x.mean()).mean()
 pd.rolling_apply(h1w, 5, mean_abs_dev).plot();
@@ -1727,7 +1730,7 @@ pd.rolling_apply(h1w, 5, mean_abs_dev).plot();
 
 
 
-```{python}
+```python
 # calculate an expanding rolling mean
 expanding_mean = lambda x: pd.rolling_mean(x, len(x),
                                            min_periods=1)
@@ -1738,3 +1741,11 @@ plt.legend(labels=['Expanding mean', 'Raw']);
 
 
 ![png](10_Time_Series_Data_files/10_Time_Series_Data_115_0.png)
+
+
+## 10.8 Summary
+
+
+```python
+
+```

@@ -1,33 +1,31 @@
 
+# Chapter 11: Visualization
 <!-- toc orderedList:0 depthFrom:1 depthTo:6 -->
 
-- [Setting up the notebook](#setting-up-the-notebook)
-- [Creating time-series charts](#creating-time-series-charts)
-	- [The basics of plotting with .plot()](#the-basics-of-plotting-with-plot)
-	- [Adorning and styling your time-series plot](#adorning-and-styling-your-time-series-plot)
-		- [Adding a title and changing axes labels](#adding-a-title-and-changing-axes-labels)
-		- [Specifying legend content and position](#specifying-legend-content-and-position)
-		- [Specifying line colors, styles, thickness and markers](#specifying-line-colors-styles-thickness-and-markers)
-		- [Specifying tick mark locations and tick labels](#specifying-tick-mark-locations-and-tick-labels)
-		- [Formatting axes tick date labels using formatters](#formatting-axes-tick-date-labels-using-formatters)
-- [Common plots used in statistical analyses](#common-plots-used-in-statistical-analyses)
-	- [Bar plots](#bar-plots)
-	- [Histograms](#histograms)
-	- [Box and whisker plots](#box-and-whisker-plots)
-	- [Area plots](#area-plots)
-	- [Scatter plots](#scatter-plots)
-	- [Density plot (kde)](#density-plot-kde)
-	- [Scatter plot matrix](#scatter-plot-matrix)
-	- [Heatmaps](#heatmaps)
-- [Multiple Plots in a Single Chart](#multiple-plots-in-a-single-chart)
+* [Chapter 11: Visualization](#chapter-11-visualization)
+  * [11.1 Setting up the IPython notebook](#111-setting-up-the-ipython-notebook)
+  * [11.2 Plotting basics with pandas](#112-plotting-basics-with-pandas)
+    * [Creating time-series charts with .plot()](#creating-time-series-charts-with-plot)
+    * [Adorning and styling your time-series plot](#adorning-and-styling-your-time-series-plot)
+  * [11.3 Common plots used in statistical analyses](#113-common-plots-used-in-statistical-analyses)
+    * [Bar plots](#bar-plots)
+    * [Histograms](#histograms)
+    * [Box and whisker charts](#box-and-whisker-charts)
+    * [Area plots](#area-plots)
+    * [Scatter plots](#scatter-plots)
+    * [Density plot](#density-plot)
+    * [The scatter plot matrix](#the-scatter-plot-matrix)
+    * [Heatmaps](#heatmaps)
+  * [11.4 Multiple plots in a single chart](#114-multiple-plots-in-a-single-chart)
+  * [11.5 Summary](#115-summary)
 
 <!-- tocstop -->
 
 
-# Setting up the notebook
+## 11.1 Setting up the IPython notebook
 
 
-```{python}
+```python
 # import pandas, numpy and datetime
 import numpy as np
 import pandas as pd
@@ -52,44 +50,20 @@ import matplotlib.pyplot as plt
 %matplotlib inline
 ```
 
-# Creating time-series charts
+## 11.2 Plotting basics with pandas
 
-## The basics of plotting with .plot()
+### Creating time-series charts with .plot()
 
 
-```{python}
+```python
 # generate a random walk time-series
 np.random.seed(seedval)
 s = pd.Series(np.random.randn(1096),
               index=pd.date_range('2012-01-01',
-                                  '2014-12-31'))
+                                  '2014-12-31')
 walk_ts = s.cumsum()
 # this plots the walk - just that easy :)
 walk_ts.plot();
-```
-
-
-![png](11_Visualization_files/11_Visualization_4_0.png)
-
-
-
-```{python}
-# tells pandas plots to use a default style
-# which has a background fill
-pd.options.display.mpl_style = 'default'
-walk_ts.plot();
-```
-
-
-![png](11_Visualization_files/11_Visualization_5_0.png)
-
-
-
-```{python}
-# a DataFrame with a single column will produce
-# the same plot as plotting the Series it is created from
-walk_df = pd.DataFrame(walk_ts)
-walk_df.plot(legend=False);
 ```
 
 
@@ -97,7 +71,50 @@ walk_df.plot(legend=False);
 
 
 
-```{python}
+```python
+s.cum
+```
+
+
+
+
+    <class 'pandas.tseries.index.DatetimeIndex'>
+    [2012-01-01, ..., 2014-12-31]
+    Length: 1096, Freq: D, Timezone: None
+
+
+
+
+```python
+
+```
+
+
+```python
+# tells pandas plots to use a default style
+# which has a background fill
+pd.options.display.mpl_style = 'default'
+walk_ts.plot();
+```
+
+
+![png](11_Visualization_files/11_Visualization_9_0.png)
+
+
+
+```python
+# a DataFrame with a single column will produce
+# the same plot as plotting the Series it is created from
+walk_df = pd.DataFrame(walk_ts)
+walk_df.plot(legend=False);
+```
+
+
+![png](11_Visualization_files/11_Visualization_10_0.png)
+
+
+
+```python
 # generate two random walks, one in each of
 # two columns in a DataFrame
 np.random.seed(seedval)
@@ -120,18 +137,18 @@ walk_df.head()
 
 
 
-```{python}
+```python
 # plot the DataFrame, which will plot a line
 # for each column, with a legend
 walk_df.plot();
 ```
 
 
-![png](11_Visualization_files/11_Visualization_8_0.png)
+![png](11_Visualization_files/11_Visualization_12_0.png)
 
 
 
-```{python}
+```python
 # copy the walk
 df2 = walk_df.copy()
 # add a column C which is 0 .. 1096
@@ -142,15 +159,15 @@ df2.plot(x='C', y=['A', 'B']);
 ```
 
 
-![png](11_Visualization_files/11_Visualization_9_0.png)
+![png](11_Visualization_files/11_Visualization_13_0.png)
 
 
-## Adorning and styling your time-series plot
+### Adorning and styling your time-series plot
 
-### Adding a title and changing axes labels
+* Adding a title and changing axes labels
 
 
-```{python}
+```python
 # create a time-series chart with a title and specific
 # x and y axis labels
 
@@ -162,13 +179,13 @@ plt.ylabel('Money');
 ```
 
 
-![png](11_Visualization_files/11_Visualization_12_0.png)
+![png](11_Visualization_files/11_Visualization_16_0.png)
 
 
-### Specifying legend content and position
+* Specifying the legend content and position
 
 
-```{python}
+```python
 # change the legend items to be different
 # from the names of the columns in the DataFrame
 ax = walk_df.plot(title='Title of the Chart')
@@ -177,11 +194,11 @@ ax.legend(['1', '2']);
 ```
 
 
-![png](11_Visualization_files/11_Visualization_14_0.png)
+![png](11_Visualization_files/11_Visualization_18_0.png)
 
 
 
-```{python}
+```python
 # change the position of the legend
 ax = walk_df.plot(title='Title of the Chart')
 # put the legend in the upper center of the chart
@@ -189,23 +206,23 @@ ax.legend(['1', '2'], loc='upper center');
 ```
 
 
-![png](11_Visualization_files/11_Visualization_15_0.png)
+![png](11_Visualization_files/11_Visualization_19_0.png)
 
 
 
-```{python}
+```python
 # omit the legend by using legend=False
 walk_df.plot(title='Title of the Chart', legend=False);
 ```
 
 
-![png](11_Visualization_files/11_Visualization_16_0.png)
+![png](11_Visualization_files/11_Visualization_20_0.png)
 
 
-### Specifying line colors, styles, thickness and markers
+* Specifying line colors, styles, thickness, and markers
 
 
-```{python}
+```python
 # change the line colors on the plot
 # use character code for the first line,
 # hex RGB for the second
@@ -213,11 +230,11 @@ walk_df.plot(style=['g', '#FF0000']);
 ```
 
 
-![png](11_Visualization_files/11_Visualization_18_0.png)
+![png](11_Visualization_files/11_Visualization_22_0.png)
 
 
 
-```{python}
+```python
 # show off different line styles
 t = np.arange(0., 5., 0.2)
 legend_labels = ['Solid', 'Dashed', 'Dotted',
@@ -234,11 +251,11 @@ ax.legend(legend_labels, loc='upper left');
 ```
 
 
-![png](11_Visualization_files/11_Visualization_19_0.png)
+![png](11_Visualization_files/11_Visualization_23_0.png)
 
 
 
-```{python}
+```python
 # regenerate the plot, specifying color and line style
 # for each line and a line width of 3 for all lines
 ax = line_style.plot(style=['r-', 'g--', 'b:', 'm-.', 'k:'], lw=3)
@@ -246,11 +263,11 @@ ax.legend(legend_labels, loc='upper left');
 ```
 
 
-![png](11_Visualization_files/11_Visualization_20_0.png)
+![png](11_Visualization_files/11_Visualization_24_0.png)
 
 
 
-```{python}
+```python
 # redraw, adding markers to the lines
 ax = line_style.plot(style=['r-o', 'g--^', 'b:*',
                             'm-.D', 'k:o'], lw=3)
@@ -258,13 +275,13 @@ ax.legend(legend_labels, loc='upper left');
 ```
 
 
-![png](11_Visualization_files/11_Visualization_21_0.png)
+![png](11_Visualization_files/11_Visualization_25_0.png)
 
 
-### Specifying tick mark locations and tick labels
+* Specifying tick mark locations and tick labels
 
 
-```{python}
+```python
 # a simple plot to use to examine ticks
 ticks_data = pd.DataFrame(np.arange(0,5))
 ticks_data.plot()
@@ -273,11 +290,11 @@ ticks
 ```
 
 
-![png](11_Visualization_files/11_Visualization_23_0.png)
+![png](11_Visualization_files/11_Visualization_27_0.png)
 
 
 
-```{python}
+```python
 # resize x-axis to (-1, 5), and draw ticks
 # only at integer values
 ticks_data = pd.DataFrame(np.arange(0,5))
@@ -286,11 +303,11 @@ plt.xticks(np.arange(-1, 6));
 ```
 
 
-![png](11_Visualization_files/11_Visualization_24_0.png)
+![png](11_Visualization_files/11_Visualization_28_0.png)
 
 
 
-```{python}
+```python
 # rename y-axis tick labels to A, B, C, D, and E
 ticks_data = pd.DataFrame(np.arange(0,5))
 ticks_data.plot()
@@ -298,23 +315,23 @@ plt.yticks(np.arange(0, 5), list("ABCDE"));
 ```
 
 
-![png](11_Visualization_files/11_Visualization_25_0.png)
+![png](11_Visualization_files/11_Visualization_29_0.png)
 
 
-### Formatting axes tick date labels using formatters
+* Formatting axes tick date labels using formatters
 
 
-```{python}
+```python
 # plot January-February 2014 from the random walk
 walk_df.loc['2014-01':'2014-02'].plot();
 ```
 
 
-![png](11_Visualization_files/11_Visualization_27_0.png)
+![png](11_Visualization_files/11_Visualization_31_0.png)
 
 
 
-```{python}
+```python
 # this import styles helps us type less
 from matplotlib.dates import WeekdayLocator, \
 DateFormatter, MonthLocator
@@ -333,11 +350,11 @@ ax.xaxis.set_major_formatter(DateFormatter('\n\n\n%b\n%Y'))
 ```
 
 
-![png](11_Visualization_files/11_Visualization_28_0.png)
+![png](11_Visualization_files/11_Visualization_32_0.png)
 
 
 
-```{python}
+```python
 # this gets around the pandas / matplotlib year issue
 # need to reference the subset twice, so let's make a variable
 walk_subset = walk_df['2014-01':'2014-02']
@@ -360,11 +377,11 @@ ax.xaxis.set_major_formatter(DateFormatter('\n\n\n%b\n%Y'));
 ```
 
 
-![png](11_Visualization_files/11_Visualization_29_0.png)
+![png](11_Visualization_files/11_Visualization_33_0.png)
 
 
 
-```{python}
+```python
 # this gets the plot so we can use it, we can ignore fig
 fig, ax = plt.subplots()
 
@@ -385,11 +402,11 @@ ax.xaxis.set_major_formatter(DateFormatter('\n\n\n%b\n%Y'));
 ```
 
 
-![png](11_Visualization_files/11_Visualization_30_0.png)
+![png](11_Visualization_files/11_Visualization_34_0.png)
 
 
 
-```{python}
+```python
 # this gets the plot so we can use it, we can ignore fig
 fig, ax = plt.subplots()
 
@@ -408,15 +425,15 @@ fig.autofmt_xdate();
 ```
 
 
-![png](11_Visualization_files/11_Visualization_31_0.png)
+![png](11_Visualization_files/11_Visualization_35_0.png)
 
 
-# Common plots used in statistical analyses
+## 11.3 Common plots used in statistical analyses
 
-## Bar plots
+### Bar plots
 
 
-```{python}
+```python
 # make a bar plot
 # create a small series of 10 random values centered at 0.0
 np.random.seed(seedval)
@@ -426,11 +443,11 @@ s.plot(kind='bar');
 ```
 
 
-![png](11_Visualization_files/11_Visualization_34_0.png)
+![png](11_Visualization_files/11_Visualization_38_0.png)
 
 
 
-```{python}
+```python
 # draw a multiple series bar chart
 # generate 4 columns of 10 random values
 np.random.seed(seedval)
@@ -441,33 +458,33 @@ df2.plot(kind='bar');
 ```
 
 
-![png](11_Visualization_files/11_Visualization_35_0.png)
+![png](11_Visualization_files/11_Visualization_39_0.png)
 
 
 
-```{python}
+```python
 # horizontal stacked bar chart
 df2.plot(kind='bar', stacked=True);
 ```
 
 
-![png](11_Visualization_files/11_Visualization_36_0.png)
+![png](11_Visualization_files/11_Visualization_40_0.png)
 
 
 
-```{python}
+```python
 # horizontal stacked bar chart
 df2.plot(kind='barh', stacked=True);
 ```
 
 
-![png](11_Visualization_files/11_Visualization_37_0.png)
+![png](11_Visualization_files/11_Visualization_41_0.png)
 
 
-## Histograms
+### Histograms
 
 
-```{python}
+```python
 # create a histogram
 np.random.seed(seedval)
 # 1000 random numbers
@@ -477,21 +494,21 @@ dfh.hist();
 ```
 
 
-![png](11_Visualization_files/11_Visualization_39_0.png)
+![png](11_Visualization_files/11_Visualization_43_0.png)
 
 
 
-```{python}
+```python
 # histogram again, but with more bins
 dfh.hist(bins = 100);
 ```
 
 
-![png](11_Visualization_files/11_Visualization_40_0.png)
+![png](11_Visualization_files/11_Visualization_44_0.png)
 
 
 
-```{python}
+```python
 # generate multiple histogram plot
 # create data frame with 4 columns of 1000 random values
 np.random.seed(seedval)
@@ -503,11 +520,11 @@ dfh.hist();
 ```
 
 
-![png](11_Visualization_files/11_Visualization_41_0.png)
+![png](11_Visualization_files/11_Visualization_45_0.png)
 
 
 
-```{python}
+```python
 # directly use pyplot to overlay multiple histograms
 # generate two distributions, each with a different
 # mean and standard deviation
@@ -526,13 +543,13 @@ plt.legend(loc='upper right');
 ```
 
 
-![png](11_Visualization_files/11_Visualization_42_0.png)
+![png](11_Visualization_files/11_Visualization_46_0.png)
 
 
-## Box and whisker plots
+### Box and whisker charts
 
 
-```{python}
+```python
 # create a box plot
 # generate the series
 np.random.seed(seedval)
@@ -542,13 +559,13 @@ dfb.boxplot(return_type='axes');
 ```
 
 
-![png](11_Visualization_files/11_Visualization_44_0.png)
+![png](11_Visualization_files/11_Visualization_48_0.png)
 
 
-## Area plots
+### Area plots
 
 
-```{python}
+```python
 # create a stacked area plot
 # generate a 4-column data frame of random data
 np.random.seed(seedval)
@@ -559,23 +576,23 @@ dfa.plot(kind='area');
 ```
 
 
-![png](11_Visualization_files/11_Visualization_46_0.png)
+![png](11_Visualization_files/11_Visualization_50_0.png)
 
 
 
-```{python}
+```python
 # do not stack the area plot
 dfa.plot(kind='area', stacked=False);
 ```
 
 
-![png](11_Visualization_files/11_Visualization_47_0.png)
+![png](11_Visualization_files/11_Visualization_51_0.png)
 
 
-## Scatter plots
+### Scatter plots
 
 
-```{python}
+```python
 # generate a scatter plot of two series of normally
 # distributed random values
 # we would expect this to cluster around 0,0
@@ -586,11 +603,11 @@ sp_df.plot(kind='scatter', x='a', y='b');
 ```
 
 
-![png](11_Visualization_files/11_Visualization_49_0.png)
+![png](11_Visualization_files/11_Visualization_53_0.png)
 
 
 
-```{python}
+```python
 # get Google stock data from 1/1/2011 to 12/31/2011
 from pandas.io.data import DataReader
 stock_data = DataReader("GOOGL", "yahoo",
@@ -616,13 +633,13 @@ ax.grid(True);
 ```
 
 
-![png](11_Visualization_files/11_Visualization_50_0.png)
+![png](11_Visualization_files/11_Visualization_54_0.png)
 
 
-## Density plot (kde)
+### Density plot
 
 
-```{python}
+```python
 # create a kde densitiy plot
 # generate a series of 1000 random numbers
 np.random.seed(seedval)
@@ -633,13 +650,13 @@ s.plot(kind='kde', figsize=(10,8));
 ```
 
 
-![png](11_Visualization_files/11_Visualization_52_0.png)
+![png](11_Visualization_files/11_Visualization_56_0.png)
 
 
-## Scatter plot matrix
+### The scatter plot matrix
 
 
-```{python}
+```python
 # create a scatter plot matrix
 # import this class
 from pandas.tools.plotting import scatter_matrix
@@ -653,13 +670,13 @@ scatter_matrix(df_spm, alpha=0.2, figsize=(6, 6), diagonal='kde');
 ```
 
 
-![png](11_Visualization_files/11_Visualization_54_0.png)
+![png](11_Visualization_files/11_Visualization_58_0.png)
 
 
-## Heatmaps
+### Heatmaps
 
 
-```{python}
+```python
 # create a heatmap
 # start with data for the heatmap
 s = pd.Series([0.0, 0.1, 0.2, 0.3, 0.4],
@@ -688,7 +705,7 @@ heatmap_data
 
 
 
-```{python}
+```python
 # generate the heatmap
 plt.imshow(heatmap_data, cmap='hot', interpolation='none')
 plt.colorbar()  # add the scale of colors bar
@@ -698,13 +715,13 @@ plt.yticks(range(len(heatmap_data)), heatmap_data.index);
 ```
 
 
-![png](11_Visualization_files/11_Visualization_57_0.png)
+![png](11_Visualization_files/11_Visualization_61_0.png)
 
 
-# Multiple Plots in a Single Chart
+## 11.4 Multiple plots in a single chart
 
 
-```{python}
+```python
 # create two sub plots on the new plot using a 2x1 grid
 # ax1 is the upper row
 ax1 = plt.subplot2grid(shape=(2,1), loc=(0,0))
@@ -713,11 +730,11 @@ ax2 = plt.subplot2grid(shape=(2,1), loc=(1,0))
 ```
 
 
-![png](11_Visualization_files/11_Visualization_59_0.png)
+![png](11_Visualization_files/11_Visualization_63_0.png)
 
 
 
-```{python}
+```python
 # layout sub plots on a 4x4 grid
 # ax1 on top row, 4 columns wide
 ax1 = plt.subplot2grid((4,4), (0,0), colspan=4)
@@ -733,11 +750,11 @@ ax5 = plt.subplot2grid((4,4), (2,1));
 ```
 
 
-![png](11_Visualization_files/11_Visualization_60_0.png)
+![png](11_Visualization_files/11_Visualization_64_0.png)
 
 
 
-```{python}
+```python
 # demonstrating drawing into specific sub-plots
 # generate a layout of 2 rows 1 column
 # create the subplots, one on each row
@@ -750,11 +767,11 @@ walk_df[[1]].plot(ax = ax6);
 ```
 
 
-![png](11_Visualization_files/11_Visualization_61_0.png)
+![png](11_Visualization_files/11_Visualization_65_0.png)
 
 
 
-```{python}
+```python
 # draw the close on the top chart
 top = plt.subplot2grid((4,4), (0, 0), rowspan=3, colspan=4)
 top.plot(stock_data.index, stock_data['Close'], label='Close')
@@ -770,4 +787,12 @@ plt.gcf().set_size_inches(15,8)
 ```
 
 
-![png](11_Visualization_files/11_Visualization_62_0.png)
+![png](11_Visualization_files/11_Visualization_66_0.png)
+
+
+## 11.5 Summary
+
+
+```python
+
+```

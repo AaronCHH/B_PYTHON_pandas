@@ -1,39 +1,35 @@
 
+# Chapter 5: The pandas DataFrame Object
 <!-- toc orderedList:0 depthFrom:1 depthTo:6 -->
 
-- [Creating a DataFrame from scratch](#creating-a-dataframe-from-scratch)
-- [Loading sample data for demonstrate DataFrame capabilities](#loading-sample-data-for-demonstrate-dataframe-capabilities)
-	- [S&P 500](#sp-500)
-	- [Monthly stock historical prices](#monthly-stock-historical-prices)
-- [Selecting columns of a DataFrame](#selecting-columns-of-a-dataframe)
-- [Selecting rows of a DataFrame](#selecting-rows-of-a-dataframe)
-	- [Slicing using the [] operator](#slicing-using-the-operator)
-	- [Selecting rows by index label and location: .loc[] and .iloc[]](#selecting-rows-by-index-label-and-location-loc-and-iloc)
-	- [Selecting rows by index label and/or location: .ix[]](#selecting-rows-by-index-label-andor-location-ix)
-	- [Scalar lookup by label or location using .at[] and .iat[]](#scalar-lookup-by-label-or-location-using-at-and-iat)
-	- [Selecting rows by Boolean selection](#selecting-rows-by-boolean-selection)
-- [Modifying the structure and contents of a DataFrame](#modifying-the-structure-and-contents-of-a-dataframe)
-	- [Renaming Columns](#renaming-columns)
-	- [Adding and inserting columns](#adding-and-inserting-columns)
-	- [Replacing the contents of a column](#replacing-the-contents-of-a-column)
-	- [Deleting columns in a DataFrame](#deleting-columns-in-a-dataframe)
-	- [Adding rows to a DataFrame](#adding-rows-to-a-dataframe)
-		- [Appending rows with .append()](#appending-rows-with-append)
-		- [Concatenating DataFrame objects with pd.concat()](#concatenating-dataframe-objects-with-pdconcat)
-		- [Adding rows via setting with enlargement](#adding-rows-via-setting-with-enlargement)
-	- [Removing rows from a DataFrame](#removing-rows-from-a-dataframe)
-		- [Removing rows using Boolean selection](#removing-rows-using-boolean-selection)
-		- [Removing rows using a slice](#removing-rows-using-a-slice)
-	- [Changing scalar values in a DataFrame](#changing-scalar-values-in-a-dataframe)
-- [Arithmetic on a DataFrame](#arithmetic-on-a-dataframe)
-- [Resetting and reindexing](#resetting-and-reindexing)
-- [Hierarchical indexing](#hierarchical-indexing)
-- [Summarized data and descriptive statistics](#summarized-data-and-descriptive-statistics)
+* [Chapter 5: The pandas DataFrame Object](#chapter-5-the-pandas-dataframe-object)
+  * [5.1 Creating DataFrame from scratch](#51-creating-dataframe-from-scratch)
+  * [5.2 Example data](#52-example-data)
+    * [S&P 500](#sp-500)
+    * [Monthly stock historical prices](#monthly-stock-historical-prices)
+  * [5.3 Selecting columns of a DataFrame](#53-selecting-columns-of-a-dataframe)
+  * [5.4 Selecting rows and values of a DataFrame using the index](#54-selecting-rows-and-values-of-a-dataframe-using-the-index)
+    * [Slicing using the [] operator](#slicing-using-the-operator)
+    * [Selecting rows by index label and location: .loc[] and .iloc[]](#selecting-rows-by-index-label-and-location-loc-and-iloc)
+    * [Selecting rows by index label and/or location: .ix[]](#selecting-rows-by-index-label-andor-location-ix)
+    * [Scalar lookup by label or location using .at[] and .iat[]](#scalar-lookup-by-label-or-location-using-at-and-iat)
+  * [5.5 Selecting rows of a DataFrame by Boolean selection](#55-selecting-rows-of-a-dataframe-by-boolean-selection)
+  * [5.6 Modifying the structure and content of DataFrame](#56-modifying-the-structure-and-content-of-dataframe)
+    * [Renaming columns](#renaming-columns)
+    * [Adding and inserting columns](#adding-and-inserting-columns)
+    * [Replacing the contents of a column](#replacing-the-contents-of-a-column)
+    * [Deleting columns in a DataFrame](#deleting-columns-in-a-dataframe)
+    * [Adding rows to a DataFrame](#adding-rows-to-a-dataframe)
+    * [Removing rows from a DataFrame](#removing-rows-from-a-dataframe)
+    * [Changing scalar values in a DataFrame](#changing-scalar-values-in-a-dataframe)
+  * [5.7 Arithmetic on a DataFrame](#57-arithmetic-on-a-dataframe)
+  * [5.8 Resetting and reindexing](#58-resetting-and-reindexing)
+  * [5.9 Hierarchical indexing](#59-hierarchical-indexing)
+  * [5.10 Summarized data and descriptive statistics](#510-summarized-data-and-descriptive-statistics)
+  * [5.11 Summary](#511-summary)
 
 <!-- tocstop -->
 
-
-# Creating a DataFrame from scratch
 
 
 ```python
@@ -46,6 +42,8 @@ pd.set_option('display.notebook_repr_html', False)
 pd.set_option('display.max_columns', 10)
 pd.set_option('display.max_rows', 10)
 ```
+
+## 5.1 Creating DataFrame from scratch
 
 
 ```python
@@ -223,9 +221,9 @@ df
 
 
 
-# Loading sample data for demonstrate DataFrame capabilities
+## 5.2 Example data
 
-## S&P 500
+### S&P 500
 
 
 ```python
@@ -258,7 +256,7 @@ sp500.head()
 
 
                             Sector   Price  Book Value
-    Symbol                                            
+    Symbol
     MMM                Industrials  141.14      26.668
     ABT                Health Care   39.60      15.573
     ABBV               Health Care   53.95       2.954
@@ -277,7 +275,7 @@ sp500.tail()
 
 
                             Sector   Price  Book Value
-    Symbol                                            
+    Symbol
     YHOO    Information Technology   35.02      12.768
     YUM     Consumer Discretionary   74.77       5.147
     ZMH                Health Care  101.84      37.181
@@ -330,8 +328,6 @@ sp500.columns
 
 
 
-## Monthly stock historical prices
-
 
 ```python
 # first three lines of the file
@@ -339,10 +335,15 @@ sp500.columns
 # type data/omh.csv # on windows, but prints the entire file
 ```
 
-    Date,MSFT,AAPL
-    2014-12-01,48.62,115.07
-    2014-12-02,48.46,114.63
+    Date,MSFT,AAPL
 
+    2014-12-01,48.62,115.07
+
+    2014-12-02,48.46,114.63
+
+
+
+### Monthly stock historical prices
 
 
 ```python
@@ -362,7 +363,7 @@ one_mon_hist[:3]
 
 
 
-# Selecting columns of a DataFrame
+## 5.3 Selecting columns of a DataFrame
 
 
 ```python
@@ -374,7 +375,7 @@ sp500[[1, 2]].head()
 
 
              Price  Book Value
-    Symbol                    
+    Symbol
     MMM     141.14      26.668
     ABT      39.60      15.573
     ABBV     53.95       2.954
@@ -393,7 +394,7 @@ sp500[[1]].head()
 
 
              Price
-    Symbol        
+    Symbol
     MMM     141.14
     ABT      39.60
     ABBV     53.95
@@ -436,7 +437,7 @@ df.head()
 
 
                                  0       1       2
-    Symbol                                        
+    Symbol
     MMM                Industrials  141.14  26.668
     ABT                Health Care   39.60  15.573
     ABBV               Health Care   53.95   2.954
@@ -460,7 +461,7 @@ df[1]
     ABBV     53.95
     ACN      79.79
     ACE     102.91
-             ...  
+             ...
     YHOO     35.02
     YUM      74.77
     ZMH     101.84
@@ -513,7 +514,7 @@ sp500['Price']
     ABBV     53.95
     ACN      79.79
     ACE     102.91
-             ...  
+             ...
     YHOO     35.02
     YUM      74.77
     ZMH     101.84
@@ -534,7 +535,7 @@ sp500[['Price', 'Sector']]
 
 
              Price                  Sector
-    Symbol                                
+    Symbol
     MMM     141.14             Industrials
     ABT      39.60             Health Care
     ABBV     53.95             Health Care
@@ -566,7 +567,7 @@ sp500.Price
     ABBV     53.95
     ACN      79.79
     ACE     102.91
-             ...  
+             ...
     YHOO     35.02
     YUM      74.77
     ZMH     101.84
@@ -590,9 +591,9 @@ loc
 
 
 
-# Selecting rows of a DataFrame
+## 5.4 Selecting rows and values of a DataFrame using the index
 
-## Slicing using the [] operator
+### Slicing using the [] operator
 
 
 ```python
@@ -604,7 +605,7 @@ sp500[:5]
 
 
                             Sector   Price  Book Value
-    Symbol                                            
+    Symbol
     MMM                Industrials  141.14      26.668
     ABT                Health Care   39.60      15.573
     ABBV               Health Care   53.95       2.954
@@ -623,14 +624,14 @@ sp500['ABT':'ACN']
 
 
                             Sector  Price  Book Value
-    Symbol                                           
+    Symbol
     ABT                Health Care  39.60      15.573
     ABBV               Health Care  53.95       2.954
     ACN     Information Technology  79.79       8.326
 
 
 
-## Selecting rows by index label and location: .loc[] and .iloc[]
+### Selecting rows by index label and location: .loc[] and .iloc[]
 
 
 ```python
@@ -661,7 +662,7 @@ sp500.loc[['MMM', 'MSFT']]
 
 
                             Sector   Price  Book Value
-    Symbol                                            
+    Symbol
     MMM                Industrials  141.14      26.668
     MSFT    Information Technology   40.12      10.584
 
@@ -677,7 +678,7 @@ sp500.iloc[[0, 2]]
 
 
                  Sector   Price  Book Value
-    Symbol                                 
+    Symbol
     MMM     Industrials  141.14      26.668
     ABBV    Health Care   53.95       2.954
 
@@ -721,13 +722,13 @@ sp500.iloc[[i1, i2]]
 
 
                  Sector   Price  Book Value
-    Symbol                                 
+    Symbol
     MMM     Industrials  141.14      26.668
     A       Health Care   56.18      16.928
 
 
 
-## Selecting rows by index label and/or location: .ix[]
+### Selecting rows by index label and/or location: .ix[]
 
 
 ```python
@@ -739,7 +740,7 @@ sp500.ix[['MSFT', 'ZTS']]
 
 
                             Sector  Price  Book Value
-    Symbol                                           
+    Symbol
     MSFT    Information Technology  40.12      10.584
     ZTS                Health Care  30.53       2.150
 
@@ -755,7 +756,7 @@ sp500.loc[['MSFT', 'ZTS']]
 
 
                             Sector  Price  Book Value
-    Symbol                                           
+    Symbol
     MSFT    Information Technology  40.12      10.584
     ZTS                Health Care  30.53       2.150
 
@@ -771,7 +772,7 @@ sp500.ix[[10, 200, 450]]
 
 
                       Sector  Price  Book Value
-    Symbol                                     
+    Symbol
     A            Health Care  56.18      16.928
     GIS     Consumer Staples  53.81      10.236
     TRV           Financials  92.86      73.056
@@ -788,14 +789,14 @@ sp500.iloc[[10, 200, 450]]
 
 
                       Sector  Price  Book Value
-    Symbol                                     
+    Symbol
     A            Health Care  56.18      16.928
     GIS     Consumer Staples  53.81      10.236
     TRV           Financials  92.86      73.056
 
 
 
-## Scalar lookup by label or location using .at[] and .iat[]
+### Scalar lookup by label or location using .at[] and .iat[]
 
 
 ```python
@@ -823,7 +824,7 @@ sp500.iat[0, 1]
 
 
 
-## Selecting rows by Boolean selection
+## 5.5 Selecting rows of a DataFrame by Boolean selection
 
 
 ```python
@@ -856,7 +857,7 @@ sp500[sp500.Price < 100]
 
 
                             Sector  Price  Book Value
-    Symbol                                           
+    Symbol
     ABT                Health Care  39.60      15.573
     ABBV               Health Care  53.95       2.954
     ACN     Information Technology  79.79       8.326
@@ -885,7 +886,7 @@ r
 
 
             Price
-    Symbol       
+    Symbol
     FTR      5.81
     HCBK     9.80
     HBAN     9.10
@@ -894,9 +895,8 @@ r
 
 
 
-# Modifying the structure and contents of a DataFrame
-
-## Renaming Columns
+## 5.6 Modifying the structure and content of DataFrame
+### Renaming columns
 
 
 ```python
@@ -912,7 +912,7 @@ df[:2]
 
 
                  Sector   Price  BookValue
-    Symbol                                
+    Symbol
     MMM     Industrials  141.14     26.668
     ABT     Health Care   39.60     15.573
 
@@ -934,8 +934,8 @@ sp500.columns
 
 ```python
 # this changes the column in-place
-sp500.rename(columns=                  
-             {'Book Value': 'BookValue'},                   
+sp500.rename(columns=
+             {'Book Value': 'BookValue'},
              inplace=True)
 # we can see the column is changed
 sp500.columns
@@ -967,7 +967,7 @@ sp500.BookValue[:5]
 
 
 
-## Adding and inserting columns
+### Adding and inserting columns
 
 
 ```python
@@ -982,7 +982,7 @@ copy[:2]
 
 
                  Sector   Price  BookValue  TwicePrice
-    Symbol                                            
+    Symbol
     MMM     Industrials  141.14     26.668      282.28
     ABT     Health Care   39.60     15.573       79.20
 
@@ -1001,7 +1001,7 @@ copy[:2]
 
 
                  Sector  TwicePrice   Price  BookValue
-    Symbol                                            
+    Symbol
     MMM     Industrials      282.28  141.14     26.668
     ABT     Health Care       79.20   39.60     15.573
 
@@ -1018,7 +1018,7 @@ rcopy
 
 
              Price
-    Symbol        
+    Symbol
     MMM     141.14
     ABT      39.60
     ABBV     53.95
@@ -1055,14 +1055,14 @@ rcopy
 
 
              Price              Comment
-    Symbol                             
+    Symbol
     MMM     141.14  Is in the DataFrame
     ABT      39.60                  NaN
     ABBV     53.95                  NaN
 
 
 
-## Replacing the contents of a column
+### Replacing the contents of a column
 
 
 ```python
@@ -1077,7 +1077,7 @@ copy[:5]
 
 
                             Sector   Price  BookValue
-    Symbol                                           
+    Symbol
     MMM                Industrials  282.28     26.668
     ABT                Health Care   79.20     15.573
     ABBV               Health Care  107.90      2.954
@@ -1120,7 +1120,7 @@ copy
 
 
                             Sector   Price  BookValue
-    Symbol                                           
+    Symbol
     MMM                Industrials  141.14     26.668
     ABT                Health Care   39.60     15.573
     ABBV               Health Care     NaN      2.954
@@ -1137,7 +1137,7 @@ copy
 
 
 
-## Deleting columns in a DataFrame
+### Deleting columns in a DataFrame
 
 
 ```python
@@ -1151,7 +1151,7 @@ copy
 
 
                  Sector   Price  Book Value
-    Symbol                                 
+    Symbol
     MMM     Industrials  141.14      26.668
     ABT     Health Care   39.60      15.573
 
@@ -1164,83 +1164,6 @@ copy
 del copy['BookValue']
 copy
 ```
-
-
-    ---------------------------------------------------------------------------
-
-    KeyError                                  Traceback (most recent call last)
-
-    C:\Anaconda3\lib\site-packages\pandas\indexes\base.py in get_loc(self, key, method, tolerance)
-       1875             try:
-    -> 1876                 return self._engine.get_loc(key)
-       1877             except KeyError:
-
-
-    pandas\index.pyx in pandas.index.IndexEngine.get_loc (pandas\index.c:4027)()
-
-
-    pandas\index.pyx in pandas.index.IndexEngine.get_loc (pandas\index.c:3891)()
-
-
-    pandas\hashtable.pyx in pandas.hashtable.PyObjectHashTable.get_item (pandas\hashtable.c:12408)()
-
-
-    pandas\hashtable.pyx in pandas.hashtable.PyObjectHashTable.get_item (pandas\hashtable.c:12359)()
-
-
-    KeyError: 'BookValue'
-
-
-    During handling of the above exception, another exception occurred:
-
-
-    KeyError                                  Traceback (most recent call last)
-
-    <ipython-input-39-f9ec171e1ac4> in <module>()
-          1 # delete the BookValue column
-          2 # deletion is in-place
-    ----> 3 del copy['BookValue']
-          4 copy
-
-
-    C:\Anaconda3\lib\site-packages\pandas\core\generic.py in __delitem__(self, key)
-       1599             # there was no match, this call should raise the appropriate
-       1600             # exception:
-    -> 1601             self._data.delete(key)
-       1602
-       1603         # delete from the caches
-
-
-    C:\Anaconda3\lib\site-packages\pandas\core\internals.py in delete(self, item)
-       3282         Delete selected item (items if non-unique) in-place.
-       3283         """
-    -> 3284         indexer = self.items.get_loc(item)
-       3285
-       3286         is_deleted = np.zeros(self.shape[0], dtype=np.bool_)
-
-
-    C:\Anaconda3\lib\site-packages\pandas\indexes\base.py in get_loc(self, key, method, tolerance)
-       1876                 return self._engine.get_loc(key)
-       1877             except KeyError:
-    -> 1878                 return self._engine.get_loc(self._maybe_cast_indexer(key))
-       1879
-       1880         indexer = self.get_indexer([key], method=method, tolerance=tolerance)
-
-
-    pandas\index.pyx in pandas.index.IndexEngine.get_loc (pandas\index.c:4027)()
-
-
-    pandas\index.pyx in pandas.index.IndexEngine.get_loc (pandas\index.c:3891)()
-
-
-    pandas\hashtable.pyx in pandas.hashtable.PyObjectHashTable.get_item (pandas\hashtable.c:12408)()
-
-
-    pandas\hashtable.pyx in pandas.hashtable.PyObjectHashTable.get_item (pandas\hashtable.c:12359)()
-
-
-    KeyError: 'BookValue'
-
 
 
 ```python
@@ -1258,7 +1181,7 @@ copy
 
 
              Price  Book Value
-    Symbol                    
+    Symbol
     MMM     141.14      26.668
     ABT      39.60      15.573
 
@@ -1295,15 +1218,15 @@ afterdrop
 
 
              Price  Book Value
-    Symbol                    
+    Symbol
     MMM     141.14      26.668
     ABT      39.60      15.573
 
 
 
-## Adding rows to a DataFrame
+### Adding rows to a DataFrame
 
-### Appending rows with .append()
+* Appending rows with .append()
 
 
 ```python
@@ -1322,7 +1245,7 @@ appended
 
 
                  Sector   Price  Book Value
-    Symbol                                 
+    Symbol
     MMM     Industrials  141.14      26.668
     ABT     Health Care   39.60      15.573
     ABBV    Health Care   53.95       2.954
@@ -1347,7 +1270,7 @@ df3
 
 
             PER
-    Symbol     
+    Symbol
     MMM     0.0
     ABT     0.0
     ABBV    0.0
@@ -1367,7 +1290,7 @@ df1.append(df3)
 
 
             Book Value  PER   Price       Sector
-    Symbol                                      
+    Symbol
     MMM         26.668  NaN  141.14  Industrials
     ABT         15.573  NaN   39.60  Health Care
     ABBV         2.954  NaN   53.95  Health Care
@@ -1396,7 +1319,7 @@ df1.append(df3, ignore_index=True)
 
 
 
-### Concatenating DataFrame objects with pd.concat()
+* Concatenating DataFrame objects with pd.concat()
 
 
 ```python
@@ -1412,7 +1335,7 @@ pd.concat([df1, df2])
 
 
                  Sector   Price  Book Value
-    Symbol                                 
+    Symbol
     MMM     Industrials  141.14      26.668
     ABT     Health Care   39.60      15.573
     ABBV    Health Care   53.95       2.954
@@ -1436,7 +1359,7 @@ df2_2
 
 
                  Sector  Price  Book Value  Foo
-    Symbol                                     
+    Symbol
     A       Health Care  56.18      16.928    0
     GAS       Utilities  52.98      32.462    0
     ABBV    Health Care  53.95       2.954    0
@@ -1453,7 +1376,7 @@ pd.concat([df1, df2_2])
 
 
             Book Value  Foo   Price       Sector
-    Symbol                                      
+    Symbol
     MMM         26.668  NaN  141.14  Industrials
     ABT         15.573  NaN   39.60  Health Care
     ABBV         2.954  NaN   53.95  Health Care
@@ -1474,7 +1397,7 @@ r
 
 
                 Book Value  Foo   Price       Sector
-        Symbol                                      
+        Symbol
     df1 MMM         26.668  NaN  141.14  Industrials
         ABT         15.573  NaN   39.60  Health Care
         ABBV         2.954  NaN   53.95  Health Care
@@ -1495,7 +1418,7 @@ df3
 
 
                  Sector   Price
-    Symbol                     
+    Symbol
     MMM     Industrials  141.14
     ABT     Health Care   39.60
     ABBV    Health Care   53.95
@@ -1513,7 +1436,7 @@ df4
 
 
             Book Value
-    Symbol            
+    Symbol
     MMM         26.668
     ABT         15.573
     ABBV         2.954
@@ -1530,7 +1453,7 @@ pd.concat([df3, df4], axis=1)
 
 
                  Sector   Price  Book Value
-    Symbol                                 
+    Symbol
     MMM     Industrials  141.14      26.668
     ABT     Health Care   39.60      15.573
     ABBV    Health Care   53.95       2.954
@@ -1550,7 +1473,7 @@ df4_2
 
 
             Book Value  Sector
-    Symbol                    
+    Symbol
     MMM         26.668       1
     ABT         15.573       1
     ABBV         2.954       1
@@ -1567,7 +1490,7 @@ pd.concat([df3, df4_2], axis=1)
 
 
                  Sector   Price  Book Value  Sector
-    Symbol                                         
+    Symbol
     MMM     Industrials  141.14      26.668       1
     ABT     Health Care   39.60      15.573       1
     ABBV    Health Care   53.95       2.954       1
@@ -1585,7 +1508,7 @@ df5
 
 
                  Sector   Price
-    Symbol                     
+    Symbol
     MMM     Industrials  141.14
     ABT     Health Care   39.60
     ABBV    Health Care   53.95
@@ -1603,7 +1526,7 @@ df6
 
 
                             Sector   Price
-    Symbol                                
+    Symbol
     ABBV               Health Care   53.95
     ACN     Information Technology   79.79
     ACE                 Financials  102.91
@@ -1620,12 +1543,12 @@ pd.concat([df5, df6], join='inner', axis=1)
 
 
                  Sector  Price       Sector  Price
-    Symbol                                        
+    Symbol
     ABBV    Health Care  53.95  Health Care  53.95
 
 
 
-### Adding rows via setting with enlargement
+* Adding rows (and columns) via setting with enlargement
 
 
 ```python
@@ -1642,7 +1565,7 @@ ss
 
 
                  Sector   Price  Book Value
-    Symbol                                 
+    Symbol
     MMM     Industrials  141.14      26.668
     ABT     Health Care   39.60      15.573
     ABBV    Health Care   53.95       2.954
@@ -1664,14 +1587,16 @@ ss
 
 
                  Sector   Price  Book Value  PER
-    Symbol                                      
+    Symbol
     MMM     Industrials  141.14      26.668    0
     ABT     Health Care   39.60      15.573    0
     ABBV    Health Care   53.95       2.954    0
 
 
 
-## Removing rows from a DataFrame
+### Removing rows from a DataFrame
+
+* Removing rows using .drop()
 
 
 ```python
@@ -1684,7 +1609,7 @@ ss
 
 
                             Sector   Price  Book Value
-    Symbol                                            
+    Symbol
     MMM                Industrials  141.14      26.668
     ABT                Health Care   39.60      15.573
     ABBV               Health Care   53.95       2.954
@@ -1704,7 +1629,7 @@ afterdrop
 
 
                  Sector   Price  Book Value
-    Symbol                                 
+    Symbol
     MMM     Industrials  141.14      26.668
     ABBV    Health Care   53.95       2.954
     ACE      Financials  102.91      86.897
@@ -1721,7 +1646,7 @@ ss
 
 
                             Sector   Price  Book Value
-    Symbol                                            
+    Symbol
     MMM                Industrials  141.14      26.668
     ABT                Health Care   39.60      15.573
     ABBV               Health Care   53.95       2.954
@@ -1730,7 +1655,7 @@ ss
 
 
 
-### Removing rows using Boolean selection
+* Removing rows using Boolean selection
 
 
 ```python
@@ -1759,7 +1684,7 @@ withPriceLessThan300
 
 
                             Sector   Price  Book Value
-    Symbol                                            
+    Symbol
     MMM                Industrials  141.14      26.668
     ABT                Health Care   39.60      15.573
     ABBV               Health Care   53.95       2.954
@@ -1776,7 +1701,7 @@ withPriceLessThan300
 
 
 
-### Removing rows using a slice
+* Removing rows using a slice
 
 
 ```python
@@ -1789,7 +1714,7 @@ onlyFirstThree
 
 
                  Sector   Price  Book Value
-    Symbol                                 
+    Symbol
     MMM     Industrials  141.14      26.668
     ABT     Health Care   39.60      15.573
     ABBV    Health Care   53.95       2.954
@@ -1807,14 +1732,14 @@ onlyFirstThree
 
 
                  Sector   Price  Book Value
-    Symbol                                 
+    Symbol
     MMM     Industrials  141.14      26.668
     ABT     Health Care   39.60      15.573
     ABBV    Health Care   53.95       2.954
 
 
 
-## Changing scalar values in a DataFrame
+### Changing scalar values in a DataFrame
 
 
 ```python
@@ -1827,7 +1752,7 @@ subset
 
 
                  Sector   Price  Book Value
-    Symbol                                 
+    Symbol
     MMM     Industrials  141.14      26.668
     ABT     Health Care   39.60      15.573
     ABBV    Health Care   53.95       2.954
@@ -1845,7 +1770,7 @@ subset
 
 
                  Sector  Price  Book Value
-    Symbol                                
+    Symbol
     MMM     Industrials   0.00      26.668
     ABT     Health Care  39.60      15.573
     ABBV    Health Care  53.95       2.954
@@ -1864,7 +1789,7 @@ subset
 
 
                  Sector  Price  Book Value
-    Symbol                                
+    Symbol
     MMM     Industrials   10.0      26.668
     ABT     Health Care   39.6      15.573
     ABBV    Health Care   20.0       2.954
@@ -1888,14 +1813,14 @@ subset
 
 
                  Sector    Price  Book Value
-    Symbol                                  
+    Symbol
     MMM     Industrials   141.14      26.668
     ABT     Health Care  1000.00      15.573
     ABBV    Health Care    53.95       2.954
 
 
 
-# Arithmetic on a DataFrame
+## 5.7 Arithmetic on a DataFrame
 
 
 ```python
@@ -2054,7 +1979,7 @@ df.sub(a_col, axis=0)
 
 
 
-# Resetting and reindexing
+## 5.8 Resetting and reindexing
 
 
 ```python
@@ -2093,7 +2018,7 @@ reset_sp500.set_index('Symbol')
 
 
                             Sector   Price  Book Value
-    Symbol                                            
+    Symbol
     MMM                Industrials  141.14      26.668
     ABT                Health Care   39.60      15.573
     ABBV               Health Care   53.95       2.954
@@ -2121,7 +2046,7 @@ subset
 
 
                             Sector   Price  Book Value
-    Symbol                                            
+    Symbol
     MMM                Industrials  141.14      26.668
     ABT                Health Care   39.60      15.573
     ABBV               Health Care   53.95       2.954
@@ -2141,7 +2066,7 @@ reindexed
 
 
                  Sector   Price  Book Value
-    Symbol                                 
+    Symbol
     MMM     Industrials  141.14      26.668
     ABBV    Health Care   53.95       2.954
     FOO             NaN     NaN         NaN
@@ -2160,7 +2085,7 @@ subset.reindex(columns=['Price',
 
 
              Price  Book Value  NewCol
-    Symbol                            
+    Symbol
     MMM     141.14      26.668     NaN
     ABT      39.60      15.573     NaN
     ABBV     53.95       2.954     NaN
@@ -2168,7 +2093,7 @@ subset.reindex(columns=['Price',
 
 
 
-# Hierarchical indexing
+## 5.9 Hierarchical indexing
 
 
 ```python
@@ -2183,7 +2108,7 @@ multi_fi
 
 
                                     Price  Book Value
-    Sector                 Symbol                    
+    Sector                 Symbol
     Industrials            MMM     141.14      26.668
     Health Care            ABT      39.60      15.573
                            ABBV     53.95       2.954
@@ -2302,7 +2227,7 @@ multi_fi.xs('Industrials')
 
 
              Price  Book Value
-    Symbol                    
+    Symbol
     MMM     141.14      26.668
     ALLE     52.46       0.000
     APH      95.71      18.315
@@ -2330,7 +2255,7 @@ multi_fi.xs('ALLE', level=1)
 
 
                  Price  Book Value
-    Sector                        
+    Sector
     Industrials  52.46         0.0
 
 
@@ -2345,7 +2270,7 @@ multi_fi.xs('Industrials', drop_level=False)
 
 
                          Price  Book Value
-    Sector      Symbol                    
+    Sector      Symbol
     Industrials MMM     141.14      26.668
                 ALLE     52.46       0.000
                 APH      95.71      18.315
@@ -2392,7 +2317,7 @@ multi_fi.xs(('Industrials', 'UPS'))
 
 
 
-# Summarized data and descriptive statistics
+## 5.10 Summarized data and descriptive statistics
 
 
 ```python
@@ -2423,7 +2348,7 @@ one_mon_hist.mean(axis=1)
     2     82.005
     3     82.165
     4     81.710
-           ...  
+           ...
     17    80.075
     18    80.935
     19    80.680
@@ -2668,6 +2593,8 @@ s.value_counts()
     dtype: int64
 
 
+
+## 5.11 Summary
 
 
 ```python

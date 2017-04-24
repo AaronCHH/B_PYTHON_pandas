@@ -1,7 +1,8 @@
 ## Learning Pandas
+
 <img src="cover.jpg" alt="" height="300">
 
-* Publisher https://www.packtpub.com/application-development/learning-pandas
+* [Publisher](https://www.packtpub.com/application-development/learning-pandas)  
 
 ## Toc
 [Chapter 1: A Tour of pandas](01_A_Tour_of_pandas.md)  

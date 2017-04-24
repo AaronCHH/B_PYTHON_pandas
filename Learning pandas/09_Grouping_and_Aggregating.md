@@ -1,27 +1,29 @@
 
+# Chapter 9: Grouping and Aggregating Data
 <!-- toc orderedList:0 depthFrom:1 depthTo:6 -->
 
-- [Setting up the notebook](#setting-up-the-notebook)
-- [Splitting a pandas object](#splitting-a-pandas-object)
-	- [Data for the examples](#data-for-the-examples)
-	- [Grouping by a column values](#grouping-by-a-column-values)
-	- [Accessing the results of a grouping](#accessing-the-results-of-a-grouping)
-	- [Grouping using index levels](#grouping-using-index-levels)
-- [Apply (aggregation)](#apply-aggregation)
-	- [Applying aggregation functions to groups](#applying-aggregation-functions-to-groups)
-	- [Transformation of group data](#transformation-of-group-data)
-		- [Overview of transformations](#overview-of-transformations)
-		- [Practical examples of transformation](#practical-examples-of-transformation)
-	- [Filtering groups](#filtering-groups)
-- [Discretization](#discretization)
+* [Chapter 9: Grouping and Aggregating Data](#chapter-9-grouping-and-aggregating-data)
+  * [9.1 Setting up the IPython notebook](#91-setting-up-the-ipython-notebook)
+  * [9.2 The split, apply, and combine (SAC) pattern](#92-the-split-apply-and-combine-sac-pattern)
+  * [9.3 Split](#93-split)
+    * [Data for the examples](#data-for-the-examples)
+    * [Grouping by a single column's values](#grouping-by-a-single-columns-values)
+    * [Accessing the results of grouping](#accessing-the-results-of-grouping)
+    * [Grouping using index levels](#grouping-using-index-levels)
+  * [9.4 Apply](#94-apply)
+    * [Applying aggregation functions to groups](#applying-aggregation-functions-to-groups)
+    * [The transformation of group data](#the-transformation-of-group-data)
+    * [Filtering groups](#filtering-groups)
+  * [9.5 Discretization and Binning](#95-discretization-and-binning)
+  * [9.6 Summary](#96-summary)
 
 <!-- tocstop -->
 
 
-# Setting up the notebook
-{python}
+## 9.1 Setting up the IPython notebook
 
-```
+
+```python
 # import pandas and numpy
 import numpy as np
 import pandas as pd
@@ -36,12 +38,14 @@ import matplotlib.pyplot as plt
 %matplotlib inline
 ```
 
-# Splitting a pandas object
+## 9.2 The split, apply, and combine (SAC) pattern
 
-## Data for the examples
+## 9.3 Split
+
+### Data for the examples
 
 
-```{python}
+```python
 # load the sensors data
 sensors = pd.read_csv("data/sensors.csv")
 sensors
@@ -67,10 +71,10 @@ sensors
 
 
 
-## Grouping by a column values
+### Grouping by a single column's values
 
 
-```{python}
+```python
 # group this data by the sensor column / variable
 # returns a DataFrameGroupBy object
 grouped = sensors.groupby('sensor')
@@ -85,7 +89,7 @@ grouped
 
 
 
-```{python}
+```python
 # get the number of groups that this will create
 grouped.ngroups
 ```
@@ -98,7 +102,7 @@ grouped.ngroups
 
 
 
-```{python}
+```python
 # what are the groups that were found?
 grouped.groups
 ```
@@ -111,10 +115,10 @@ grouped.groups
 
 
 
-## Accessing the results of a grouping
+### Accessing the results of grouping
 
 
-```{python}
+```python
 # a helper function to print the contents of the groups
 def print_groups (groupobject):
     # loop over all groups, printing the group name
@@ -125,7 +129,7 @@ def print_groups (groupobject):
 ```
 
 
-```{python}
+```python
 # examine the content of the groups we created
 print_groups(grouped)
 ```
@@ -163,7 +167,7 @@ print_groups(grouped)
 
 
 
-```{python}
+```python
 # get how many items are in each group
 grouped.size()
 ```
@@ -179,7 +183,7 @@ grouped.size()
 
 
 
-```{python}
+```python
 # get the count of items in each column of each group
 grouped.count()
 ```
@@ -188,14 +192,14 @@ grouped.count()
 
 
                  interval  axis  reading
-    sensor                              
+    sensor
     accel              12    12       12
     orientation        12    12       12
 
 
 
 
-```{python}
+```python
 # get the data in one specific group
 grouped.get_group('accel')
 ```
@@ -221,7 +225,7 @@ grouped.get_group('accel')
 
 
 
-```{python}
+```python
 # get the first three items in each group
 grouped.head(3)
 ```
@@ -240,7 +244,7 @@ grouped.head(3)
 
 
 
-```{python}
+```python
 # get the first item in each group
 grouped.nth(0)
 ```
@@ -249,14 +253,14 @@ grouped.nth(0)
 
 
                  interval       sensor axis  reading
-    sensor                                          
+    sensor
     accel               0        accel    Z        0
     orientation         0  orientation    Z        0
 
 
 
 
-```{python}
+```python
 # get the 2nd item in each group
 grouped.nth(1)
 ```
@@ -265,14 +269,14 @@ grouped.nth(1)
 
 
                  interval       sensor axis  reading
-    sensor                                          
+    sensor
     accel               0        accel    Y      0.5
     orientation         0  orientation    Y      0.1
 
 
 
 
-```{python}
+```python
 # and so on...
 grouped.nth(2)
 ```
@@ -281,14 +285,14 @@ grouped.nth(2)
 
 
                  interval       sensor axis  reading
-    sensor                                          
+    sensor
     accel               0        accel    X        1
     orientation         0  orientation    X        0
 
 
 
 
-```{python}
+```python
 # group by both sensor and axis values
 mcg = sensors.groupby(['sensor', 'axis'])
 print_groups(mcg)
@@ -333,7 +337,7 @@ print_groups(mcg)
 
 
 
-```{python}
+```python
 # get descriptive statistics for each
 mcg.describe()
 ```
@@ -342,7 +346,7 @@ mcg.describe()
 
 
                             interval   reading
-    sensor      axis                          
+    sensor      axis
     accel       X    count  4.000000  4.000000
                      mean   1.500000  0.850000
                      std    1.290994  0.129099
@@ -359,10 +363,10 @@ mcg.describe()
 
 
 
-## Grouping using index levels
+### Grouping using index levels
 
 
-```{python}
+```python
 # make a copy of the data and reindex the copy
 mi = sensors.copy()
 mi = mi.set_index(['sensor', 'axis'])
@@ -373,7 +377,7 @@ mi
 
 
                       interval  reading
-    sensor      axis                   
+    sensor      axis
     accel       Z            0      0.0
                 Y            0      0.5
                 X            0      1.0
@@ -391,7 +395,7 @@ mi
 
 
 
-```{python}
+```python
 # group by the first level of the index
 mig_l1 = mi.groupby(level=0)
 print_groups(mig_l1)
@@ -399,7 +403,7 @@ print_groups(mig_l1)
 
     accel
                  interval  reading
-    sensor axis                   
+    sensor axis
     accel  Z            0      0.0
            Y            0      0.5
            X            0      1.0
@@ -415,7 +419,7 @@ print_groups(mig_l1)
     [12 rows x 2 columns]
     orientation
                       interval  reading
-    sensor      axis                   
+    sensor      axis
     orientation Z            0      0.0
                 Y            0      0.1
                 X            0      0.0
@@ -432,7 +436,7 @@ print_groups(mig_l1)
 
 
 
-```{python}
+```python
 # group by multiple levels of the index
 mig_l12 = mi.groupby(level=['sensor', 'axis'])
 print_groups(mig_l12)
@@ -440,54 +444,54 @@ print_groups(mig_l12)
 
     ('accel', 'X')
                  interval  reading
-    sensor axis                   
+    sensor axis
     accel  X            0      1.0
            X            1      0.9
            X            2      0.8
            X            3      0.7
     ('accel', 'Y')
                  interval  reading
-    sensor axis                   
+    sensor axis
     accel  Y            0      0.5
            Y            1      0.4
            Y            2      0.3
            Y            3      0.2
     ('accel', 'Z')
                  interval  reading
-    sensor axis                   
+    sensor axis
     accel  Z            0      0.0
            Z            1      0.1
            Z            2      0.2
            Z            3      0.3
     ('orientation', 'X')
                       interval  reading
-    sensor      axis                   
+    sensor      axis
     orientation X            0      0.0
                 X            1      0.1
                 X            2      0.2
                 X            3      0.3
     ('orientation', 'Y')
                       interval  reading
-    sensor      axis                   
+    sensor      axis
     orientation Y            0      0.1
                 Y            1      0.2
                 Y            2      0.3
                 Y            3      0.4
     ('orientation', 'Z')
                       interval  reading
-    sensor      axis                   
+    sensor      axis
     orientation Z            0        0
                 Z            1        0
                 Z            2        0
                 Z            3        0
 
 
-# Apply (aggregation)
+## 9.4 Apply
 
-## Applying aggregation functions to groups
+### Applying aggregation functions to groups
 
 
-```{python}
+```python
 # calculate the mean for each sensor/axis
 mig_l12.agg(np.mean)
 ```
@@ -496,7 +500,7 @@ mig_l12.agg(np.mean)
 
 
                       interval  reading
-    sensor      axis                   
+    sensor      axis
     accel       X          1.5     0.85
                 Y          1.5     0.35
                 Z          1.5     0.15
@@ -507,7 +511,7 @@ mig_l12.agg(np.mean)
 
 
 
-```{python}
+```python
 # do not create an index matching the original object
 sensors.groupby(['sensor', 'axis'],
                 as_index=False).agg(np.mean)
@@ -527,7 +531,7 @@ sensors.groupby(['sensor', 'axis'],
 
 
 
-```{python}
+```python
 # can simply apply the agg function to the group by object
 mig_l12.mean()
 ```
@@ -536,7 +540,7 @@ mig_l12.mean()
 
 
                       interval  reading
-    sensor      axis                   
+    sensor      axis
     accel       X          1.5     0.85
                 Y          1.5     0.35
                 Z          1.5     0.15
@@ -547,7 +551,7 @@ mig_l12.mean()
 
 
 
-```{python}
+```python
 # apply multiple aggregation functions at once
 mig_l12.agg([np.sum, np.std])
 ```
@@ -555,9 +559,9 @@ mig_l12.agg([np.sum, np.std])
 
 
 
-                     interval           reading          
+                     interval           reading
                           sum       std     sum       std
-    sensor      axis                                     
+    sensor      axis
     accel       X           6  1.290994     3.4  0.129099
                 Y           6  1.290994     1.4  0.129099
                 Z           6  1.290994     0.6  0.129099
@@ -568,7 +572,7 @@ mig_l12.agg([np.sum, np.std])
 
 
 
-```{python}
+```python
 # apply a different function to each column
 mig_l12.agg({'interval' : len,
              'reading': np.mean})
@@ -578,7 +582,7 @@ mig_l12.agg({'interval' : len,
 
 
                       interval  reading
-    sensor      axis                   
+    sensor      axis
     accel       X            4     0.85
                 Y            4     0.35
                 Z            4     0.15
@@ -589,7 +593,7 @@ mig_l12.agg({'interval' : len,
 
 
 
-```{python}
+```python
 # calculate the mean of the reading column
 mig_l12['reading'].mean()
 ```
@@ -608,12 +612,11 @@ mig_l12['reading'].mean()
 
 
 
-## Transformation of group data
+### The transformation of group data
+* An overview of transformation
 
-### Overview of transformations
 
-
-```{python}
+```python
 # a DataFrame to use for examples
 df = pd.DataFrame({ 'Label': ['A', 'C', 'B', 'A', 'C'],
                     'Values': [0, 1, 2, 3, 4],
@@ -636,7 +639,7 @@ df
 
 
 
-```{python}
+```python
 # group by label
 grouped = df.groupby('Label')
 print_groups(grouped)
@@ -656,7 +659,7 @@ print_groups(grouped)
 
 
 
-```{python}
+```python
 # add ten to all values in all columns
 grouped.transform(lambda x: x + 10)
 ```
@@ -674,7 +677,7 @@ grouped.transform(lambda x: x + 10)
 
 
 
-```{python}
+```python
 # a function to print the input before we are adding 10 to it
 def xplus10(x):
     print (x)
@@ -682,7 +685,7 @@ def xplus10(x):
 ```
 
 
-```{python}
+```python
 # transform using xplus10
 grouped.transform(xplus10)
 ```
@@ -727,7 +730,7 @@ grouped.transform(xplus10)
 
 
 
-```{python}
+```python
 # sum returns existing as it is applied to each individual item
 grouped.transform(lambda x: x.sum())
 ```
@@ -744,10 +747,10 @@ grouped.transform(lambda x: x.sum())
 
 
 
-### Practical examples of transformation
+* Practical examples of transformation
 
 
-```{python}
+```python
 # data to demonstrate replacement on NaN
 df = pd.DataFrame({ 'Label': list("ABABAB"),
                     'Values': [10, 20, 11, np.nan, 12, 22]},
@@ -769,7 +772,7 @@ df
 
 
 
-```{python}
+```python
 # show the groups in the data based upon Label
 grouped = df.groupby('Label')
 print_groups(grouped)
@@ -788,7 +791,7 @@ print_groups(grouped)
 
 
 
-```{python}
+```python
 # calculate the mean of the two groups
 grouped.mean()
 ```
@@ -797,14 +800,14 @@ grouped.mean()
 
 
            Values
-    Label        
+    Label
     A          11
     B          21
 
 
 
 
-```{python}
+```python
 # use transform to fill the NaNs with the mean of the group
 filled_NaNs = grouped.transform(lambda x: x.fillna(x.mean()))
 filled_NaNs
@@ -824,7 +827,7 @@ filled_NaNs
 
 
 
-```{python}
+```python
 # overwrite old values with the new ones
 df.Values = filled_NaNs
 df
@@ -844,7 +847,7 @@ df
 
 
 
-```{python}
+```python
 # generate a rolling mean time series
 np.random.seed(123456)
 data = pd.Series(np.random.normal(0.5, 2, 365*3),
@@ -868,17 +871,17 @@ rolling
 
 
 
-```{python}
+```python
 # visualize the series
 rolling.plot();
 ```
 
 
-![png](09_Grouping_and_Aggregating_files/09_Grouping_and_Aggregating_48_0.png)
+![png](09_Grouping_and_Aggregating_files/09_Grouping_and_Aggregating_50_0.png)
 
 
 
-```{python}
+```python
 # calculate mean and std by year
 groupkey = lambda x: x.year
 groups = rolling.groupby(groupkey)
@@ -896,7 +899,7 @@ groups.agg([np.mean, np.std])
 
 
 
-```{python}
+```python
 # normalize to the z-score
 zscore = lambda x: (x - x.mean()) / x.std()
 normed = rolling.groupby(groupkey).transform(zscore)
@@ -914,7 +917,7 @@ normed.groupby(groupkey).agg([np.mean, np.std])
 
 
 
-```{python}
+```python
 # plot original vs normalize
 compared = pd.DataFrame({ 'Original': rolling,
                           'Normed': normed })
@@ -922,11 +925,11 @@ compared.plot();
 ```
 
 
-![png](09_Grouping_and_Aggregating_files/09_Grouping_and_Aggregating_51_0.png)
+![png](09_Grouping_and_Aggregating_files/09_Grouping_and_Aggregating_53_0.png)
 
 
 
-```{python}
+```python
 # check the distribution % within one std
 # should be roughly 64.2%
 normed_in1std = normed[np.abs(normed) <= 1.0].count()
@@ -940,10 +943,10 @@ float(normed_in1std) / len(normed)
 
 
 
-## Filtering groups
+### Filtering groups
 
 
-```{python}
+```python
 # data for our examples
 df = pd.DataFrame({'Label': list('AABCCC'),
                    'Values': [1, 2, 3, 4, np.nan, 8]})
@@ -964,7 +967,7 @@ df
 
 
 
-```{python}
+```python
 # drop groups with one or fewer non-NaN values
 f = lambda x: x.Values.count() > 1
 df.groupby('Label').filter(f)
@@ -983,7 +986,7 @@ df.groupby('Label').filter(f)
 
 
 
-```{python}
+```python
 # drop any groups with NaN values
 f = lambda x: x.Values.isnull().sum() == 0
 df.groupby('Label').filter(f)
@@ -1000,7 +1003,7 @@ df.groupby('Label').filter(f)
 
 
 
-```{python}
+```python
 # select groups with a mean of 2.0 or greater
 grouped = df.groupby('Label')
 mean = grouped.mean().mean()
@@ -1019,7 +1022,7 @@ df.groupby('Label').filter(f)
 
 
 
-```{python}
+```python
 # replace values in a group where the # of items is <= 1
 f = lambda x: x.Values.count() > 1
 df.groupby('Label').filter(f, dropna=False)
@@ -1038,10 +1041,10 @@ df.groupby('Label').filter(f, dropna=False)
 
 
 
-# Discretization
+## 9.5 Discretization and Binning
 
 
-```{python}
+```python
 # generate 10000 normal random #'s
 np.random.seed(123456)
 dist = np.random.normal(size = 10000)
@@ -1058,7 +1061,7 @@ dist = np.random.normal(size = 10000)
 
 
 
-```{python}
+```python
 # and the actual data
 dist
 ```
@@ -1072,7 +1075,7 @@ dist
 
 
 
-```{python}
+```python
 # split the data into 5 bins
 bins = pd.cut(dist, 5)
 bins
@@ -1088,7 +1091,7 @@ bins
 
 
 
-```{python}
+```python
 # show the categories in the bins
 bins.categories
 ```
@@ -1101,7 +1104,7 @@ bins.categories
 
 
 
-```{python}
+```python
 # demonstrate the math to calculate the bins
 min = dist.min()
 max = dist.max()
@@ -1122,7 +1125,7 @@ intervals
 
 
 
-```{python}
+```python
 # codes tells us which bin each item is in
 bins.codes
 ```
@@ -1135,7 +1138,7 @@ bins.codes
 
 
 
-```{python}
+```python
 # move the closed side of the interval to the left
 pd.cut(dist, 5, right=False).categories
 ```
@@ -1148,7 +1151,7 @@ pd.cut(dist, 5, right=False).categories
 
 
 
-```{python}
+```python
 # generate 50 ages between 6 and 45
 np.random.seed(123456)
 ages = np.random.randint(6, 45, 50)
@@ -1165,7 +1168,7 @@ ages
 
 
 
-```{python}
+```python
 # cut into ranges and then get descriptive stats
 ranges = [6, 12, 18, 35, 50]
 agebins = pd.cut(ages, ranges)
@@ -1176,7 +1179,7 @@ agebins.describe()
 
 
                 counts  freqs
-    categories               
+    categories
     (6, 12]          8   0.16
     (12, 18]         9   0.18
     (18, 35]        21   0.42
@@ -1185,7 +1188,7 @@ agebins.describe()
 
 
 
-```{python}
+```python
 # add names for the bins
 ranges = [6, 12, 18, 35, 50]
 labels = ['Youth', 'Young Adult', 'Adult', 'Middle Aged']
@@ -1197,7 +1200,7 @@ agebins.describe()
 
 
                  counts  freqs
-    categories                
+    categories
     Youth             8   0.16
     Young Adult       9   0.18
     Adult            21   0.42
@@ -1206,7 +1209,7 @@ agebins.describe()
 
 
 
-```{python}
+```python
 # cut into quantiles
 # 5 bins with an equal quantity of items
 qbin = pd.qcut(dist, 5)
@@ -1218,7 +1221,7 @@ qbin.describe()
 
 
                       counts  freqs
-    categories                     
+    categories
     [-3.521, -0.861]    2000    0.2
     (-0.861, -0.241]    2000    0.2
     (-0.241, 0.261]     2000    0.2
@@ -1228,7 +1231,7 @@ qbin.describe()
 
 
 
-```{python}
+```python
 # make the quantiles at the +/- 3, 2 and 1 std deviations
 quantiles = [0,0.001,
              0.021,
@@ -1247,7 +1250,7 @@ qbin.describe()
 
 
                          counts  freqs
-    categories                        
+    categories
     [-3.521, -3.131]         10  0.001
     (-3.131, -2.0562]       200  0.020
     (-2.0562, -1.0332]     1380  0.138
@@ -1256,3 +1259,12 @@ qbin.describe()
     (1.0114, 2.0428]       1380  0.138
     (2.0428, 3.0619]        200  0.020
     (3.0619, 3.698]          10  0.001
+
+
+
+## 9.6 Summary
+
+
+```python
+
+```

@@ -1,43 +1,49 @@
 
+# Chapter 4: The pandas Series Object
 <!-- toc orderedList:0 depthFrom:1 depthTo:6 -->
 
-- [Importing pandas](#importing-pandas)
-- [Creating a Series and accessing elements](#creating-a-series-and-accessing-elements)
-- [Size, shapes, uniqueness and counts of values](#size-shapes-uniqueness-and-counts-of-values)
-- [Peeking at data with heads, tails and take](#peeking-at-data-with-heads-tails-and-take)
-- [Looking up values in a Series](#looking-up-values-in-a-series)
-- [Alignment via index labels](#alignment-via-index-labels)
-- [Arithmetic operations](#arithmetic-operations)
-- [The special case of Not-A-Number (NaN)](#the-special-case-of-not-a-number-nan)
-- [Boolean selection](#boolean-selection)
-- [Reindexing a Series](#reindexing-a-series)
-- [Modifying a Series in-place](#modifying-a-series-in-place)
-- [Slicing a Series](#slicing-a-series)
+* [Chapter 4: The pandas Series Object](#chapter-4-the-pandas-series-object)
+  * [4.1 The Series object](#41-the-series-object)
+  * [4.2 Importing pandas](#42-importing-pandas)
+  * [4.3 Creating Series](#43-creating-series)
+  * [4.4 Size, shape, uniqueness, and counts of values](#44-size-shape-uniqueness-and-counts-of-values)
+  * [4.5 Peeking at data with heads, tails, and take](#45-peeking-at-data-with-heads-tails-and-take)
+  * [4.6 Looking up values in Series](#46-looking-up-values-in-series)
+    * [Alignment via index labels](#alignment-via-index-labels)
+  * [4.7 Arithmetic operations](#47-arithmetic-operations)
+  * [4.8 The special case of Not-A-Number (NaN)](#48-the-special-case-of-not-a-number-nan)
+  * [4.9 Boolean selection](#49-boolean-selection)
+  * [4.10 Reindexing a Series](#410-reindexing-a-series)
+    * [Modifying a Series in-place](#modifying-a-series-in-place)
+  * [4.11 Slicing a Series](#411-slicing-a-series)
+  * [4.12 Summary](#412-summary)
 
 <!-- tocstop -->
 
 
-# Importing pandas
 
-
-```{python}
+```python
 # bring in NumPy and pandas
 import numpy as np
 import pandas as pd
 ```
 
 
-```{python}
+```python
 # Set some pandas options for controlling output display
 pd.set_option('display.notebook_repr_html', False)
 pd.set_option('display.max_columns', 10)
 pd.set_option('display.max_rows', 10)
 ```
 
-# Creating a Series and accessing elements
+## 4.1 The Series object
+
+## 4.2 Importing pandas
+
+## 4.3 Creating Series
 
 
-```{python}
+```python
 # create one item Series
 s1 = pd.Series(2)
 s1
@@ -52,7 +58,7 @@ s1
 
 
 
-```{python}
+```python
 # get value with label 0
 s1[0]
 ```
@@ -65,7 +71,7 @@ s1[0]
 
 
 
-```{python}
+```python
 # create a series of multiple items from a list
 s2 = pd.Series([1, 2, 3, 4, 5])
 s2
@@ -84,7 +90,7 @@ s2
 
 
 
-```{python}
+```python
 # get the values in the Series
 s2.values
 ```
@@ -92,12 +98,12 @@ s2.values
 
 
 
-    array([1, 2, 3, 4, 5])
+    array([1, 2, 3, 4, 5], dtype=int64)
 
 
 
 
-```{python}
+```python
 # get the index of the Series
 s2.index
 ```
@@ -110,7 +116,7 @@ s2.index
 
 
 
-```{python}
+```python
 # explicitly create an index
 # index is alpha, not integer
 s3 = pd.Series([1, 2, 3], index=['a', 'b', 'c'])
@@ -128,19 +134,19 @@ s3
 
 
 
-```{python}
+```python
 s3.index
 ```
 
 
 
 
-    Index([u'a', u'b', u'c'], dtype='object')
+    Index(['a', 'b', 'c'], dtype='object')
 
 
 
 
-```{python}
+```python
 # lookup by label value, not integer position
 s3['c']
 ```
@@ -153,7 +159,7 @@ s3['c']
 
 
 
-```{python}
+```python
 # create Series from an existing index
 # scalar value with be copied at each index label
 s4 = pd.Series(2, index=s2.index)
@@ -173,7 +179,7 @@ s4
 
 
 
-```{python}
+```python
 # generate a Series from 5 normal random numbers
 np.random.seed(123456)
 pd.Series(np.random.randn(5))
@@ -192,7 +198,7 @@ pd.Series(np.random.randn(5))
 
 
 
-```{python}
+```python
 # 0 through 9
 pd.Series(np.linspace(0, 9, 10))
 ```
@@ -215,7 +221,7 @@ pd.Series(np.linspace(0, 9, 10))
 
 
 
-```{python}
+```python
 # 0 through 8
 pd.Series(np.arange(0, 9))
 ```
@@ -232,12 +238,12 @@ pd.Series(np.arange(0, 9))
     6    6
     7    7
     8    8
-    dtype: int64
+    dtype: int32
 
 
 
 
-```{python}
+```python
 # create Series from dict
 s6 = pd.Series({'a': 1, 'b': 2, 'c': 3, 'd': 4})
 s6
@@ -254,10 +260,10 @@ s6
 
 
 
-# Size, shapes, uniqueness and counts of values
+## 4.4 Size, shape, uniqueness, and counts of values
 
 
-```{python}
+```python
 # example series, which also contains a NaN
 s = pd.Series([0, 1, 1, 2, 3, 4, 5, 6, 7, np.nan])
 s
@@ -281,7 +287,7 @@ s
 
 
 
-```{python}
+```python
 # length of the Series
 len(s)
 ```
@@ -294,7 +300,7 @@ len(s)
 
 
 
-```{python}
+```python
 # .size is also the # of items in the Series
 s.size
 ```
@@ -307,7 +313,7 @@ s.size
 
 
 
-```{python}
+```python
 # .shape is a tuple with one value
 s.shape
 ```
@@ -320,7 +326,7 @@ s.shape
 
 
 
-```{python}
+```python
 # count() returns the number of non-NaN values
 s.count()
 ```
@@ -333,7 +339,7 @@ s.count()
 
 
 
-```{python}
+```python
 # all unique values
 s.unique()
 ```
@@ -346,7 +352,7 @@ s.unique()
 
 
 
-```{python}
+```python
 # count of non-NaN values, returned max to min order
 s.value_counts()
 ```
@@ -366,10 +372,10 @@ s.value_counts()
 
 
 
-# Peeking at data with heads, tails and take
+## 4.5 Peeking at data with heads, tails, and take
 
 
-```{python}
+```python
 # first five
 s.head()
 ```
@@ -387,7 +393,7 @@ s.head()
 
 
 
-```{python}
+```python
 # first three
 s.head(n = 3) # s.head(3) is equivalent
 ```
@@ -403,7 +409,7 @@ s.head(n = 3) # s.head(3) is equivalent
 
 
 
-```{python}
+```python
 # last five
 s.tail()
 ```
@@ -421,7 +427,7 @@ s.tail()
 
 
 
-```{python}
+```python
 # last 3
 s.tail(n = 3) # equivalent to s.tail(3)
 ```
@@ -437,7 +443,7 @@ s.tail(n = 3) # equivalent to s.tail(3)
 
 
 
-```{python}
+```python
 # only take specific items
 s.take([0, 3, 9])
 ```
@@ -452,10 +458,10 @@ s.take([0, 3, 9])
 
 
 
-# Looking up values in a Series
+## 4.6 Looking up values in Series
 
 
-```{python}
+```python
 # single item lookup
 s3['a']
 ```
@@ -468,7 +474,7 @@ s3['a']
 
 
 
-```{python}
+```python
 # lookup by position since the index is not integer
 s3[1]
 ```
@@ -481,7 +487,7 @@ s3[1]
 
 
 
-```{python}
+```python
 # multiple items
 s3[['a', 'c']]
 ```
@@ -496,7 +502,7 @@ s3[['a', 'c']]
 
 
 
-```{python}
+```python
 # series with integer index, but not starting with 0
 s5 = pd.Series([1, 2, 3], index=[10, 11, 12])
 s5
@@ -513,7 +519,7 @@ s5
 
 
 
-```{python}
+```python
 # by value as value passed and index are both integer
 s5[11]
 ```
@@ -526,7 +532,7 @@ s5[11]
 
 
 
-```{python}
+```python
 # force lookup by index label
 s5.loc[12]
 ```
@@ -539,7 +545,7 @@ s5.loc[12]
 
 
 
-```{python}
+```python
 # forced lookup by location / position
 s5.iloc[1]
 ```
@@ -552,7 +558,7 @@ s5.iloc[1]
 
 
 
-```{python}
+```python
 # multiple items by label (loc)
 s5.loc[[12, 10]]
 ```
@@ -567,7 +573,7 @@ s5.loc[[12, 10]]
 
 
 
-```{python}
+```python
 # multiple items by location / position (iloc)
 s5.iloc[[0, 2]]
 ```
@@ -582,7 +588,7 @@ s5.iloc[[0, 2]]
 
 
 
-```{python}
+```python
 # -1 and 15 will be NaN
 s5.loc[[12, -1, 15]]
 ```
@@ -598,7 +604,7 @@ s5.loc[[12, -1, 15]]
 
 
 
-```{python}
+```python
 # reminder of the contents of s3
 s3
 ```
@@ -614,7 +620,7 @@ s3
 
 
 
-```{python}
+```python
 # label based lookup
 s3.ix[['a', 'c']]
 ```
@@ -629,7 +635,7 @@ s3.ix[['a', 'c']]
 
 
 
-```{python}
+```python
 # position based lookup
 s3.ix[[1, 2]]
 ```
@@ -644,7 +650,7 @@ s3.ix[[1, 2]]
 
 
 
-```{python}
+```python
 # this looks up by label and not position
 # note that 1,2 have NaN as those labels do not exist
 # in the index
@@ -662,10 +668,10 @@ s5.ix[[1, 2, 10, 11]]
 
 
 
-# Alignment via index labels
+### Alignment via index labels
 
 
-```{python}
+```python
 s6 = pd.Series([1, 2, 3, 4], index=['a', 'b', 'c', 'd'])
 s6
 ```
@@ -682,7 +688,7 @@ s6
 
 
 
-```{python}
+```python
 s7 = pd.Series([4, 3, 2, 1], index=['d', 'c', 'b', 'a'])
 s7
 ```
@@ -699,7 +705,7 @@ s7
 
 
 
-```{python}
+```python
 # add them
 s6 + s7
 ```
@@ -716,7 +722,7 @@ s6 + s7
 
 
 
-```{python}
+```python
 # see how different from adding numpy arrays
 a1 = np.array([1, 2, 3, 4])
 a2 = np.array([4, 3, 2, 1])
@@ -730,10 +736,10 @@ a1 + a2
 
 
 
-# Arithmetic operations
+## 4.7 Arithmetic operations
 
 
-```{python}
+```python
 # multiply all values in s3 by 2
 s3 * 2
 ```
@@ -749,7 +755,7 @@ s3 * 2
 
 
 
-```{python}
+```python
 # scalar series using s3's index
 t = pd.Series(2, s3.index)
 s3 * t
@@ -766,7 +772,7 @@ s3 * t
 
 
 
-```{python}
+```python
 # we will add this to s9
 s8 = pd.Series({'a': 1, 'b': 2, 'c': 3, 'd': 5})
 s8
@@ -784,7 +790,7 @@ s8
 
 
 
-```{python}
+```python
 # going to add this to s8
 s9 = pd.Series({'b': 6, 'c': 7, 'd': 9, 'e': 10})
 s9
@@ -802,7 +808,7 @@ s9
 
 
 
-```{python}
+```python
 # NaN's result for a and e
 # demonstrates alignment
 s8 + s9
@@ -821,7 +827,7 @@ s8 + s9
 
 
 
-```{python}
+```python
 # going to add this to s11
 s10 = pd.Series([1.0, 2.0, 3.0], index=['a', 'a', 'b'])
 s10
@@ -838,7 +844,7 @@ s10
 
 
 
-```{python}
+```python
 # going to add this to s10
 s11 = pd.Series([4.0, 5.0, 6.0], index=['a', 'a', 'c'])
 s11
@@ -855,7 +861,7 @@ s11
 
 
 
-```{python}
+```python
 # will result in four 'a' index labels
 s10 + s11
 ```
@@ -873,10 +879,10 @@ s10 + s11
 
 
 
-# The special case of Not-A-Number (NaN)
+## 4.8 The special case of Not-A-Number (NaN)
 
 
-```{python}
+```python
 # mean of numpy array values
 nda = np.array([1, 2, 3, 4, 5])
 nda.mean()
@@ -890,7 +896,7 @@ nda.mean()
 
 
 
-```{python}
+```python
 # mean of numpy array values with a NaN
 nda = np.array([1, 2, 3, 4, np.NaN])
 nda.mean()
@@ -904,7 +910,7 @@ nda.mean()
 
 
 
-```{python}
+```python
 # ignores NaN's
 s = pd.Series(nda)
 s.mean()
@@ -918,7 +924,7 @@ s.mean()
 
 
 
-```{python}
+```python
 # handle nan's like NumPy
 s.mean(skipna=False)
 ```
@@ -930,10 +936,10 @@ s.mean(skipna=False)
 
 
 
-# Boolean selection
+## 4.9 Boolean selection
 
 
-```{python}
+```python
 # which rows have values that are > 5?
 s = pd.Series(np.arange(0, 10))
 s > 5
@@ -957,7 +963,7 @@ s > 5
 
 
 
-```{python}
+```python
 # select rows where values are > 5
 logicalResults = s > 5
 s[logicalResults]
@@ -970,12 +976,12 @@ s[logicalResults]
     7    7
     8    8
     9    9
-    dtype: int64
+    dtype: int32
 
 
 
 
-```{python}
+```python
 # a little shorter version
 s[s > 5]
 ```
@@ -987,18 +993,18 @@ s[s > 5]
     7    7
     8    8
     9    9
-    dtype: int64
+    dtype: int32
 
 
 
 
-```{python}
+```python
 # commented as it throws an exception
 # s[s > 5 and s < 8]
 ```
 
 
-```{python}
+```python
 # correct syntax
 s[(s > 5) & (s < 8)]
 ```
@@ -1008,12 +1014,12 @@ s[(s > 5) & (s < 8)]
 
     6    6
     7    7
-    dtype: int64
+    dtype: int32
 
 
 
 
-```{python}
+```python
 # are all items >= 0?
 (s >= 0).all()
 ```
@@ -1026,7 +1032,7 @@ s[(s > 5) & (s < 8)]
 
 
 
-```{python}
+```python
 # any items < 2?
 s[s < 2].any()
 ```
@@ -1039,7 +1045,7 @@ s[s < 2].any()
 
 
 
-```{python}
+```python
 # how many values < 2?
 (s < 2).sum()
 ```
@@ -1051,10 +1057,10 @@ s[s < 2].any()
 
 
 
-# Reindexing a Series
+## 4.10 Reindexing a Series
 
 
-```{python}
+```python
 # sample series of five items
 s = pd.Series(np.random.randn(5))
 s
@@ -1073,7 +1079,7 @@ s
 
 
 
-```{python}
+```python
 # change the index
 s.index = ['a', 'b', 'c', 'd', 'e']
 s
@@ -1092,7 +1098,7 @@ s
 
 
 
-```{python}
+```python
 # concat copies index values verbatim,
 # potentially making duplicates
 np.random.seed(123456)
@@ -1116,7 +1122,7 @@ combined
 
 
 
-```{python}
+```python
 # reset the index
 combined.index = np.arange(0, len(combined))
 combined
@@ -1136,7 +1142,7 @@ combined
 
 
 
-```{python}
+```python
 np.random.seed(123456)
 s1 = pd.Series(np.random.randn(4), ['a', 'b', 'c', 'd'])
 # reindex with different number of labels
@@ -1156,7 +1162,7 @@ s2
 
 
 
-```{python}
+```python
 # s2 is a different Series than s1
 s2['a'] = 0
 s2
@@ -1173,7 +1179,7 @@ s2
 
 
 
-```{python}
+```python
 # this did not modify s1
 s1
 ```
@@ -1190,7 +1196,7 @@ s1
 
 
 
-```{python}
+```python
 # different types for the same values of labels
 # causes big trouble
 s1 = pd.Series([0, 1, 2], index=[0, 1, 2])
@@ -1212,7 +1218,7 @@ s1 + s2
 
 
 
-```{python}
+```python
 # reindex by casting the label types
 # and we will get the desired result
 s2.index = s2.index.values.astype(int)
@@ -1230,7 +1236,7 @@ s1 + s2
 
 
 
-```{python}
+```python
 # fill with 0 instead of NaN
 s2 = s.copy()
 s2.reindex(['a', 'f'], fill_value=0)
@@ -1246,7 +1252,7 @@ s2.reindex(['a', 'f'], fill_value=0)
 
 
 
-```{python}
+```python
 # create example to demonstrate fills
 s3 = pd.Series(['red', 'green', 'blue'], index=[0, 3, 5])
 s3
@@ -1263,7 +1269,7 @@ s3
 
 
 
-```{python}
+```python
 # forward fill example
 s3.reindex(np.arange(0,7), method='ffill')
 ```
@@ -1283,7 +1289,7 @@ s3.reindex(np.arange(0,7), method='ffill')
 
 
 
-```{python}
+```python
 # backwards fill example
 s3.reindex(np.arange(0,7), method='bfill')
 ```
@@ -1302,10 +1308,10 @@ s3.reindex(np.arange(0,7), method='bfill')
 
 
 
-# Modifying a Series in-place
+### Modifying a Series in-place
 
 
-```{python}
+```python
 # generate a Series to play with
 np.random.seed(123456)
 s = pd.Series(np.random.randn(3), index=['a', 'b', 'c'])
@@ -1323,7 +1329,7 @@ s
 
 
 
-```{python}
+```python
 # change a value in the Series
 # this is done in-place
 # a new Series is not returned that has a modified value
@@ -1343,7 +1349,7 @@ s
 
 
 
-```{python}
+```python
 # modify the value at 'd' in-place
 s['d'] = -100
 s
@@ -1361,7 +1367,7 @@ s
 
 
 
-```{python}
+```python
 # remove a row / item
 del(s['a'])
 s
@@ -1377,10 +1383,10 @@ s
 
 
 
-# Slicing a Series
+## 4.11 Slicing a Series
 
 
-```{python}
+```python
 # a Series to use for slicing
 # using index labels not starting at 0 to demonstrate
 # position based slicing
@@ -1401,12 +1407,12 @@ s
     17    107
     18    108
     19    109
-    dtype: int64
+    dtype: int32
 
 
 
 
-```{python}
+```python
 # items at position 0, 2, 4
 s[0:6:2]
 ```
@@ -1417,12 +1423,12 @@ s[0:6:2]
     10    100
     12    102
     14    104
-    dtype: int64
+    dtype: int32
 
 
 
 
-```{python}
+```python
 # equivalent to
 s.iloc[[0, 2, 4]]
 ```
@@ -1433,12 +1439,12 @@ s.iloc[[0, 2, 4]]
     10    100
     12    102
     14    104
-    dtype: int64
+    dtype: int32
 
 
 
 
-```{python}
+```python
 # first five by slicing, same as .head(5)
 s[:5]
 ```
@@ -1451,12 +1457,12 @@ s[:5]
     12    102
     13    103
     14    104
-    dtype: int64
+    dtype: int32
 
 
 
 
-```{python}
+```python
 # fourth position to the end
 s[4:]
 ```
@@ -1470,12 +1476,12 @@ s[4:]
     17    107
     18    108
     19    109
-    dtype: int64
+    dtype: int32
 
 
 
 
-```{python}
+```python
 # every other item in the first five positions
 s[:5:2]
 ```
@@ -1486,12 +1492,12 @@ s[:5:2]
     10    100
     12    102
     14    104
-    dtype: int64
+    dtype: int32
 
 
 
 
-```{python}
+```python
 # every other item starting at the fourth position
 s[4::2]
 ```
@@ -1502,12 +1508,12 @@ s[4::2]
     14    104
     16    106
     18    108
-    dtype: int64
+    dtype: int32
 
 
 
 
-```{python}
+```python
 # reverse the Series
 s[::-1]
 ```
@@ -1525,12 +1531,12 @@ s[::-1]
     12    102
     11    101
     10    100
-    dtype: int64
+    dtype: int32
 
 
 
 
-```{python}
+```python
 # every other starting at position 4, in reverse
 s[4::-2]
 ```
@@ -1541,12 +1547,12 @@ s[4::-2]
     14    104
     12    102
     10    100
-    dtype: int64
+    dtype: int32
 
 
 
 
-```{python}
+```python
 # :-2, which means positions 0 through (10-2) [8]
 s[:-2]
 ```
@@ -1562,12 +1568,12 @@ s[:-2]
     15    105
     16    106
     17    107
-    dtype: int64
+    dtype: int32
 
 
 
 
-```{python}
+```python
 # last three items of the series
 s[-3:]
 ```
@@ -1578,12 +1584,12 @@ s[-3:]
     17    107
     18    108
     19    109
-    dtype: int64
+    dtype: int32
 
 
 
 
-```{python}
+```python
 # equivalent to s.tail(4).head(3)
 s[-4:-1]
 ```
@@ -1594,12 +1600,12 @@ s[-4:-1]
     16    106
     17    107
     18    108
-    dtype: int64
+    dtype: int32
 
 
 
 
-```{python}
+```python
 copy = s.copy() # preserve s
 slice = copy[:2] # slice with first two rows
 slice
@@ -1610,12 +1616,12 @@ slice
 
     10    100
     11    101
-    dtype: int64
+    dtype: int32
 
 
 
 
-```{python}
+```python
 # change item with label 10 to 1000
 slice[11] = 1000
 # and see it in the source
@@ -1635,12 +1641,12 @@ copy
     17     107
     18     108
     19     109
-    dtype: int64
+    dtype: int32
 
 
 
 
-```{python}
+```python
 # used to demonstrate the next two slices
 s = pd.Series(np.arange(0, 5),
               index=['a', 'b', 'c', 'd', 'e'])
@@ -1655,12 +1661,12 @@ s
     c    2
     d    3
     e    4
-    dtype: int64
+    dtype: int32
 
 
 
 
-```{python}
+```python
 # slices by position as the index is characters
 s[1:3]
 ```
@@ -1670,12 +1676,12 @@ s[1:3]
 
     b    1
     c    2
-    dtype: int64
+    dtype: int32
 
 
 
 
-```{python}
+```python
 # this slices by the strings in the index
 s['b':'d']
 ```
@@ -1686,4 +1692,13 @@ s['b':'d']
     b    1
     c    2
     d    3
-    dtype: int64
+    dtype: int32
+
+
+
+## 4.12 Summary
+
+
+```python
+
+```
