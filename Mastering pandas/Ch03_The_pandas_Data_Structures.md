@@ -1,54 +1,32 @@
 
 # Chapter 3: The pandas Data Structures
-
 <!-- toc orderedList:0 depthFrom:1 depthTo:6 -->
 
-- [Chapter 3: The pandas Data Structures](#chapter-3-the-pandas-data-structures)
-	- [NumPy ndarrays](#numpy-ndarrays)
-		- [NumPy array creation](#numpy-array-creation)
-			- [NumPy arrays via numpy.array](#numpy-arrays-via-numpyarray)
-			- [NumPy array via numpy.arange](#numpy-array-via-numpyarange)
-			- [NumPy array via numpy.linspace](#numpy-array-via-numpylinspace)
-			- [NumPy array via various other functions](#numpy-array-via-various-other-functions)
-		- [NumPy datatypes](#numpy-datatypes)
-		- [NumPy indexing and slicing](#numpy-indexing-and-slicing)
-			- [Array slicing](#array-slicing)
-			- [Array masking](#array-masking)
-			- [Complex indexing](#complex-indexing)
-		- [Copies and views](#copies-and-views)
-		- [Operations](#operations)
-			- [Basic operations](#basic-operations)
-			- [Reduction operations](#reduction-operations)
-			- [Statistical operators](#statistical-operators)
-			- [Logical operators](#logical-operators)
-		- [Broadcasting](#broadcasting)
-		- [Array shape manipulation](#array-shape-manipulation)
-			- [Flattening a multi-dimensional array](#flattening-a-multi-dimensional-array)
-			- [Reshaping](#reshaping)
-			- [Resizing](#resizing)
-			- [Adding a dimension](#adding-a-dimension)
-		- [Array sorting](#array-sorting)
-	- [Data structures in pandas](#data-structures-in-pandas)
-		- [Series](#series)
-			- [Series creation](#series-creation)
-			- [Operations on Series](#operations-on-series)
-		- [DataFrame](#dataframe)
-			- [DataFrame Creation](#dataframe-creation)
-			- [Operations](#operations-1)
-		- [Panel](#panel)
-			- [Using 3D NumPy array with axis labels](#using-3d-numpy-array-with-axis-labels)
-			- [Using a Python dictionary of DataFrame objects](#using-a-python-dictionary-of-dataframe-objects)
-			- [Using the DataFrame.to_panel method](#using-the-dataframeto_panel-method)
-			- [Other operations](#other-operations)
-	- [Summary](#summary)
+* [Chapter 3: The pandas Data Structures](#chapter-3-the-pandas-data-structures)
+  * [3.1 NumPy ndarrays](#31-numpy-ndarrays)
+    * [NumPy array creation](#numpy-array-creation)
+    * [NumPy datatypes](#numpy-datatypes)
+    * [NumPy indexing and slicing](#numpy-indexing-and-slicing)
+    * [Copies and views](#copies-and-views)
+    * [Operations](#operations)
+    * [Broadcasting](#broadcasting)
+    * [Array shape manipulation](#array-shape-manipulation)
+    * [Array sorting](#array-sorting)
+  * [3.2 Data structures in pandas](#32-data-structures-in-pandas)
+    * [Series](#series)
+    * [DataFrame](#dataframe)
+      * [Operations](#operations-1)
+    * [Panel](#panel)
+  * [3.3 Summary](#33-summary)
 
 <!-- tocstop -->
 
-## NumPy ndarrays
 
- ### NumPy array creation
+## 3.1 NumPy ndarrays
 
- #### NumPy arrays via numpy.array
+### NumPy array creation
+
+* NumPy arrays via numpy.array
 
 
 ```python
@@ -106,7 +84,7 @@ ar2.ndim
 
 
 
- #### NumPy array via numpy.arange
+* NumPy array via numpy.arange
 
 
 ```python
@@ -136,7 +114,7 @@ ar4
 
 
 
- #### NumPy array via numpy.linspace
+* NumPy array via numpy.linspace
 
 
 ```python
@@ -151,7 +129,7 @@ ar5=np.linspace(0,2.0/3,4); ar5
 
 
 
- #### NumPy array via various other functions
+* NumPy array via various other functions
 
 * numpy.ones
 
@@ -554,7 +532,7 @@ ar[5]
     IndexError: index 5 is out of bounds for axis 0 with size 3
 
 
-#### Array slicing
+* Array slicing
 
 
 ```python
@@ -664,7 +642,7 @@ ar[2:]=np.ones(4);ar
 
 
 
-#### Array masking
+* Array masking
 
 
 ```python
@@ -788,7 +766,7 @@ ar[[1,3]]=50; ar
 
 
 
-#### Complex indexing
+* Complex indexing
 
 
 ```python
@@ -914,14 +892,14 @@ ar
 
 ### Operations
 
-#### Basic operations
+* Basic operations
 
 
 ```python
 
 ```
 
-#### Reduction operations
+* Reduction operations
 
 
 ```python
@@ -1001,7 +979,7 @@ np.median(ar)
 
 
 
-#### Statistical operators
+* Statistical operators
 
 
 ```python
@@ -1068,7 +1046,7 @@ ar.cumsum()
 
 
 
-#### Logical operators
+* Logical operators
 
 
 ```python
@@ -1194,7 +1172,7 @@ ar.T + ar
 
 ### Array shape manipulation
 
-#### Flattening a multi-dimensional array
+* Flattening a multi-dimensional array
 
 
 ```python
@@ -1233,7 +1211,7 @@ ar.T.ravel()
 
 
 
-#### Reshaping
+* Reshaping
 
 
 ```python
@@ -1261,7 +1239,7 @@ ar.reshape(3,5)
 
 
 
-#### Resizing
+* Resizing
 
 
 ```python
@@ -1290,20 +1268,7 @@ ar2=ar
 ar.resize((8,));
 ```
 
-
-    ---------------------------------------------------------------------------
-
-    ValueError                                Traceback (most recent call last)
-
-    <ipython-input-154-394f7795e2d1> in <module>()
-    ----> 1 ar.resize((8,));
-
-
-    ValueError: cannot resize an array that references or is referenced
-    by another array in this way.  Use the resize function
-
-
-#### Adding a dimension
+* Adding a dimension
 
 
 ```python
@@ -1413,11 +1378,11 @@ ar
 
 
 
-## Data structures in pandas
+## 3.2 Data structures in pandas
 
 ### Series
 
-#### Series creation
+* Series creation
 
 ```py
 import pandas as pd
@@ -1577,7 +1542,7 @@ type(dogSeries)
 
 
 
-#### Operations on Series
+* Operations on Series
 
 * Assignment
 
@@ -1770,7 +1735,7 @@ ser[1:] + ser[:-2]
 
 ### DataFrame
 
-#### DataFrame Creation
+* DataFrame Creation
 
 * Using dictionaries of Series
 
@@ -2592,9 +2557,11 @@ np.sqrt(ore1DF)
 
 
 
+* Operations
+
 ### Panel
 
-#### Using 3D NumPy array with axis labels
+* Using 3D NumPy array with axis labels
 
 
 ```python
@@ -2641,7 +2608,7 @@ stockHistoricalPrices
 
 
 
-#### Using a Python dictionary of DataFrame objects
+* Using a Python dictionary of DataFrame objects
 
 
 ```python
@@ -2749,7 +2716,7 @@ pd.Panel(US_ChinaData)
 
 
 
-#### Using the DataFrame.to_panel method
+* Using the DataFrame.to_panel method
 
 
 ```python
@@ -2903,11 +2870,11 @@ ChinaUSDF.to_panel()
 
 
 
-#### Other operations
+* Other operations
+
+## 3.3 Summary
 
 
 ```python
 
 ```
-
-## Summary

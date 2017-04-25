@@ -1,32 +1,25 @@
 
 # Chapter 6: Missing Data, Time Series, and Plotting Using Matplotlib
-
 <!-- toc orderedList:0 depthFrom:1 depthTo:6 -->
 
-- [Chapter 6: Missing Data, Time Series, and Plotting Using Matplotlib](#chapter-6-missing-data-time-series-and-plotting-using-matplotlib)
-	- [Handling missing data](#handling-missing-data)
-		- [Handling missing values](#handling-missing-values)
-	- [Handling time series](#handling-time-series)
-		- [Reading in time series data](#reading-in-time-series-data)
-			- [DateOffset and TimeDelta objects](#dateoffset-and-timedelta-objects)
-		- [Time series-related instance methods](#time-series-related-instance-methods)
-			- [Shifting/lagging](#shiftinglagging)
-			- [Frequency conversion](#frequency-conversion)
-			- [Resampling of data](#resampling-of-data)
-			- [Aliases for Time Series frequencies](#aliases-for-time-series-frequencies)
-		- [Time series concepts and datatypes](#time-series-concepts-and-datatypes)
-			- [Period and PeriodIndex](#period-and-periodindex)
-			- [Conversion between Time Series datatypes](#conversion-between-time-series-datatypes)
-	- [A summary of Time Series-related objects](#a-summary-of-time-series-related-objects)
-		- [Plotting using matplotlib](#plotting-using-matplotlib)
-	- [Summary](#summary)
+* [Chapter 6: Missing Data, Time Series, and Plotting Using Matplotlib](#chapter-6-missing-data-time-series-and-plotting-using-matplotlib)
+  * [6.1 Handling missing data](#61-handling-missing-data)
+    * [Handling missing values](#handling-missing-values)
+  * [6.2 Handling time series](#62-handling-time-series)
+    * [Reading in time series data](#reading-in-time-series-data)
+    * [Time series-related instance methods](#time-series-related-instance-methods)
+    * [Time series concepts and datatypes](#time-series-concepts-and-datatypes)
+  * [6.3 A summary of Time Series-related objects](#63-a-summary-of-time-series-related-objects)
+    * [Plotting using matplotlib](#plotting-using-matplotlib)
+  * [6.4 Summary](#64-summary)
 
 <!-- tocstop -->
 
-## Handling missing data
+
+## 6.1 Handling missing data
 
 
-```{python}
+```python
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -34,19 +27,19 @@ import matplotlib.pyplot as plt
 ```
 
 
-```{python}
+```python
 date_stngs = ['2014-05-01','2014-05-02',
               '2014-05-05','2014-05-06','2014-05-07']
 tradeDates = pd.to_datetime(pd.Series(date_stngs))
 ```
 
 
-```{python}
+```python
 closingPrices=[531.35,527.93,527.81,515.14,509.96]
 ```
 
 
-```{python}
+```python
 googClosingPrices=pd.DataFrame(data=closingPrices,
                                columns=['closingPrice'],
                                index=tradeDates)
@@ -92,7 +85,7 @@ googClosingPrices
 
 
 
-```{python}
+```python
 import pandas.io.data as web
 import datetime
 googPrices = web.get_data_yahoo("GOOG",
@@ -107,7 +100,7 @@ googPrices = web.get_data_yahoo("GOOG",
 
 
 
-```{python}
+```python
 googFinalPrices=pd.DataFrame(googPrices['Close'],
                              index=tradeDates)
 googFinalPrices
@@ -152,7 +145,7 @@ googFinalPrices
 
 
 
-```{python}
+```python
 googClosingPricesCDays=googClosingPrices.asfreq('D')
 googClosingPricesCDays
 ```
@@ -204,7 +197,7 @@ googClosingPricesCDays
 
 
 
-```{python}
+```python
 googClosingPricesCDays.isnull()
 ```
 
@@ -255,7 +248,7 @@ googClosingPricesCDays.isnull()
 
 
 
-```{python}
+```python
 googClosingPricesCDays.notnull()
 ```
 
@@ -306,14 +299,14 @@ googClosingPricesCDays.notnull()
 
 
 
-```{python}
+```python
 tDates=tradeDates.copy()
 tDates[1]=np.NaN
 tDates[4]=np.NaN
 ```
 
 
-```{python}
+```python
 tDates
 ```
 
@@ -330,13 +323,13 @@ tDates
 
 
 
-```{python}
+```python
 FBVolume=[82.34,54.11,45.99,55.86,78.5]
 TWTRVolume=[15.74,12.71,10.39,134.62,68.84]
 ```
 
 
-```{python}
+```python
 socialTradingVolume=pd.concat([pd.Series(FBVolume),
                                pd.Series(TWTRVolume),
                                tradeDates], axis=1,
@@ -395,7 +388,7 @@ socialTradingVolume
 
 
 
-```{python}
+```python
 socialTradingVolTS=socialTradingVolume.set_index('TradeDate')
 socialTradingVolTS
 ```
@@ -450,7 +443,7 @@ socialTradingVolTS
 
 
 
-```{python}
+```python
 socialTradingVolTSCal=socialTradingVolTS.asfreq('D')
 socialTradingVolTSCal
 ```
@@ -515,7 +508,7 @@ socialTradingVolTSCal
 
 
 
-```{python}
+```python
 socialTradingVolTSCal['FB']+socialTradingVolTSCal['TWTR']
 ```
 
@@ -535,7 +528,7 @@ socialTradingVolTSCal['FB']+socialTradingVolTSCal['TWTR']
 
 
 
-```{python}
+```python
 pd.Series([1.0,np.NaN,5.9,6])+pd.Series([3,5,2,5.6])
 ```
 
@@ -551,7 +544,7 @@ pd.Series([1.0,np.NaN,5.9,6])+pd.Series([3,5,2,5.6])
 
 
 
-```{python}
+```python
 pd.Series([1.0,25.0,5.5,6])/pd.Series([3,np.NaN,2,5.6])
 ```
 
@@ -567,7 +560,7 @@ pd.Series([1.0,25.0,5.5,6])/pd.Series([3,np.NaN,2,5.6])
 
 
 
-```{python}
+```python
 np.mean([1.0,np.NaN,5.9,6])
 ```
 
@@ -579,7 +572,7 @@ np.mean([1.0,np.NaN,5.9,6])
 
 
 
-```{python}
+```python
 np.sum([1.0,np.NaN,5.9,6])
 ```
 
@@ -591,7 +584,7 @@ np.sum([1.0,np.NaN,5.9,6])
 
 
 
-```{python}
+```python
 pd.Series([1.0,np.NaN,5.9,6]).sum()
 ```
 
@@ -603,7 +596,7 @@ pd.Series([1.0,np.NaN,5.9,6]).sum()
 
 
 
-```{python}
+```python
 pd.Series([1.0,np.NaN,5.9,6]).mean()
 ```
 
@@ -615,7 +608,7 @@ pd.Series([1.0,np.NaN,5.9,6]).mean()
 
 
 
-```{python}
+```python
 np.nanmean([1.0,np.NaN,5.9,6])
 ```
 
@@ -627,7 +620,7 @@ np.nanmean([1.0,np.NaN,5.9,6])
 
 
 
-```{python}
+```python
 np.nansum([1.0,np.NaN,5.9,6])
 ```
 
@@ -641,7 +634,7 @@ np.nansum([1.0,np.NaN,5.9,6])
 ### Handling missing values
 
 
-```{python}
+```python
 socialTradingVolTSCal
 ```
 
@@ -705,7 +698,7 @@ socialTradingVolTSCal
 
 
 
-```{python}
+```python
 socialTradingVolTSCal.fillna(100)
 ```
 
@@ -769,7 +762,7 @@ socialTradingVolTSCal.fillna(100)
 
 
 
-```{python}
+```python
 socialTradingVolTSCal.fillna(method='ffill')
 ```
 
@@ -833,7 +826,7 @@ socialTradingVolTSCal.fillna(method='ffill')
 
 
 
-```{python}
+```python
 socialTradingVolTSCal.fillna(method='bfill')
 ```
 
@@ -896,10 +889,10 @@ socialTradingVolTSCal.fillna(method='bfill')
 
 
 
-## Handling time series
+## 6.2 Handling time series
 
 
-```{python}
+```python
 socialTradingVolTSCal.dropna()
 ```
 
@@ -953,7 +946,7 @@ socialTradingVolTSCal.dropna()
 
 
 
-```{python}
+```python
 pd.set_option('display.precision',4)
 socialTradingVolTSCal.interpolate()
 ```
@@ -1017,10 +1010,8 @@ socialTradingVolTSCal.interpolate()
 
 
 
-### Reading in time series data
 
-
-```{python}
+```python
 ibmData=pd.read_csv('./Chapter 6/ibm-common-stock-closing-prices-1959_1960.csv')
 ibmData.head()
 ```
@@ -1070,7 +1061,7 @@ ibmData.head()
 
 
 
-```{python}
+```python
 type(ibmData['TradeDate'])
 ```
 
@@ -1082,7 +1073,7 @@ type(ibmData['TradeDate'])
 
 
 
-```{python}
+```python
 type(ibmData['TradeDate'][0])
 ```
 
@@ -1094,7 +1085,7 @@ type(ibmData['TradeDate'][0])
 
 
 
-```{python}
+```python
 ibmData['TradeDate']=pd.to_datetime(ibmData['TradeDate'])
 type(ibmData['TradeDate'][0])
 ```
@@ -1107,17 +1098,19 @@ type(ibmData['TradeDate'][0])
 
 
 
-```{python}
+```python
 #Convert DataFrame to TimeSeries
 #Resampling creates NaN rows for weekend dates, hence use dropna
 ibmTS = ibmData.set_index('TradeDate').resample('D')['closingPrice'].dropna()
 ibmTS
 ```
 
-#### DateOffset and TimeDelta objects
+### Reading in time series data
+
+* DateOffset and TimeDelta objects
 
 
-```{python}
+```python
 xmasDay=pd.datetime(2014,12,25)
 xmasDay
 ```
@@ -1130,7 +1123,7 @@ xmasDay
 
 
 
-```{python}
+```python
 boxingDay=xmasDay+pd.DateOffset(days=1)
 boxingDay
 ```
@@ -1143,7 +1136,7 @@ boxingDay
 
 
 
-```{python}
+```python
 today=pd.datetime.now()
 today
 ```
@@ -1156,7 +1149,7 @@ today
 
 
 
-```{python}
+```python
 today+pd.DateOffset(weeks=1)
 ```
 
@@ -1168,7 +1161,7 @@ today+pd.DateOffset(weeks=1)
 
 
 
-```{python}
+```python
 today+2*pd.DateOffset(years=2, months=6)
 ```
 
@@ -1180,7 +1173,7 @@ today+2*pd.DateOffset(years=2, months=6)
 
 
 
-```{python}
+```python
 lastDay=pd.datetime(2013,12,31)
 from pandas.tseries.offsets import QuarterBegin
 dtoffset=QuarterBegin()
@@ -1195,7 +1188,7 @@ lastDay+dtoffset
 
 
 
-```{python}
+```python
 dtoffset.rollforward(lastDay)
 ```
 
@@ -1207,7 +1200,7 @@ dtoffset.rollforward(lastDay)
 
 
 
-```{python}
+```python
 weekDelta=datetime.timedelta(weeks=1)
 weekDelta
 ```
@@ -1220,7 +1213,7 @@ weekDelta
 
 
 
-```{python}
+```python
 today=pd.datetime.now()
 today
 ```
@@ -1233,7 +1226,7 @@ today
 
 
 
-```{python}
+```python
 today+weekDelta
 ```
 
@@ -1246,40 +1239,40 @@ today+weekDelta
 
 ### Time series-related instance methods
 
-#### Shifting/lagging
+* Shifting/lagging
 
 
-```{python}
+```python
 ibmTS.shift(3)
 ```
 
 
-```{python}
+```python
 ibmTS.shift(3, freq=pd.datetools.bday)
 ```
 
-#### Frequency conversion
+* Frequency conversion
 
 
-```{python}
+```python
 # Frequency conversion using asfreq
 ibmTS.asfreq('BM')
 ```
 
 
-```{python}
+```python
 ibmTS.asfreq('H')
 ```
 
 
-```{python}
+```python
 ibmTS.asfreq('H', method='ffill')
 ```
 
-#### Resampling of data
+* Resampling of data
 
 
-```{python}
+```python
 googTickData=pd.read_csv('./Chapter 6/GOOG_tickdata_20140527.csv')
 googTickData.head()
 ```
@@ -1353,7 +1346,7 @@ googTickData.head()
 
 
 
-```{python}
+```python
 googTickData['tstamp']=pd.to_datetime(googTickData['Timestamp'],unit='s',utc=True)
 googTickData.head()
 ```
@@ -1433,7 +1426,7 @@ googTickData.head()
 
 
 
-```{python}
+```python
 googTickTS=googTickData.set_index('tstamp')
 googTickTS=googTickTS.drop('Timestamp',axis=1)
 googTickTS.head()
@@ -1510,13 +1503,13 @@ googTickTS.head()
 
 
 
-```{python}
+```python
 googTickTS.index=googTickTS.index.tz_localize('UTC').tz_convert('US/Eastern')
 googTickTS.head()
 ```
 
 
-```{python}
+```python
 googTickTS.tail()
 ```
 
@@ -1591,7 +1584,7 @@ googTickTS.tail()
 
 
 
-```{python}
+```python
 len(googTickTS)
 ```
 
@@ -1603,7 +1596,7 @@ len(googTickTS)
 
 
 
-```{python}
+```python
 googTickTS.resample('5Min').head(6)
 ```
 
@@ -1691,7 +1684,7 @@ googTickTS.resample('5Min').head(6)
 
 
 
-```{python}
+```python
 googTickTS.resample('10Min', how=np.min).head(4)
 ```
 
@@ -1763,7 +1756,7 @@ googTickTS.resample('10Min', how=np.min).head(4)
 
 
 
-```{python}
+```python
 pd.set_option('display.precision',5)
 googTickTS.resample('5Min', closed='right').tail(3)
 ```
@@ -1828,7 +1821,7 @@ googTickTS.resample('5Min', closed='right').tail(3)
 
 
 
-```{python}
+```python
 googTickTS[:3].resample('30s', fill_method='ffill')
 ```
 
@@ -1908,7 +1901,7 @@ googTickTS[:3].resample('30s', fill_method='ffill')
 
 
 
-```{python}
+```python
 googTickTS[:3].resample('30s', fill_method='bfill')
 ```
 
@@ -1987,10 +1980,10 @@ googTickTS[:3].resample('30s', fill_method='bfill')
 
 
 
-#### Aliases for Time Series frequencies
+* Aliases for Time Series frequencies
 
 
-```{python}
+```python
 googTickTS.resample('7T30S').head(5)
 ```
 
@@ -2070,11 +2063,10 @@ googTickTS.resample('7T30S').head(5)
 
 
 ### Time series concepts and datatypes
+* Period and PeriodIndex
 
-#### Period and PeriodIndex
 
-
-```{python}
+```python
 # Period representing May 2014
 pd.Period('2014', freq='A-MAY')
 ```
@@ -2087,7 +2079,7 @@ pd.Period('2014', freq='A-MAY')
 
 
 
-```{python}
+```python
 # Period representing specific day – June 11, 2014
 pd.Period('06/11/2014')
 ```
@@ -2100,7 +2092,7 @@ pd.Period('06/11/2014')
 
 
 
-```{python}
+```python
 # Period representing 11AM, Nov 11, 1918
 pd.Period('11/11/1918 11:00',freq='H')
 ```
@@ -2113,7 +2105,7 @@ pd.Period('11/11/1918 11:00',freq='H')
 
 
 
-```{python}
+```python
 pd.Period('06/30/2014')+4
 ```
 
@@ -2125,7 +2117,7 @@ pd.Period('06/30/2014')+4
 
 
 
-```{python}
+```python
 pd.Period('11/11/1918 11:00',freq='H') - 48
 ```
 
@@ -2137,7 +2129,7 @@ pd.Period('11/11/1918 11:00',freq='H') - 48
 
 
 
-```{python}
+```python
 pd.Period('2014-04', freq='M')-pd.Period('2013-02', freq='M')
 ```
 
@@ -2151,7 +2143,7 @@ pd.Period('2014-04', freq='M')-pd.Period('2013-02', freq='M')
 * PeriodIndex
 
 
-```{python}
+```python
 perRng=pd.period_range('02/01/2014','02/06/2014',freq='D')
 perRng
 ```
@@ -2166,7 +2158,7 @@ perRng
 
 
 
-```{python}
+```python
 type(perRng[:2])
 ```
 
@@ -2178,7 +2170,7 @@ type(perRng[:2])
 
 
 
-```{python}
+```python
 perRng[:2]
 ```
 
@@ -2190,7 +2182,7 @@ perRng[:2]
 
 
 
-```{python}
+```python
 JulyPeriod=pd.PeriodIndex(['07/01/2014','07/31/2014'], freq='D')
 JulyPeriod
 ```
@@ -2202,10 +2194,10 @@ JulyPeriod
 
 
 
-#### Conversion between Time Series datatypes
+* Conversion between Time Series datatypes
 
 
-```{python}
+```python
 worldCupFinal=pd.to_datetime('07/13/2014', errors='raise')
 worldCupFinal
 ```
@@ -2218,7 +2210,7 @@ worldCupFinal
 
 
 
-```{python}
+```python
 worldCupFinal.to_period('D')
 ```
 
@@ -2230,7 +2222,7 @@ worldCupFinal.to_period('D')
 
 
 
-```{python}
+```python
 worldCupKickoff=pd.Period('06/12/2014','D')
 worldCupKickoff
 ```
@@ -2243,7 +2235,7 @@ worldCupKickoff
 
 
 
-```{python}
+```python
 worldCupKickoff.to_timestamp()
 ```
 
@@ -2255,7 +2247,7 @@ worldCupKickoff.to_timestamp()
 
 
 
-```{python}
+```python
 worldCupDays=pd.date_range('06/12/2014',periods=32, freq='D')
 worldCupDays
 ```
@@ -2276,7 +2268,7 @@ worldCupDays
 
 
 
-```{python}
+```python
 worldCupDays.to_period()
 ```
 
@@ -2295,17 +2287,17 @@ worldCupDays.to_period()
 
 
 
-## A summary of Time Series-related objects
+## 6.3 A summary of Time Series-related objects
 
 ### Plotting using matplotlib
 
 
-```{python}
+```python
 import matplotlib.pyplot as plt
 ```
 
 
-```{python}
+```python
 import numpy as np
 X = np.linspace(-np.pi, np.pi, 256,endpoint=True)
 f,g = np.cos(X)+np.sin(X), np.sin(X)-np.cos(X)
@@ -2316,7 +2308,7 @@ plotDF.index=X
 ```
 
 
-```{python}
+```python
 plotDF.columns=['sin(x)+cos(x)','sin(x)-cos(x)']
 plotDF.head()
 ```
@@ -2366,7 +2358,7 @@ plotDF.head()
 
 
 
-```{python}
+```python
 plotDF.plot()
 plt.show()
 ```
@@ -2376,7 +2368,7 @@ plt.show()
 
 
 
-```{python}
+```python
 plotDF.columns=['f(x)','g(x)']
 plotDF.plot(title='Plot of f(x)=sin(x)+cos(x), g(x)=sinx(x)-cos(x)')
 plt.show()
@@ -2387,7 +2379,7 @@ plt.show()
 
 
 
-```{python}
+```python
 plotDF.plot(subplots=True, figsize=(6,6))
 plt.show()
 ```
@@ -2396,4 +2388,9 @@ plt.show()
 ![png](Ch06_Missing_Data%2C_Time_Series%2C_and_Plotting_Using_Matplotlib_files/Ch06_Missing_Data%2C_Time_Series%2C_and_Plotting_Using_Matplotlib_100_0.png)
 
 
-## Summary
+## 6.4 Summary
+
+
+```python
+
+```

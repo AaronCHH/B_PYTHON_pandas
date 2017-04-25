@@ -1,45 +1,44 @@
 
 # Chapter 10: R and pandas Compared
-
 <!-- toc orderedList:0 depthFrom:1 depthTo:6 -->
 
-- [Chapter 10: R and pandas Compared](#chapter-10-r-and-pandas-compared)
-	- [R data types](#r-data-types)
-		- [R lists](#r-lists)
-		- [R DataFrames](#r-dataframes)
-	- [Slicing and selection](#slicing-and-selection)
-		- [R-matrix and Numpy array compared](#r-matrix-and-numpy-array-compared)
-		- [R lists and pandas series compared](#r-lists-and-pandas-series-compared)
-			- [Specifying column name in R](#specifying-column-name-in-r)
-			- [Specifying column name in pandas](#specifying-column-name-in-pandas)
-		- [R DataFrames versus pandas DataFrames](#r-dataframes-versus-pandas-dataframes)
-			- [Multi-column selection in R](#multi-column-selection-in-r)
-			- [Multi-column selection in pandas](#multi-column-selection-in-pandas)
-	- [Arithmetic operations on columns](#arithmetic-operations-on-columns)
-	- [Aggregation and GroupBy](#aggregation-and-groupby)
-		- [Aggregation in R](#aggregation-in-r)
-		- [The pandas' GroupBy operator](#the-pandas-groupby-operator)
-	- [Comparing matching operators in R and pandas](#comparing-matching-operators-in-r-and-pandas)
-		- [R %in% operator](#r-in-operator)
-		- [The pandas isin() function](#the-pandas-isin-function)
-	- [Logical subsetting](#logical-subsetting)
-		- [Logical subsetting in R](#logical-subsetting-in-r)
-		- [Logical subsetting in pandas](#logical-subsetting-in-pandas)
-	- [Split-apply-combine](#split-apply-combine)
-		- [Implementation in R](#implementation-in-r)
-		- [Implementation in pandas](#implementation-in-pandas)
-	- [Reshaping using Melt](#reshaping-using-melt)
-		- [The R melt() function](#the-r-melt-function)
-		- [The pandas melt() function](#the-pandas-melt-function)
-	- [Factors/categorical data](#factorscategorical-data)
-		- [An R example using cut()](#an-r-example-using-cut)
-		- [The pandas solution](#the-pandas-solution)
-	- [Summary](#summary)
+* [Chapter 10: R and pandas Compared](#chapter-10-r-and-pandas-compared)
+  * [10.1 R data types](#101-r-data-types)
+    * [R lists](#r-lists)
+    * [R DataFrames](#r-dataframes)
+  * [10.2 Slicing and selection](#102-slicing-and-selection)
+    * [R-matrix and Numpy array compared](#r-matrix-and-numpy-array-compared)
+    * [R lists and pandas series compared](#r-lists-and-pandas-series-compared)
+      * [Specifying column name in R](#specifying-column-name-in-r)
+      * [Specifying column name in pandas](#specifying-column-name-in-pandas)
+    * [R DataFrames versus pandas DataFrames](#r-dataframes-versus-pandas-dataframes)
+      * [Multi-column selection in R](#multi-column-selection-in-r)
+      * [Multi-column selection in pandas](#multi-column-selection-in-pandas)
+  * [10.3 Arithmetic operations on columns](#103-arithmetic-operations-on-columns)
+  * [10.4 Aggregation and GroupBy](#104-aggregation-and-groupby)
+    * [Aggregation in R](#aggregation-in-r)
+    * [The pandas' GroupBy operator](#the-pandas-groupby-operator)
+  * [10.5 Comparing matching operators in R and pandas](#105-comparing-matching-operators-in-r-and-pandas)
+    * [R %in% operator](#r-in-operator)
+    * [The pandas isin() function](#the-pandas-isin-function)
+  * [10.6 Logical subsetting](#106-logical-subsetting)
+    * [Logical subsetting in R](#logical-subsetting-in-r)
+    * [Logical subsetting in pandas](#logical-subsetting-in-pandas)
+  * [10.7 Split-apply-combine](#107-split-apply-combine)
+    * [Implementation in R](#implementation-in-r)
+    * [Implementation in pandas](#implementation-in-pandas)
+  * [10.8 Reshaping using Melt](#108-reshaping-using-melt)
+    * [The R melt() function](#the-r-melt-function)
+    * [The pandas melt() function](#the-pandas-melt-function)
+  * [10.9 Factors/categorical data](#109-factorscategorical-data)
+    * [An R example using cut()](#an-r-example-using-cut)
+    * [The pandas solution](#the-pandas-solution)
+  * [10.10 Summary](#1010-summary)
 
 <!-- tocstop -->
 
 
-## R data types
+## 10.1 R data types
 
 * Character
 * Numeric
@@ -52,12 +51,12 @@
 * DataFrame
 * Matrix
 
-> For more information on R data types, refer to the following document at: http://www.statmethods.net/input/datatypes.html.  
+> For more information on R data types, refer to the following document at: http://www.statmethods.net/input/datatypes.html.
 For NumPy data types, refer to the following document at: http://docs.scipy.org/doc/numpy/reference/generated/numpy.array.html and http://docs.scipy.org/doc/numpy/reference/generated/numpy.matrix.html.
 
 ### R lists
 
-```{r}
+```{r id:"j1x4x7fx"}
 h_lst <- list(23,'donkey',5.6,1+4i,TRUE)
 h_lst
 typeof(h_lst)
@@ -186,12 +185,12 @@ stocks_df
 
 
 
-## Slicing and selection
+## 10.2 Slicing and selection
 
-> In R, we slice objects in the following three ways:  
-• [: This always returns an object of the same type as the original and can be used to select more than one element.  
-• [[: This is used to extract elements of list or DataFrame; and can only be used to extract a single element,: the type of the returned element will not necessarily be a list or DataFrame.  
-• $: This is used to extract elements of a list or DataFrame by name and is similar to [[.  
+> In R, we slice objects in the following three ways:
+• [: This always returns an object of the same type as the original and can be used to select more than one element.
+• [[: This is used to extract elements of list or DataFrame; and can only be used to extract a single element,: the type of the returned element will not necessarily be a list or DataFrame.
+• $: This is used to extract elements of a list or DataFrame by name and is similar to [[.
 Here are some slicing examples in R and their equivalents in pandas:
 
 ### R-matrix and Numpy array compared
@@ -330,7 +329,7 @@ cal_df[[1]]
 
 
 
-```  
+```
 In the case of R, the []  operator produces a container type, that is, a list containing the string, while the [[]]  produces an atomic type: in this case, a character as follows:
 
 >typeof(cal_lst[2])
@@ -340,13 +339,13 @@ In the case of R, the []  operator produces a container type, that is, a list co
 ```
 
 ```
-In the case of pandas, the opposite is true: []  produces the atomic type, while [[]] results in a complex type, that is, a series as follows:  
+In the case of pandas, the opposite is true: []  produces the atomic type, while [[]] results in a complex type, that is, a series as follows:
 
-In [99]: type(cal_df[0])  
+In [99]: type(cal_df[0])
 Out[99]: str
 In [101]: type(cal_df[[0]])
 Out[101]: pandas.core.series.Series
-```    
+```
 
 #### Specifying column name in R
 
@@ -373,7 +372,7 @@ cal_df['mth']
 
 
 ```
-One area where R and pandas differ is in the subsetting of nested elements. For example, to obtain day 4 from weekdays, we have to use the [[]]  operator in R:  
+One area where R and pandas differ is in the subsetting of nested elements. For example, to obtain day 4 from weekdays, we have to use the [[]]  operator in R:
 > cal_lst[[1]][[4]]
 [1] 4
 > cal_lst[[c(1,4)]]
@@ -534,7 +533,7 @@ stocks_df.loc[:,['Symbol','Price']]
 
 
 
-## Arithmetic operations on columns
+## 10.3 Arithmetic operations on columns
 
 ```
 Here, we construct a DataFrame in R with columns labeled x and y, and subtract column y from column x:
@@ -593,11 +592,11 @@ df.eval('x-y')
 
 
 
-## Aggregation and GroupBy
+## 10.4 Aggregation and GroupBy
 
 ### Aggregation in R
 
-```{r}
+```{r id:"j1x4x7g0"}
 goal_stats=read.csv('champ_league_stats_semifinalists.csv')
 goal_stats
 
@@ -629,11 +628,11 @@ grouped['GoalsPerGame'].aggregate(np.max)
 grouped['GoalsPerGame'].apply(np.max)
 ```
 
-## Comparing matching operators in R and pandas
+## 10.5 Comparing matching operators in R and pandas
 
 ### R %in% operator
 
-```{r}
+```{r id:"j1x4x7g0"}
 stock_symbols=stocks_table$Symbol
 stock_symbols
 
@@ -681,18 +680,18 @@ stock_symbols.isin(['GOOG','NFLX'])
 
 
 
-## Logical subsetting
+## 10.6 Logical subsetting
 ### Logical subsetting in R
 
 • Via a logical slice:
 
-```{R}
+```{R id:"j1x4x7g1"}
 goaml_stats[goal_stats$GoalsPerGame>=0.5,]
 ```
 
 • Via the subset()  function:
 
-```{r}
+```{r id:"j1x4x7g1"}
 subset(goal_stats,GoalsPerGame>=0.5)
 ```
 
@@ -712,7 +711,7 @@ goal_stats_df[goal_stats_df['GoalsPerGame']>=0.5]
 goal_stats_df.query('GoalsPerGame>= 0.5')
 ```
 
-## Split-apply-combine
+## 10.7 Split-apply-combine
 
 > For more information on ddply, you can refer to the following: http://www.inside-r.org/packages/cran/plyr/docs/ddply
 
@@ -720,7 +719,7 @@ goal_stats_df.query('GoalsPerGame>= 0.5')
 
 ### Implementation in R
 
-```{r}
+```{r id:"j1x4x7g2"}
 install.packages('nycflights13')
 ...
 
@@ -750,11 +749,11 @@ grouped = flights_sample_df.groupby(['year','month'])
 grouped['dep_delay'].agg([np.mean, np.std])
 ```
 
-## Reshaping using Melt
+## 10.8 Reshaping using Melt
 
 ### The R melt() function
 
-```{r}
+```{r id:"j1x4x7g2"}
 sample4=head(flights.sample,4)[c('year','month','dep_delay','arr_delay')]
 sample4
 
@@ -778,11 +777,11 @@ pd.melt(sample_4_df,id_vars=['year','month'])
 
 > The reference for this information is from: http://pandas.pydata.org/pandas-docs/stable/reshaping.html#reshaping-by-melt.
 
-## Factors/categorical data
+## 10.9 Factors/categorical data
 
 ### An R example using cut()
 
-```{R}
+```{R id:"j1x4x7g3"}
 clinical.trial<- data.frame(patient = 1:1000,
                             age = rnorm(1000, mean = 50, sd = 5),
                             year.enroll = sample(paste("19", 80:99, sep = ""),
@@ -959,11 +958,11 @@ ctcut.value_counts().sort_index()
 
 
 
-## Summary
+## 10.10 Summary
 
-> In this chapter, we have attempted to compare key features in R with their pandas equivalents in order to achieve the following objectives:  
-• To assist R users who may wish to replicate the same functionality in pandas  
-• To assist any users who upon reading some R code may wish to rewrite the code in pandas  
+> In this chapter, we have attempted to compare key features in R with their pandas equivalents in order to achieve the following objectives:
+• To assist R users who may wish to replicate the same functionality in pandas
+• To assist any users who upon reading some R code may wish to rewrite the code in pandas
 
 > In the next chapter, we will conclude the book by giving a brief introduction to the scikit-learn library for doing machine learning and show how pandas fis within that framework. The reference documentation for this chapter can be found here: http://pandas.pydata.org/pandas-docs/stable/comparison_with_r.html.
 

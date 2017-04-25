@@ -1,37 +1,40 @@
 
 # Chapter 7: A Tour of Statistics – The Classical Approach
-
 <!-- toc orderedList:0 depthFrom:1 depthTo:6 -->
 
-- [Chapter 7: A Tour of Statistics – The Classical Approach](#chapter-7-a-tour-of-statistics-the-classical-approach)
-	- [Descriptive statistics versus inferential statistics](#descriptive-statistics-versus-inferential-statistics)
-	- [Measures of central tendency and variability](#measures-of-central-tendency-and-variability)
-		- [Measures of central tendency](#measures-of-central-tendency)
-		- [Measures of variability, dispersion, or spread](#measures-of-variability-dispersion-or-spread)
-	- [Hypothesis testing – the null and alternative hypotheses](#hypothesis-testing-the-null-and-alternative-hypotheses)
-		- [The null and alternative hypotheses](#the-null-and-alternative-hypotheses)
-		- [Statistical hypothesis tests](#statistical-hypothesis-tests)
-		- [Confidence intervals](#confidence-intervals)
-		- [Correlation and linear regression](#correlation-and-linear-regression)
-	- [Summary](#summary)
+* [Chapter 7: A Tour of Statistics – The Classical Approach](#chapter-7-a-tour-of-statistics-the-classical-approach)
+  * [7.1 Descriptive statistics versus inferential statistics](#71-descriptive-statistics-versus-inferential-statistics)
+  * [7.2 Measures of central tendency and variability](#72-measures-of-central-tendency-and-variability)
+    * [Measures of central tendency](#measures-of-central-tendency)
+    * [Measures of variability, dispersion, or spread](#measures-of-variability-dispersion-or-spread)
+  * [7.3 Hypothesis testing – the null and alternative hypotheses](#73-hypothesis-testing-the-null-and-alternative-hypotheses)
+    * [The null and alternative hypotheses](#the-null-and-alternative-hypotheses)
+    * [Statistical hypothesis tests](#statistical-hypothesis-tests)
+    * [Confidence intervals](#confidence-intervals)
+    * [Correlation and linear regression](#correlation-and-linear-regression)
+  * [7.4 Summary](#74-summary)
+    * [Confidence intervals](#confidence-intervals-1)
+    * [Correlation and linear regression](#correlation-and-linear-regression-1)
+  * [7.5 Summary](#75-summary)
 
 <!-- tocstop -->
 
 
-## Descriptive statistics versus inferential statistics
-## Measures of central tendency and variability
+## 7.1 Descriptive statistics versus inferential statistics
+## 7.2 Measures of central tendency and variability
 
 ### Measures of central tendency
-
-* **The mean**
-* **The median**
-* **The mode**
+* The mean
+* The median
+* The mode
 
 
 ```python
 import matplotlib.pyplot as plt
 %matplotlib inline
 ```
+
+* Computing measures of central tendency of a dataset in Python
 
 
 ```python
@@ -43,10 +46,8 @@ plt.show()
 ```
 
 
-![png](Ch07_A_Tour_of_Statistics_The_Classical_Approach_files/Ch07_A_Tour_of_Statistics_The_Classical_Approach_4_0.png)
+![png](Ch07_A_Tour_of_Statistics_The_Classical_Approach_files/Ch07_A_Tour_of_Statistics_The_Classical_Approach_6_0.png)
 
-
-* **Computing measures of central tendency of a dataset in Python  **
 
 
 ```python
@@ -73,7 +74,7 @@ plt.show()
 ```
 
 
-![png](Ch07_A_Tour_of_Statistics_The_Classical_Approach_files/Ch07_A_Tour_of_Statistics_The_Classical_Approach_6_0.png)
+![png](Ch07_A_Tour_of_Statistics_The_Classical_Approach_files/Ch07_A_Tour_of_Statistics_The_Classical_Approach_7_0.png)
 
 
 
@@ -94,7 +95,7 @@ plt.show()
 ```
 
 
-![png](Ch07_A_Tour_of_Statistics_The_Classical_Approach_files/Ch07_A_Tour_of_Statistics_The_Classical_Approach_7_0.png)
+![png](Ch07_A_Tour_of_Statistics_The_Classical_Approach_files/Ch07_A_Tour_of_Statistics_The_Classical_Approach_8_0.png)
 
 
 
@@ -108,15 +109,15 @@ plt.show()
 ```
 
 
-![png](Ch07_A_Tour_of_Statistics_The_Classical_Approach_files/Ch07_A_Tour_of_Statistics_The_Classical_Approach_8_0.png)
+![png](Ch07_A_Tour_of_Statistics_The_Classical_Approach_files/Ch07_A_Tour_of_Statistics_The_Classical_Approach_9_0.png)
 
 
-> The histogram is actually a better representation of the data as bar plots are generally used to represent categorical data while histograms are preferred for quantitative data, which is the case for the salaries' data.  
+> The histogram is actually a better representation of the data as bar plots are generally used to represent categorical data while histograms are preferred for quantitative data, which is the case for the salaries' data.
 For more information on when to use histograms versus bar plots, refer to http://onforb.es/1Dru2gv.
 
 ### Measures of variability, dispersion, or spread
-* **Range  **
-* **Quartile  **
+* Range
+* Quartile
 
 
 ```python
@@ -194,34 +195,35 @@ mquantiles(sortedScores)
 
 
 
-* **Deviation and variance**
+* Deviation and variance
 
-## Hypothesis testing – the null and alternative hypotheses
+## 7.3 Hypothesis testing – the null and alternative hypotheses
 ### The null and alternative hypotheses
-* **The alpha and p-values**  
-  * http://statistics.about.com/od/Inferential-Statistics/a/What-Is-The-Difference-Between-Alpha-And-P-Values.htm  
-  * http://bit.ly/1GzYX1P  
-  * http://en.wikipedia.org/wiki/P-value  
+* The alpha and p-values
+* Type I and Type II errors
 
-* **Type I and Type II errors**
+> * http://statistics.about.com/od/Inferential-Statistics/a/What-Is-The-Difference-Between-Alpha-And-P-Values.htm
+* http://bit.ly/1GzYX1P
+* http://en.wikipedia.org/wiki/P-value
 
-> **Type I Error:** In this type of error, we reject H0 when in fact H0 is true.  
-An example of this would be a jury convicting an innocent person for a  
-crime that the person did not commit.  
+* **Type I and Type II errors  **
 
-> **Type II Error:** In this type of error, we fail to reject H0 when in fact H1  
-is true. This is equivalent to a guilty person escaping conviction.  
+> * Type I Error: In this type of error, we reject H0 when in fact H0 is true.
+An example of this would be a jury convicting an innocent person for a
+crime that the person did not commit.
+* Type II Error: In this type of error, we fail to reject H0 when in fact H1
+is true. This is equivalent to a guilty person escaping conviction.
 
 ### Statistical hypothesis tests
 
 > For more details on this topic, refer to http://www.ats.ucla.edu/stat/mult_pkg/faq/general/tail_tests.htm.
 
-* **Background**
+* Background
 
 > For more details on this topic, refer to http://stattrek.com/sampling/sampling-distribution.aspx and http://en.wikipedia.org/wiki/Central_limit_
 theorem.
 
-* **The z-test**
+* **The z-test  **
 
 > For reference, go to http://mathisfun.com/data/images/normal-distrubution-large.gif.
 
@@ -237,20 +239,20 @@ theorem.
 
 
 
-> The typical values for α are 0.05 or 0.01. Following list explains the different values of alpha:  
-* p-value <0.01: There is VERY strong evidence against H0  
-* 0.01 < p-value < 0.05: There is strong evidence against H0  
-* 0.05 < p-value < 0.1: There is weak evidence against H0  
-* p-value > 0.1: There is little or no evidence against H0  
+> The typical values for α are 0.05 or 0.01. Following list explains the different values of alpha:
+* p-value <0.01: There is VERY strong evidence against H0
+* 0.01 < p-value < 0.05: There is strong evidence against H0
+* 0.05 < p-value < 0.1: There is weak evidence against H0
+* p-value > 0.1: There is little or no evidence against H0
 
-* **The t-test**
+* The z-test
 
-> The reference of this image is from: http://zoonek2.free.fr/UNIX/48_R/g593.png.  
+* The t-test
+
+> The reference of this image is from: http://zoonek2.free.fr/UNIX/48_R/g593.png.
 A more detailed technical explanation on the relationship between t-distribution, z-distribution, and the degrees of freedom can be found at http://en.wikipedia.org/wiki/Student's_t-distribution.
 
-* **Types of t-test**
-
-* **A t-test example**
+* **A t-test example  **
 
 
 ```python
@@ -288,6 +290,8 @@ feRawData.columns[:20]
 feRawData = feRawData.rename(columns={'Trans as listed in FE Guide (derived from col AA thru AF)' :'TransmissionType',
                                       'Comb FE (Guide) - Conventional Fuel' : 'CombinedFuelEcon'})
 ```
+
+### Confidence intervals
 
 
 ```python
@@ -380,6 +384,13 @@ feData.head()
 feData_auto=feData[feData['TransmissionType']=='Auto']
 feData_manual=feData[feData['TransmissionType']=='Manual']
 ```
+
+* An illustrative example
+### Correlation and linear regression
+* Correlation
+* Linear regression
+* An illustrative example
+## 7.4 Summary
 
 
 ```python
@@ -611,7 +622,7 @@ ci
 
 
 
-> Reference for this information: http://statsmodels.sourceforge.net/devel/datasets/index.html and  
+> Reference for this information: http://statsmodels.sourceforge.net/devel/datasets/index.html and
 http://docs.scipy.org/doc/scipy-0.14.0/reference/generated/scipy.stats.norm.html.
 
 ### Correlation and linear regression
@@ -624,6 +635,7 @@ http://docs.scipy.org/doc/scipy-0.14.0/reference/generated/scipy.stats.norm.html
 > For more information see: http://en.wikipedia.org/wiki/Power_law
 
 * **An illustrative example**
+
 
 ```python
 import pandas as pd
@@ -751,9 +763,9 @@ plt.show()
 ```
 
 
-![png](Ch07_A_Tour_of_Statistics_The_Classical_Approach_files/Ch07_A_Tour_of_Statistics_The_Classical_Approach_61_0.png)
+![png](Ch07_A_Tour_of_Statistics_The_Classical_Approach_files/Ch07_A_Tour_of_Statistics_The_Classical_Approach_64_0.png)
 
-> **library:**  http://statsmodels.sourceforge.net/devel/examples/notebooks/generated/example_formulas.html  
+
 
 ```python
 import statsmodels.api as sm
@@ -794,10 +806,10 @@ result.summary()
   <th>Df Residuals:</th>          <td>    13</td>      <th>  BIC:               </th> <td>   44.97</td>
 </tr>
 <tr>
-  <th>Df Model:</th>              <td>     1</td>      <th>                     </th>     <td> </td>   
+  <th>Df Model:</th>              <td>     1</td>      <th>                     </th>     <td> </td>
 </tr>
 <tr>
-  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>   
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>
 </tr>
 </table>
 <table class="simpletable">
@@ -841,17 +853,17 @@ R
 
 
 
-> Thus, our correlation coeffiient is R = 0.835. This would indicate that about 84 percent of the chirp frequency can be explained by the changes in temperature.  
+> Thus, our correlation coeffiient is R = 0.835. This would indicate that about 84 percent of the chirp frequency can be explained by the changes in temperature.
 
-> Reference of this information: The Song of Insects http://www.hup.harvard.edu/catalog.php?isbn=9780674420663  
+> Reference of this information: The Song of Insects http://www.hup.harvard.edu/catalog.php?isbn=9780674420663
 
-> The data is sourced from http://bit.ly/1MrlJqR.  
+> The data is sourced from http://bit.ly/1MrlJqR.
 
-> For a more in-depth treatment of single and multi-variable regression, refer to the following websites:  
-> • Regression (Part I): http://bit.ly/1Eq5kSx  
-> • Regression (Part II): http://bit.ly/1OmuFTV  
+> For a more in-depth treatment of single and multi-variable regression, refer to the following websites:
+• Regression (Part I): http://bit.ly/1Eq5kSx
+• Regression (Part II): http://bit.ly/1OmuFTV
 
-## Summary
+## 7.5 Summary
 
 > In this chapter, we took a brief tour of the classical or frequentist approach to statistics and showed you how to combine pandas along with the stats packages — __scipy.stats__ and __statsmodels__ — to calculate, interpret, and make inferences from statistical data.
 

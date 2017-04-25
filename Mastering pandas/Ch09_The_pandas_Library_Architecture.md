@@ -1,10 +1,33 @@
 
 # Chapter 9: The pandas Library Architecture
-## Introduction to pandas' file hierarchy
+<!-- toc orderedList:0 depthFrom:1 depthTo:6 -->
+
+* [Chapter 9: The pandas Library Architecture](#chapter-9-the-pandas-library-architecture)
+  * [9.1 Introduction to pandas' file hierarchy](#91-introduction-to-pandas-file-hierarchy)
+  * [9.2 Description of pandas' modules and files](#92-description-of-pandas-modules-and-files)
+    * [pandas/core](#pandascore)
+    * [pandas/io](#pandasio)
+    * [pandas/tools](#pandastools)
+    * [pandas/sparse](#pandassparse)
+    * [pandas/stats](#pandasstats)
+    * [pandas/util](#pandasutil)
+    * [pandas/rpy](#pandasrpy)
+    * [pandas/tests](#pandastests)
+    * [pandas/compat](#pandascompat)
+    * [pandas/computation](#pandascomputation)
+    * [pandas/tseries](#pandastseries)
+    * [pandas/sandbox](#pandassandbox)
+  * [9.3 Improving performance using Python extensions](#93-improving-performance-using-python-extensions)
+  * [9.4 Summary](#94-summary)
+
+<!-- tocstop -->
+
+
+## 9.1 Introduction to pandas' file hierarchy
 
 > For reference see: http://pandas.pydata.org/developers.html.
 
-## Description of pandas' modules and files
+## 9.2 Description of pandas' modules and files
 ### pandas/core
 ### pandas/io
 ### pandas/tools
@@ -30,7 +53,7 @@
 ### pandas/compat
 ### pandas/computation
 
-> * For more information on numexpr, go to https://code.google.com/p/numexpr/.   
+> * For more information on numexpr, go to https://code.google.com/p/numexpr/.
 * For information of the usage of this module, go to http://pandas.pydata.org/pandas docs/stable/computation.html.
 
 ### pandas/tseries
@@ -38,7 +61,7 @@
 > The Formatter and Locator classes are used for handling ticks in matplotlib plotting.
 
 ### pandas/sandbox
-## Improving performance using Python extensions
+## 9.3 Improving performance using Python extensions
 
 > According to the programming benchmarks site, Python is often slower than compiled languages, such as C/C++ for many algorithms or data structure operations. An example of this would be binary tree operations. In the following reference, Python3 ran 104x slower than the fastest C++ implementation of an n-body simulation calculation: http://bit.ly/1dm4JqW.
 
@@ -71,7 +94,7 @@ math.__file__
     <ipython-input-3-88a0eccf93aa> in <module>()
           1 import math
     ----> 2 math.__file__
-    
+
 
     AttributeError: module 'math' has no attribute '__file__'
 
@@ -103,7 +126,7 @@ fibonacci(100)
 ```
 
     100000 loops, best of 3: 5.97 µs per loop
-    
+
 
 
 ```python
@@ -112,7 +135,7 @@ fibonacci(100)
 
     The cythonmagic extension is already loaded. To reload it, use:
       %reload_ext cythonmagic
-    
+
 
 
 ```python
@@ -137,7 +160,7 @@ def cfibonacci(int n):
 
     The slowest run took 12.76 times longer than the fastest. This could mean that an intermediate result is being cached.
     10000000 loops, best of 3: 101 ns per loop
-    
+
 
 
 ```python
@@ -151,7 +174,7 @@ def cfibonacci(int n):
 
 
 
-## Summary
+## 9.4 Summary
 
 > To summarize this chapter, we took a tour of the library hierarchy of pandas in an attempt to illustrate the internal workings of the library. We also touched on the benefis of speeding up our code performance by using a Python extension module.
 

@@ -1,27 +1,21 @@
 # Master Pandas
 <img src="cover.jpg" alt="" height="300">
 
-* Publisher  https://www.packtpub.com/big-data-and-business-intelligence/mastering-pandas  
+## info 
+* [Publisher](https://www.packtpub.com/big-data-and-business-intelligence/mastering-pandas)
 
-
-
-<!-- toc orderedList:0 depthFrom:1 depthTo:6 -->
-
-- [Master Pandas](#master-pandas)  
-		- [Chapter 1: Introduction to pandas and Data Analysis](#chapter-1-introduction-to-pandas-and-data-analysisch01_introduction_to_pandas_and_data_analysismd)  
-		- [Chapter 2: Installation of pandas and Supporting Software](#chapter-2-installation-of-pandas-and-supporting-softwarech02_installation_of_pandas_and_supporting_softwaremd)  
-		- [Chapter 3: The pandas Data Structures](#chapter-3-the-pandas-data-structuresch03_the_pandas_data_structuresmd)  
-		- [Chapter 4: Operations in Pandas, Part I – Indexing and Selecting](#chapter-4-operations-in-pandas-part-i-indexing-and-selecting)  
-		- [Chapter 5: Operations in pandas, Part II – Grouping, Merging, and Reshaping of Data](#chapter-5-operations-in-pandas-part-ii-grouping-merging-and-reshaping-of-datach05_operations_in_pandas_part_ii_grouping_merging_and_reshaping_of_datamd)  
-		- [Chapter 6: Missing Data, Time Series, and Plotting Using Matplotlib](#chapter-6-missing-data-time-series-and-plotting-using-matplotlibch06_missing_data_time_series_and_plotting_using_matplotlibmd)  
-		- [Chapter 7: A Tour of Statistics – The Classical Approach](#chapter-7-a-tour-of-statistics-the-classical-approachch07_a_tour_of_statistics_the_classical_approachmd)  
-		- [Chapter 8: A Brief Tour of Bayesian Statistics](#chapter-8-a-brief-tour-of-bayesian-statisticsch08_a_brief_tour_of_bayesian_statisticsmd)  
-		- [Chapter 9: The pandas Library Architecture](#chapter-9-the-pandas-library-architecturech09_the_pandas_library_architecturemd)  
-		- [Chapter 10: R and pandas Compared](#chapter-10-r-and-pandas-comparedch10_r_and_pandas_comparedmd)  
-		- [Chapter 11: Brief Tour of Machine Learning](#chapter-11-brief-tour-of-machine-learningch11_brief_tour_of_machine_learningmd)  
-
-<!-- tocstop -->
-
+## toc
+* [Chapter 1: Introduction to pandas and Data Analysis](Ch01_Introduction_to_pandas_and_Data_Analysis.md)
+* [Chapter 2: Installation of pandas and Supporting Software](Ch02_Installation_of_pandas_and_Supporting_Software.md)
+* [Chapter 3: The pandas Data Structures](Ch03_The_pandas_Data_Structures.md)
+* [Chapter 4: Operations in Pandas, Part I – Indexing and Selecting](Ch04_Operations_in_Pandas,_Part_I_Indexing_and_Selecting.md)
+* [Chapter 5: Operations in pandas, Part II – Grouping, Merging, and Reshaping of Data](Ch05_Operations_in_pandas,_Part_II_Grouping,_Merging,_and_Reshaping_of_Data.md)
+* [Chapter 6: Missing Data, Time Series, and Plotting Using Matplotlib](Ch06_Missing_Data,_Time_Series,_and_Plotting_Using_Matplotlib.md)
+* [Chapter 7: A Tour of Statistics – The Classical Approach](Ch07_A_Tour_of_Statistics_The_Classical_Approach.md)
+* [Chapter 8: A Brief Tour of Bayesian Statistics](Ch08_A_Brief_Tour_of_Bayesian_Statistics.md)
+* [Chapter 9: The pandas Library Architecture](Ch09_The_pandas_Library_Architecture.md)
+* [Chapter 10: R and pandas Compared](Ch10_R_and_pandas_Compared.md)
+* [Chapter 11: Brief Tour of Machine Learning](Ch11_Brief_Tour_of_Machine_Learning.md)
 
 ### [Chapter 1: Introduction to pandas and Data Analysis](Ch01_Introduction_to_pandas_and_Data_Analysis.md)
 * Motivation for data analysis

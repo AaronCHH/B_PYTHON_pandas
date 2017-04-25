@@ -1,44 +1,44 @@
 
 # Chapter 11: Brief Tour of Machine Learning
-
 <!-- toc orderedList:0 depthFrom:1 depthTo:6 -->
 
-- [Chapter 11: Brief Tour of Machine Learning](#chapter-11-brief-tour-of-machine-learning)
-	- [Role of pandas in machine learning](#role-of-pandas-in-machine-learning)
-	- [Installation of scikit-learn](#installation-of-scikit-learn)
-		- [Installing via Anaconda](#installing-via-anaconda)
-		- [Installing on Unix (Linux/Mac OSX](#installing-on-unix-linuxmac-osx)
-		- [Installing on Windows](#installing-on-windows)
-	- [Introduction to machine learning](#introduction-to-machine-learning)
-		- [Supervised versus unsupervised learning](#supervised-versus-unsupervised-learning)
-		- [Illustration using document classification](#illustration-using-document-classification)
-			- [Supervised learning](#supervised-learning)
-			- [Unsupervised learning](#unsupervised-learning)
-		- [How machine learning systems learn](#how-machine-learning-systems-learn)
-	- [Application of machine learning – Kaggle Titanic competition](#application-of-machine-learning-kaggle-titanic-competition)
-		- [The Titanic: Machine Learning from Disaster problem](#the-titanic-machine-learning-from-disaster-problem)
-		- [The problem of overfitting](#the-problem-of-overfitting)
-	- [Data analysis and preprocessing using pandas](#data-analysis-and-preprocessing-using-pandas)
-		- [Examining the data](#examining-the-data)
-		- [Handling missing values](#handling-missing-values)
-	- [A naïve approach to Titanic problem](#a-naïve-approach-to-titanic-problem)
-	- [The scikit-learn ML/classifier interface](#the-scikit-learn-mlclassifier-interface)
-	- [Supervised learning algorithms](#supervised-learning-algorithms)
-		- [Constructing a model using Patsy scikit-learn](#constructing-a-model-using-patsy-scikit-learn)
-		- [General boilerplate code explanation](#general-boilerplate-code-explanation)
-		- [Logistic regression](#logistic-regression)
-		- [Support vector machine](#support-vector-machine)
-		- [Decision trees](#decision-trees)
-		- [Random forest](#random-forest)
-	- [Unsupervised learning algorithms](#unsupervised-learning-algorithms)
-		- [Dimensionality reduction](#dimensionality-reduction)
-		- [K-means clustering](#k-means-clustering)
-	- [Summary](#summary)
+* [Chapter 11: Brief Tour of Machine Learning](#chapter-11-brief-tour-of-machine-learning)
+  * [11.1 Role of pandas in machine learning](#111-role-of-pandas-in-machine-learning)
+  * [11.2 Installation of scikit-learn](#112-installation-of-scikit-learn)
+    * [Installing via Anaconda](#installing-via-anaconda)
+    * [Installing on Unix (Linux/Mac OSX](#installing-on-unix-linuxmac-osx)
+    * [Installing on Windows](#installing-on-windows)
+  * [11.3 Introduction to machine learning](#113-introduction-to-machine-learning)
+    * [Supervised versus unsupervised learning](#supervised-versus-unsupervised-learning)
+    * [Illustration using document classification](#illustration-using-document-classification)
+      * [Supervised learning](#supervised-learning)
+      * [Unsupervised learning](#unsupervised-learning)
+    * [How machine learning systems learn](#how-machine-learning-systems-learn)
+  * [11.4 Application of machine learning – Kaggle Titanic competition](#114-application-of-machine-learning-kaggle-titanic-competition)
+    * [The Titanic: Machine Learning from Disaster problem](#the-titanic-machine-learning-from-disaster-problem)
+    * [The problem of overfitting](#the-problem-of-overfitting)
+  * [11.5 Data analysis and preprocessing using pandas](#115-data-analysis-and-preprocessing-using-pandas)
+    * [Examining the data](#examining-the-data)
+    * [Handling missing values](#handling-missing-values)
+  * [11.6 A naïve approach to Titanic problem](#116-a-naïve-approach-to-titanic-problem)
+  * [11.7 The scikit-learn ML/classifier interface](#117-the-scikit-learn-mlclassifier-interface)
+  * [11.8 Supervised learning algorithms](#118-supervised-learning-algorithms)
+    * [Constructing a model using Patsy scikit-learn](#constructing-a-model-using-patsy-scikit-learn)
+    * [General boilerplate code explanation](#general-boilerplate-code-explanation)
+    * [Logistic regression](#logistic-regression)
+    * [Support vector machine](#support-vector-machine)
+    * [Decision trees](#decision-trees)
+    * [Random forest](#random-forest)
+  * [11.9 Unsupervised learning algorithms](#119-unsupervised-learning-algorithms)
+    * [Dimensionality reduction](#dimensionality-reduction)
+    * [K-means clustering](#k-means-clustering)
+  * [11.9 Summary](#119-summary)
 
 <!-- tocstop -->
 
-## Role of pandas in machine learning
-## Installation of scikit-learn
+
+## 11.1 Role of pandas in machine learning
+## 11.2 Installation of scikit-learn
 ### Installing via Anaconda
 ### Installing on Unix (Linux/Mac OSX
 ### Installing on Windows
@@ -47,11 +47,11 @@
 pip install –U scikit-learn
 ```
 
-> For more in-depth information on installation, you can take a look at the offiial scikit-learn docs at: http://scikit-learn.org/stable/install.html.  
+> For more in-depth information on installation, you can take a look at the offiial scikit-learn docs at: http://scikit-learn.org/stable/install.html.
 
 > You can also take a look at the README fie for the scikit-learn Git repository at: https://github.com/scikit-learn/scikit-learn/blob/master/README.rst.
 
-## Introduction to machine learning
+## 11.3 Introduction to machine learning
 
 > A Few Useful Things to Know about Machine Learning at http://homes.cs.washington.edu/~pedrod/papers/cacm12.pdf
 
@@ -60,15 +60,17 @@ pip install –U scikit-learn
 #### Supervised learning
 #### Unsupervised learning
 ### How machine learning systems learn
-## Application of machine learning – Kaggle Titanic competition
+## 11.4 Application of machine learning – Kaggle Titanic competition
 
-> In order to illustrate how we can use pandas to assist us at the start of our machine learning journey, we will apply it to a classic problem, which is hosted on the Kaggle website (http://www.kaggle.com).   
+> In order to illustrate how we can use pandas to assist us at the start of our machine learning journey, we will apply it to a classic problem, which is hosted on the Kaggle website (http://www.kaggle.com).
 
 > Kaggle is a competition platform for machine learning problems. The idea behind Kaggle is to enable companies that are interested in solving predictive analytics problems with their data to post their data on Kaggle and invite data scientists to come up with the proposed solutions to their problems. The competition can be ongoing over a period of time, and the rankings of the competitors are posted on a leader board. At the end of the competition, the top-ranked competitors receive cash prizes.
 
 ### The Titanic: Machine Learning from Disaster problem
 ### The problem of overfitting
-## Data analysis and preprocessing using pandas
+
+## 11.5 Data analysis and preprocessing using pandas
+
 ### Examining the data
 
 
@@ -252,7 +254,7 @@ pclass_survival_dict['Survival Rate']= {'1st Class' : round(100.0*num_class1_sur
 pd.DataFrame(pclass_survival_dict)
 ```
 
-## A naïve approach to Titanic problem
+## 11.6 A naïve approach to Titanic problem
 
 
 ```python
@@ -305,7 +307,7 @@ survival_counts.plot(kind='barh',ax=ax,width=0.75, color=['red','black'], xlim=(
 test_df.head(3)[['PassengerId','Pclass','Sex','Fare']]
 ```
 
-## The scikit-learn ML/classifier interface
+## 11.7 The scikit-learn ML/classifier interface
 
 
 ```python
@@ -321,7 +323,7 @@ sample_size=500
 x = []
 y = []
 for i in range(sample_size):
-    newVal = random.normalvariate(100,10)   
+    newVal = random.normalvariate(100,10)
     x.append(newVal)
     y.append(newVal / 2.0 + random.normalvariate(50,5))
 ```
@@ -348,12 +350,7 @@ plt.legend(loc=2)
 
 > For extra reference, please see the following: http://bit.ly/1FU7mXj and http://bit.ly/1QqFN2V.
 
-## Supervised learning algorithms
-
-
-```python
-
-```
+## 11.8 Supervised learning algorithms
 
 ### Constructing a model using Patsy scikit-learn
 
@@ -515,12 +512,7 @@ X_test = dt.dmatrix(formula, test_df_filled)
 . . .
 ```
 
-## Unsupervised learning algorithms
-
-
-```python
-
-```
+## 11.9 Unsupervised learning algorithms
 
 ### Dimensionality reduction
 
@@ -636,7 +628,7 @@ ax.scatter(X_red[:, 0], X_red[:, 1], c=y_pred);
 
 > More information on K-means clustering in scikit-learn and, in general, can be found here at: http://scikit-learn.org/stable/auto_examples/cluster/ plot_cluster_iris.html and http://en.wikipedia.org/wiki/K-means_clustering.
 
-## Summary
+## 11.9 Summary
 
 
 ```python

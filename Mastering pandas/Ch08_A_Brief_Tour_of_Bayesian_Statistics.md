@@ -1,34 +1,34 @@
 
 # Chapter 8: A Brief Tour of Bayesian Statistics
-
 <!-- toc orderedList:0 depthFrom:1 depthTo:6 -->
 
-- [Chapter 8: A Brief Tour of Bayesian Statistics](#chapter-8-a-brief-tour-of-bayesian-statistics)
-	- [Introduction to Bayesian statistic](#introduction-to-bayesian-statistic)
-	- [Mathematical framework for Bayesian statitics](#mathematical-framework-for-bayesian-statitics)
-		- [Bayes theory and odds](#bayes-theory-and-odds)
-		- [Applications of Bayesian statistics](#applications-of-bayesian-statistics)
-	- [Probability distributions](#probability-distributions)
-		- [Fitting a distribution](#fitting-a-distribution)
-			- [Discrete uniform distribution](#discrete-uniform-distribution)
-			- [Continuous probability distributions](#continuous-probability-distributions)
-	- [Bayesian statistics versus Frequentist statistics](#bayesian-statistics-versus-frequentist-statistics)
-		- [What is probability](#what-is-probability)
-		- [How the model is defined](#how-the-model-is-defined)
-		- [Confidence (Frequentist) versus Credible (Bayesian) intervals](#confidence-frequentist-versus-credible-bayesian-intervals)
-	- [Conducting Bayesian statistical analysis](#conducting-bayesian-statistical-analysis)
-	- [Monte Carlo estimation of the likelihood function and PyMC](#monte-carlo-estimation-of-the-likelihood-function-and-pymc)
-		- [Bayesian analysis example – Switchpoint detection](#bayesian-analysis-example-switchpoint-detection)
-	- [References](#references)
-	- [Summary](#summary)
+* [Chapter 8: A Brief Tour of Bayesian Statistics](#chapter-8-a-brief-tour-of-bayesian-statistics)
+  * [8.1 Introduction to Bayesian statistic](#81-introduction-to-bayesian-statistic)
+  * [8.2 Mathematical framework for Bayesian statitics](#82-mathematical-framework-for-bayesian-statitics)
+    * [Bayes theory and odds](#bayes-theory-and-odds)
+    * [Applications of Bayesian statistics](#applications-of-bayesian-statistics)
+  * [8.3 Probability distributions](#83-probability-distributions)
+    * [Fitting a distribution](#fitting-a-distribution)
+      * [Discrete uniform distribution](#discrete-uniform-distribution)
+      * [Continuous probability distributions](#continuous-probability-distributions)
+  * [8.4 Bayesian statistics versus Frequentist statistics](#84-bayesian-statistics-versus-frequentist-statistics)
+    * [What is probability](#what-is-probability)
+    * [How the model is defined](#how-the-model-is-defined)
+    * [Confidence (Frequentist) versus Credible (Bayesian) intervals](#confidence-frequentist-versus-credible-bayesian-intervals)
+  * [8.5 Conducting Bayesian statistical analysis](#85-conducting-bayesian-statistical-analysis)
+  * [8.6 Monte Carlo estimation of the likelihood function and PyMC](#86-monte-carlo-estimation-of-the-likelihood-function-and-pymc)
+    * [Bayesian analysis example – Switchpoint detection](#bayesian-analysis-example-switchpoint-detection)
+  * [8.7 References](#87-references)
+  * [8.8 Summary](#88-summary)
 
 <!-- tocstop -->
 
-## Introduction to Bayesian statistic
 
-> The fild of Bayesian statistics is built on the work of Reverend Thomas Bayes, an 18th century statistician, philosopher, and Presbyterian minister. His famous Bayes'theorem, which forms the theoretical underpinnings for Bayesian statistics, was published posthumously in 1763 as a solution to the problem of inverse probability. For more details on this topic, refer to http://en.wikipedia.org/wiki/Thomas_Bayes.
+## 8.1 Introduction to Bayesian statistic
 
-## Mathematical framework for Bayesian statitics
+> The fild of Bayesian statistics is built on the work of Reverend Thomas Bayes, an 18th century statistician, philosopher, and Presbyterian minister. His famous Bayes'theorem, which forms the theoretical underpinnings for Bayesian statistics, was published posthumously in 1763 as a solution to the problem of inverse probability. For more details on this topic, refer to http://en.wikipedia.org/wiki/Thomas_Bayes.`m
+
+## 8.2 Mathematical framework for Bayesian statitics
 
 > This is somewhat intuitive—that the probability of A given B is obtained by dividing the probability of both A and B occurring by the probability that B occurred. The idea is that B is given, so we divide by its probability. A more rigorous treatment of this equation can be found at http://bit.ly/1bCYXRd, which is titled Probability: Joint, Marginal and Conditional Probabilities.
 
@@ -37,10 +37,10 @@
 ### Bayes theory and odds
 ### Applications of Bayesian statistics
 
-> There are many compelling reasons for studying Bayesian statistics; some of them being the use of prior information to better inform the current model. The Bayesian approach works with probability distributions rather than point estimates, thus producing more realistic predictions. Bayesian inference bases a hypothesis on the available data— P(hypothesis|data).  
+> There are many compelling reasons for studying Bayesian statistics; some of them being the use of prior information to better inform the current model. The Bayesian approach works with probability distributions rather than point estimates, thus producing more realistic predictions. Bayesian inference bases a hypothesis on the available data— P(hypothesis|data).
 The Frequentist approach tries to fi the data based on a hypothesis. It can be argued that the Bayesian approach is the more logical and empirical one as it tries to base its belief on the facts rather than the other way round. For more information on this, refer to http://www.bayesian-inference.com/advantagesbayesian.
 
-## Probability distributions
+## 8.3 Probability distributions
 
 
 ```python
@@ -57,7 +57,7 @@ import matplotlib
 
 #### Discrete uniform distribution
 
-* **Discrete probability distributions**  
+* **Discrete probability distributions**
 
 
 ```python
@@ -74,11 +74,11 @@ plt.ylabel('p(x)')
 plt.ylim(0,0.5)
 plt.xlim(0,10)
 plt.title('Discrete uniform probability distribution with p=1/6')
-plt.show()    
+plt.show()
 ```
 
 
-![png](Ch08_A_Brief_Tour_of_Bayesian_Statistics_files/Ch08_A_Brief_Tour_of_Bayesian_Statistics_12_0.png)
+![png](Ch08_A_Brief_Tour_of_Bayesian_Statistics_files/Ch08_A_Brief_Tour_of_Bayesian_Statistics_14_0.png)
 
 
 * **The Bernoulli distribution**
@@ -110,7 +110,7 @@ for i, p in enumerate([0.0, 0.2, 0.5, 0.75, 1.0]):
 
 
 
-![png](Ch08_A_Brief_Tour_of_Bayesian_Statistics_files/Ch08_A_Brief_Tour_of_Bayesian_Statistics_14_1.png)
+![png](Ch08_A_Brief_Tour_of_Bayesian_Statistics_files/Ch08_A_Brief_Tour_of_Bayesian_Statistics_16_1.png)
 
 
 * **The binomial distribution**
@@ -141,7 +141,7 @@ plt.xlabel("$k$")
 
 
 
-![png](Ch08_A_Brief_Tour_of_Bayesian_Statistics_files/Ch08_A_Brief_Tour_of_Bayesian_Statistics_16_1.png)
+![png](Ch08_A_Brief_Tour_of_Bayesian_Statistics_files/Ch08_A_Brief_Tour_of_Bayesian_Statistics_18_1.png)
 
 
 * **The Poisson distribution**
@@ -175,7 +175,7 @@ plt.show()
 
 
 
-![png](Ch08_A_Brief_Tour_of_Bayesian_Statistics_files/Ch08_A_Brief_Tour_of_Bayesian_Statistics_18_1.png)
+![png](Ch08_A_Brief_Tour_of_Bayesian_Statistics_files/Ch08_A_Brief_Tour_of_Bayesian_Statistics_20_1.png)
 
 
 * **The Geometric distribution**
@@ -217,7 +217,7 @@ plt.suptitle("Continuous Uniform probability distributions for various sample si
 
 
 
-![png](Ch08_A_Brief_Tour_of_Bayesian_Statistics_files/Ch08_A_Brief_Tour_of_Bayesian_Statistics_24_1.png)
+![png](Ch08_A_Brief_Tour_of_Bayesian_Statistics_files/Ch08_A_Brief_Tour_of_Bayesian_Statistics_26_1.png)
 
 
 * **The exponential distribution**
@@ -241,7 +241,7 @@ for l,c in zip(lambda_,clrs):
 ```
 
 
-![png](Ch08_A_Brief_Tour_of_Bayesian_Statistics_files/Ch08_A_Brief_Tour_of_Bayesian_Statistics_26_0.png)
+![png](Ch08_A_Brief_Tour_of_Bayesian_Statistics_files/Ch08_A_Brief_Tour_of_Bayesian_Statistics_28_0.png)
 
 
 * **The normal distribution**
@@ -263,7 +263,7 @@ for sd in sdL:
 colors = matplotlib.rcParams['axes.color_cycle']
 
 for sd,c,P in zip(sdL,colors,L):
-    plt.plot(R,P,zorder=1,lw=1.5,color=c,            
+    plt.plot(R,P,zorder=1,lw=1.5,color=c,
              label="$\sigma$=" + str(sd))
     plt.legend()
     ax = plt.axes()
@@ -278,7 +278,7 @@ for sd,c,P in zip(sdL,colors,L):
 
 
 
-![png](Ch08_A_Brief_Tour_of_Bayesian_Statistics_files/Ch08_A_Brief_Tour_of_Bayesian_Statistics_28_1.png)
+![png](Ch08_A_Brief_Tour_of_Bayesian_Statistics_files/Ch08_A_Brief_Tour_of_Bayesian_Statistics_30_1.png)
 
 
 > Reference for the Python code for the plotting of the distributions can be found at:
@@ -313,24 +313,24 @@ for n, color in zip(n_values, cols):
 ```
 
 
-![png](Ch08_A_Brief_Tour_of_Bayesian_Statistics_files/Ch08_A_Brief_Tour_of_Bayesian_Statistics_31_0.png)
+![png](Ch08_A_Brief_Tour_of_Bayesian_Statistics_files/Ch08_A_Brief_Tour_of_Bayesian_Statistics_33_0.png)
 
 
-## Bayesian statistics versus Frequentist statistics
+## 8.4 Bayesian statistics versus Frequentist statistics
 ### What is probability
 ### How the model is defined
 ### Confidence (Frequentist) versus Credible (Bayesian) intervals
 
 > For more information, refer to Frequentism and Bayesianism: What's the Big Deal? | SciPy 2014 | Jake VanderPlas at https://www.youtube.com/watch?v=KhAUfqhLakw.
 
-## Conducting Bayesian statistical analysis
-## Monte Carlo estimation of the likelihood function and PyMC
+## 8.5 Conducting Bayesian statistical analysis
+## 8.6 Monte Carlo estimation of the likelihood function and PyMC
 
-> In conducting Bayesian analysis in Python, we will need a module that will enable us to calculate the likelihood function using the Monte Carlo method that was described earlier. The PyMC library fulfils that need. It provides a Monte Carlo method known commonly as **Markov Chain Monte Carlo (MCMC)**. I will not delve further into the technical details of MCMC, but the interested reader can fid out more about MCMC implementation in PyMC at the following references:  
+> In conducting Bayesian analysis in Python, we will need a module that will enable us to calculate the likelihood function using the Monte Carlo method that was described earlier. The PyMC library fulfils that need. It provides a Monte Carlo method known commonly as **Markov Chain Monte Carlo (MCMC)**. I will not delve further into the technical details of MCMC, but the interested reader can fid out more about MCMC implementation in PyMC at the following references:
 
-> • Monte Carlo Integration in Bayesian Estimation at http://bit.ly/1bMALeu  
-• Markov Chain Monte Carlo Maximum Likelihood at http://bit.ly/1KBP8hH  
-• Bayesian Statistical Analysis Using Python-Part 1| SciPy 2014, Chris Fonnesbeck at http://www.youtube.com/watch?v=vOBB_ycQ0RA  
+> • Monte Carlo Integration in Bayesian Estimation at http://bit.ly/1bMALeu
+• Markov Chain Monte Carlo Maximum Likelihood at http://bit.ly/1KBP8hH
+• Bayesian Statistical Analysis Using Python-Part 1| SciPy 2014, Chris Fonnesbeck at http://www.youtube.com/watch?v=vOBB_ycQ0RA
 
 > MCMC is not a universal panacea; there are some drawbacks to the approach, and one of them is the slow convergence of the algorithm.
 
@@ -866,10 +866,10 @@ fb_activity = pm.Poisson('fb_activity', mu=rate,
 fb_activity
 ```
 
-> For more information, refer to the following web pages:  
-• http://en.wikipedia.org/wiki/Poisson_process  
-• http://pymc-devs.github.io/pymc/tutorial.html  
-• https://github.com/CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers  
+> For more information, refer to the following web pages:
+• http://en.wikipedia.org/wiki/Poisson_process
+• http://pymc-devs.github.io/pymc/tutorial.html
+• https://github.com/CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers
 
 
 ```python
@@ -972,16 +972,16 @@ Plotting switchpoint
 Plotting early_mean
 ```
 
-## References
+## 8.7 References
 
-> For a more in-depth look at Bayesian statistics topics that we touched upon, please take a look at the following references:   
+> For a more in-depth look at Bayesian statistics topics that we touched upon, please take a look at the following references:
 
-> • Probabilistic Programming and Bayesian Methods for Hackers at https://github.com/CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers  
-• Bayesian Data Analysis, Third Edition, Andrew Gelman at http://www.amazon.com/Bayesian-Analysis-Chapman-Statistical-Science/dp/1439840954  
-• The Bayesian Choice, Christian P Robert (this is more theoretical) at http://www.springer.com/us/book/9780387952314  
-• PyMC documentation at http://pymc-devs.github.io/pymc/index.html  
+> • Probabilistic Programming and Bayesian Methods for Hackers at https://github.com/CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers
+• Bayesian Data Analysis, Third Edition, Andrew Gelman at http://www.amazon.com/Bayesian-Analysis-Chapman-Statistical-Science/dp/1439840954
+• The Bayesian Choice, Christian P Robert (this is more theoretical) at http://www.springer.com/us/book/9780387952314
+• PyMC documentation at http://pymc-devs.github.io/pymc/index.html
 
-## Summary
+## 8.8 Summary
 
 
 ```python

@@ -1,32 +1,28 @@
 
 # Chapter 5: Operations in pandas, Part II – Grouping, Merging, and Reshaping of Data
-
 <!-- toc orderedList:0 depthFrom:1 depthTo:6 -->
 
-- [Chapter 5: Operations in pandas, Part II – Grouping, Merging, and Reshaping of Data](#chapter-5-operations-in-pandas-part-ii-grouping-merging-and-reshaping-of-data)
-	- [Grouping of data](#grouping-of-data)
-		- [The groupby operation](#the-groupby-operation)
-			- [Using groupby with a MultiIndex](#using-groupby-with-a-multiindex)
-			- [Using the aggregate method](#using-the-aggregate-method)
-			- [Applying multiple functions](#applying-multiple-functions)
-			- [The transform() method](#the-transform-method)
-			- [Filtering](#filtering)
-	- [Merging and joining](#merging-and-joining)
-		- [The concat function](#the-concat-function)
-		- [Using append](#using-append)
-		- [Appending a single row to a DataFrame](#appending-a-single-row-to-a-dataframe)
-		- [SQL-like merging/joining of DataFrame objects](#sql-like-mergingjoining-of-dataframe-objects)
-			- [The join function](#the-join-function)
-	- [Pivots and reshaping data](#pivots-and-reshaping-data)
-		- [Stacking and unstacking](#stacking-and-unstacking)
-			- [The stack() function](#the-stack-function)
-		- [Other methods to reshape DataFrames](#other-methods-to-reshape-dataframes)
-			- [Using the melt function](#using-the-melt-function)
-	- [Summary](#summary)
+* [Chapter 5: Operations in pandas, Part II – Grouping, Merging, and Reshaping of Data](#chapter-5-operations-in-pandas-part-ii-grouping-merging-and-reshaping-of-data)
+  * [5.1 Grouping of data](#51-grouping-of-data)
+    * [The groupby operation](#the-groupby-operation)
+      * [Using groupby with a MultiIndex](#using-groupby-with-a-multiindex)
+      * [Filtering](#filtering)
+  * [5.2 Merging and joining](#52-merging-and-joining)
+    * [The concat function](#the-concat-function)
+    * [The concat function](#the-concat-function-1)
+    * [Using append](#using-append)
+    * [Appending a single row to a DataFrame](#appending-a-single-row-to-a-dataframe)
+    * [SQL-like merging/joining of DataFrame objects](#sql-like-mergingjoining-of-dataframe-objects)
+      * [The join function](#the-join-function)
+  * [5.3 Pivots and reshaping data](#53-pivots-and-reshaping-data)
+    * [Stacking and unstacking](#stacking-and-unstacking)
+    * [Other methods to reshape DataFrames](#other-methods-to-reshape-dataframes)
+  * [5.4 Summary](#54-summary)
 
 <!-- tocstop -->
 
-## Grouping of data
+
+## 5.1 Grouping of data
 
 ### The groupby operation
 
@@ -211,7 +207,7 @@ clubWins
 
 
 
-    Nation       Winners          
+    Nation       Winners
     Spain        Real Madrid          9
     Italy        Milan                7
     Germany      Bayern Munich        5
@@ -370,7 +366,7 @@ for name, group in goalStatsGroupedByYear:
 
     2012
                          Stat    EPL  La Liga  Serie A  Bundesliga
-    Month                                                         
+    Month
     08/01/2012  MatchesPlayed   20.0       20     10.0        10.0
     09/01/2012  MatchesPlayed   38.0       39     50.0        44.0
     10/01/2012  MatchesPlayed   31.0       31     39.0        27.0
@@ -383,7 +379,7 @@ for name, group in goalStatsGroupedByYear:
     12/01/2012    GoalsScored  183.0      109    125.0        72.0
     2013
                          Stat    EPL  La Liga  Serie A  Bundesliga
-    Month                                                         
+    Month
     01/01/2013  MatchesPlayed   42.0       40     40.0        18.0
     02/01/2013  MatchesPlayed   30.0       40     40.0        36.0
     03/01/2013  MatchesPlayed   35.0       38     39.0        36.0
@@ -444,12 +440,12 @@ print(goalStatsDF2.tail(3))
 ```
 
                                EPL  La Liga  Serie A  Bundesliga
-    Month      Stat                                             
+    Month      Stat
     08/01/2012 MatchesPlayed  20.0       20     10.0        10.0
     09/01/2012 MatchesPlayed  38.0       39     50.0        44.0
     10/01/2012 MatchesPlayed  31.0       31     39.0        27.0
                               EPL  La Liga  Serie A  Bundesliga
-    Month      Stat                                            
+    Month      Stat
     04/01/2013 GoalsScored  105.0      127    102.0       104.0
     05/01/2013 GoalsScored   96.0      109    102.0        92.0
     06/01/2013 GoalsScored    NaN       80      NaN         NaN
@@ -703,7 +699,8 @@ totalsDF.append(goalsPerGameDF)
 
 
 
-#### Using the aggregate method
+* Using groupby with a MultiIndex
+* Using the aggregate method
 
 
 ```python
@@ -754,7 +751,7 @@ grouped2.aggregate(np.sum)
 
 
 
-#### Applying multiple functions
+* Applying multiple functions
 
 
 ```python
@@ -933,7 +930,7 @@ nationsGrp['Attendance'].agg({'Total':np.sum, 'Average':np.mean, 'Deviation':np.
 
 
 
-#### The transform() method
+* The transform() method
 
 
 ```python
@@ -1481,7 +1478,11 @@ import numpy as np
 goalsScoredDF.groupby(level='Month').filter(lambda x: np.all([x[col] > 100 for col in goalsScoredDF.columns]))
 ```
 
-## Merging and joining
+* Filtering
+
+## 5.2 Merging and joining
+
+### The concat function
 
 ### The concat function
 
@@ -3102,12 +3103,14 @@ slice_NASD_SP.join(slice_Russ_DJIA)
 
 
 
+* The join function
+
 
 ```python
 slice1.join(slice2)
 ```
 
-## Pivots and reshaping data
+## 5.3 Pivots and reshaping data
 
 
 ```python
@@ -3450,7 +3453,7 @@ pd.pivot_table(plantGrowthRawDF, values='weight', columns=['group'], aggfunc=np.
 
 ### Stacking and unstacking
 
-#### The stack() function
+* The stack() function
 
 
 ```python
@@ -4005,7 +4008,7 @@ plantGrowthStackedDF.unstack().stack()
 
 ### Other methods to reshape DataFrames
 
-#### Using the melt function
+* Using the melt function
 
 
 ```python
@@ -4282,4 +4285,9 @@ pd.get_dummies(melted['Index Name'])
 
 
 
-## Summary
+## 5.4 Summary
+
+
+```python
+
+```

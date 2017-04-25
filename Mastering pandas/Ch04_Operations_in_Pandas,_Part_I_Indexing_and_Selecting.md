@@ -1,30 +1,29 @@
 
 # Chapter 4: Operations in Pandas, Part I – Indexing and Selecting
-
 <!-- toc orderedList:0 depthFrom:1 depthTo:6 -->
 
-- [Chapter 4: Operations in Pandas, Part I – Indexing and Selecting](#chapter-4-operations-in-pandas-part-i-indexing-and-selecting)
-	- [Basic indexing](#basic-indexing)
-		- [Accessing attributes using dot operator](#accessing-attributes-using-dot-operator)
-		- [Range slicing](#range-slicing)
-	- [Label, integer, and mixed indexing](#label-integer-and-mixed-indexing)
-		- [Label-oriented indexing](#label-oriented-indexing)
-			- [Selection using a Boolean array](#selection-using-a-boolean-array)
-		- [Integer-oriented indexing](#integer-oriented-indexing)
-		- [The .iat and .at operators](#the-iat-and-at-operators)
-		- [Mixed indexing with the .ix operator](#mixed-indexing-with-the-ix-operator)
-		- [Multi-indexing](#multi-indexing)
-		- [Swapping and re-ordering levels](#swapping-and-re-ordering-levels)
-		- [Cross-sections](#cross-sections)
-	- [Boolean indexing](#boolean-indexing)
-		- [The is in and any all methods](#the-is-in-and-any-all-methods)
-		- [Using the where() method](#using-the-where-method)
-		- [Operations on indexes](#operations-on-indexes)
-	- [Summary](#summary)
+* [Chapter 4: Operations in Pandas, Part I – Indexing and Selecting](#chapter-4-operations-in-pandas-part-i-indexing-and-selecting)
+  * [4.1 Basic indexing](#41-basic-indexing)
+    * [Accessing attributes using dot operator](#accessing-attributes-using-dot-operator)
+    * [Range slicing](#range-slicing)
+  * [4.2 Label, integer, and mixed indexing](#42-label-integer-and-mixed-indexing)
+    * [Label-oriented indexing](#label-oriented-indexing)
+    * [Integer-oriented indexing](#integer-oriented-indexing)
+    * [The .iat and .at operators](#the-iat-and-at-operators)
+    * [Mixed indexing with the .ix operator](#mixed-indexing-with-the-ix-operator)
+    * [Multi-indexing](#multi-indexing)
+    * [Swapping and re-ordering levels](#swapping-and-re-ordering-levels)
+    * [Cross-sections](#cross-sections)
+  * [4.3 Boolean indexing](#43-boolean-indexing)
+    * [The is in and any all methods](#the-is-in-and-any-all-methods)
+    * [Using the where() method](#using-the-where-method)
+    * [Operations on indexes](#operations-on-indexes)
+  * [4.4 Summary](#44-summary)
 
 <!-- tocstop -->
 
-## Basic indexing
+
+## 4.1 Basic indexing
 
 
 ```python
@@ -520,7 +519,7 @@ dubaiPrices[::-1]
 
 
 
-## Label, integer, and mixed indexing
+## 4.2 Label, integer, and mixed indexing
 
 ### Label-oriented indexing
 
@@ -797,7 +796,7 @@ NYC_SnowAvgs.loc['March']
 
 
 
-#### Selection using a Boolean array
+* Selection using a Boolean array
 
 
 ```python
@@ -2292,7 +2291,7 @@ sharesIndexDF.swaplevel(0, 1, axis=0).ix['open']
 
 
 
-## Boolean indexing
+## 4.3 Boolean indexing
 
 
 ```python
@@ -3017,9 +3016,9 @@ stockIndexDF.reset_index()
 
 
 
+## 4.4 Summary
+
 
 ```python
 
 ```
-
-## Summary
