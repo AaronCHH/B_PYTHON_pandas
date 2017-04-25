@@ -1,6 +1,25 @@
 
 # Chapter 7: Tidying Up Your Data
 <!-- toc orderedList:0 depthFrom:1 depthTo:6 -->
+
+* [Chapter 7: Tidying Up Your Data](#chapter-7-tidying-up-your-data)
+  * [7.1 What is tidying your data](#71-what-is-tidying-your-data)
+  * [7.2 Setting up the IPython notebook](#72-setting-up-the-ipython-notebook)
+  * [7.3 Working with missing data](#73-working-with-missing-data)
+    * [Determining NaN values in Series and DataFrame objects](#determining-nan-values-in-series-and-dataframe-objects)
+    * [Selecting out or dropping missing data](#selecting-out-or-dropping-missing-data)
+    * [How pandas handles NaN values in mathematical operations](#how-pandas-handles-nan-values-in-mathematical-operations)
+    * [Filling in missing data](#filling-in-missing-data)
+    * [Forward and backward filling of missing values](#forward-and-backward-filling-of-missing-values)
+    * [Filling using index labels](#filling-using-index-labels)
+    * [Interpolation of missing values](#interpolation-of-missing-values)
+  * [7.4 Handling duplicate data](#74-handling-duplicate-data)
+  * [7.5 Transforming Data](#75-transforming-data)
+    * [Mapping](#mapping)
+    * [Replacing values](#replacing-values)
+    * [Applying functions to transform data](#applying-functions-to-transform-data)
+  * [7.6 Summary](#76-summary)
+
 <!-- tocstop -->
 
 
